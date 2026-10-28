@@ -29,8 +29,8 @@ ACCENT="frost"               # Choices: frost (#88C0D0), glacier (#81A1C1), auro
 WANT_BLUR=1
 WANT_ICONS=1
 WANT_GTK4_OVERRIDE=1
-WANT_WALLPAPER=0
-WALLPAPER_CHOICE="none"
+WANT_WALLPAPER=1
+WALLPAPER_CHOICE="1"
 INSTALL_DEPS=0
 INTERACTIVE=0
 EXPLICIT_ARGS=0
@@ -123,6 +123,10 @@ while [ $# -gt 0 ]; do
     --wallpaper=*)
       WANT_WALLPAPER=1
       WALLPAPER_CHOICE="${1#*=}"
+      ;;
+    --no-wallpaper)
+      WANT_WALLPAPER=0
+      WALLPAPER_CHOICE="none"
       ;;
     --tweaks)
       shift
@@ -543,7 +547,8 @@ case "${PANEL_STYLE}" in
     [ -f "${REPO_ROOT}/src/tweaks/shell/tray-round.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-round.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
     echo "  + top bar: rounded modern island (16px curved floating bar)"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
-      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur false 2>/dev/null || true
+      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
+      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/corner-radius 16 2>/dev/null || true
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background false 2>/dev/null || true
     fi
     ;;
@@ -551,7 +556,8 @@ case "${PANEL_STYLE}" in
     [ -f "${REPO_ROOT}/src/tweaks/shell/tray-pill.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-pill.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
     echo "  + top bar: floating pill capsule (999px circular ends)"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
-      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur false 2>/dev/null || true
+      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
+      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/corner-radius 30 2>/dev/null || true
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background false 2>/dev/null || true
     fi
     ;;
@@ -559,7 +565,8 @@ case "${PANEL_STYLE}" in
     [ -f "${REPO_ROOT}/src/tweaks/shell/tray-bottom-round.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-bottom-round.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
     echo "  + top bar: bottom-rounded (connected to top edge)"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
-      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur false 2>/dev/null || true
+      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
+      dconf write /org/gnome/shell/extensions/blur-my-shell/panel/corner-radius 16 2>/dev/null || true
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background false 2>/dev/null || true
     fi
     ;;
@@ -599,6 +606,14 @@ if [ "${WANT_BLUR}" -eq 1 ]; then
   [ -f "${REPO_ROOT}/src/tweaks/shell/translucent.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/translucent.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
   [ -f "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
   echo "  + surface: frosted glass translucency & blur enabled"
+  if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
+    dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur true 2>/dev/null || true
+    dconf write /org/gnome/shell/extensions/blur-my-shell/overview/blur true 2>/dev/null || true
+    dconf write /org/gnome/shell/extensions/blur-my-shell/appfolder/blur true 2>/dev/null || true
+  fi
+  if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com" ]; then
+    dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme true 2>/dev/null || true
+  fi
 else
   [ -f "${REPO_ROOT}/src/tweaks/shell/noblur.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/noblur.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
   if [ -f "${REPO_ROOT}/src/tweaks/gtk/noblur.css" ]; then
@@ -608,6 +623,10 @@ else
     cat "${REPO_ROOT}/src/tweaks/gtk/noblur.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   fi
   echo "  + surface: solid opaque surfaces"
+  if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
+    dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur false 2>/dev/null || true
+    dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur false 2>/dev/null || true
+  fi
 fi
 
 # ---------- apply window controls (buttons) ----------
@@ -707,6 +726,7 @@ if [ "${WANT_WALLPAPER}" -eq 1 ] && [ "${WALLPAPER_CHOICE}" != "none" ]; then
     DEST="${HOME}/Pictures/${WP_NAME}"
     mkdir -p "${HOME}/Pictures"
     cp "${WP_SRC}" "${DEST}"
+    cp "${WP_SRC}" "${HOME}/.config/background" 2>/dev/null || true
     gsettings set org.gnome.desktop.background picture-uri "file://${DEST}" 2>/dev/null || true
     gsettings set org.gnome.desktop.background picture-uri-dark "file://${DEST}" 2>/dev/null || true
     echo "wallpaper applied: ${DEST}"
@@ -721,8 +741,36 @@ if [ "${WANT_GTK4_OVERRIDE}" -eq 1 ]; then
   [ -f "${CONF_DIR}/gtk-dark.css" ] && [ ! -L "${CONF_DIR}/gtk-dark.css" ] && cp "${CONF_DIR}/gtk-dark.css" "${CONF_DIR}/gtk-dark.css.pre-nordic"
   ln -sf "${THEME_DIR}/gtk-4.0/gtk.css" "${CONF_DIR}/gtk.css"
   ln -sf "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${CONF_DIR}/gtk-dark.css"
+  cat <<'EOF_GTK4_INI' > "${CONF_DIR}/settings.ini"
+[Settings]
+gtk-application-prefer-dark-theme=1
+EOF_GTK4_INI
   echo "libadwaita best-effort override linked at ${CONF_DIR}/gtk.css and gtk-dark.css"
 fi
+
+# ---------- GTK3 config sync & cleanup ----------
+CONF3_DIR="${HOME}/.config/gtk-3.0"
+mkdir -p "${CONF3_DIR}"
+if [ -f "${CONF3_DIR}/gtk.css" ] && grep -q "colors.css" "${CONF3_DIR}/gtk.css" 2>/dev/null; then
+  mv "${CONF3_DIR}/gtk.css" "${CONF3_DIR}/gtk.css.pre-nordic" 2>/dev/null || true
+fi
+cat <<EOF_GTK3_INI > "${CONF3_DIR}/settings.ini"
+[Settings]
+gtk-theme-name=${THEME_NAME}
+gtk-icon-theme-name=${ICONS_NAME}
+gtk-cursor-theme-name=${CURSORS_NAME}
+gtk-cursor-theme-size=24
+gtk-application-prefer-dark-theme=1
+EOF_GTK3_INI
+
+# ---------- default cursor fallback for all toolkits ----------
+mkdir -p "${HOME}/.icons/default"
+cat <<EOF_CUR_INI > "${HOME}/.icons/default/index.theme"
+[Icon Theme]
+Name=Default
+Comment=Default Cursor Theme
+Inherits=${CURSORS_NAME}
+EOF_CUR_INI
 
 # ---------- GNOME settings activation ----------
 if have dconf; then

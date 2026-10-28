@@ -2,7 +2,7 @@
 
 © Mayanktaker Computers & Web Development | https://mayanktaker.com
 
-MT Verdant Nocturne derives from GNOME upstream theme code:
+MT Nordic Blue derives from GNOME upstream theme code:
 
 - **GNOME Shell stylesheet** — derived at build time from the installed
   `gnome-shell-theme.gresource` (upstream `gnome-shell` project, GPLv2+),

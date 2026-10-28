@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Creative, 3D, and audio/video vector application icons for MT-Verdant-Icons.
+# Creative, 3D, and audio/video vector application icons for MT-Nordic-Blue-Icons.
 
 CREATIVE_APP_ICONS = {
     # 1. Inkscape (Vector Graphics Editor)

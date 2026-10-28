@@ -1,6 +1,6 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Generates MT-Verdant-Icons suite: vector SVGs, multi-res PNGs, and theme metadata.
-# High-definition botanical dark green palette with rich gradients and crisp contrast.
+# Generates MT-Nordic-Blue-Icons suite: vector SVGs, multi-res PNGs, and theme metadata.
+# High-definition Nordic dark palette with rich gradients and crisp contrast.
 
 import os
 import shutil
@@ -1413,7 +1413,7 @@ def build_mimetypes() -> None:
             render_svg_to_png(svg_content, png_file, size)
 
 def main() -> None:
-    # Clean and assemble full MT-Verdant-Icons suite.
+    # Clean and assemble full MT-Nordic-Blue-Icons suite.
     if OUT_DIR.exists():
         shutil.rmtree(OUT_DIR)
     OUT_DIR.mkdir(parents=True, exist_ok=True)

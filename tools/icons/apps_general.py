@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Productivity, web browsers, security, and gaming vector icons for MT-Verdant-Icons.
+# Productivity, web browsers, security, and gaming vector icons for MT-Nordic-Blue-Icons.
 
 GENERAL_APP_ICONS = {
     # 1. ChatGPT (OpenAI Conversational Assistant)

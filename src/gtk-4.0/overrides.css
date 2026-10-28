@@ -1,51 +1,51 @@
 /*
- * MT Verdant Nocturne — GTK4 & Libadwaita overrides
+ * MT Nordic Blue — GTK4 & Libadwaita overrides
  * © Mayanktaker Computers & Web Development | https://mayanktaker.com
  *
- * Provides full botanical dark styling for both active and unfocused (:backdrop) states.
+ * Provides full Nordic Frost dark styling for both active and unfocused (:backdrop) states.
  * Colors come from palette/tokens.json — single source of truth.
  */
 
 /* GTK4 & Libadwaita color definitions */
-@define-color accent_color #8fb8a6;
-@define-color accent_bg_color #8fb8a6;
-@define-color accent_fg_color #0d131a;
-@define-color destructive_color #e5737f;
-@define-color success_color #7fc8a0;
-@define-color warning_color #e5b580;
-@define-color error_color #e5737f;
+@define-color accent_color #88c0d0;
+@define-color accent_bg_color #88c0d0;
+@define-color accent_fg_color #090d14;
+@define-color destructive_color #bf616a;
+@define-color success_color #a3be8c;
+@define-color warning_color #ebcb8b;
+@define-color error_color #bf616a;
 
-@define-color window_bg_color #0f141b;
-@define-color window_fg_color #e9f1ec;
-@define-color window_backdrop_color #0f141b;
+@define-color window_bg_color #0e141d;
+@define-color window_fg_color #eceff4;
+@define-color window_backdrop_color #0e141d;
 
-@define-color view_bg_color #16222a;
-@define-color view_fg_color #e9f1ec;
-@define-color view_backdrop_color #141f26;
+@define-color view_bg_color #151d2a;
+@define-color view_fg_color #eceff4;
+@define-color view_backdrop_color #121924;
 
-@define-color headerbar_bg_color #0f141b;
-@define-color headerbar_fg_color #e9f1ec;
-@define-color headerbar_backdrop_color #0f141b;
+@define-color headerbar_bg_color #0e141d;
+@define-color headerbar_fg_color #eceff4;
+@define-color headerbar_backdrop_color #0e141d;
 
-@define-color sidebar_bg_color #131a21;
-@define-color sidebar_fg_color #a7b8b1;
-@define-color sidebar_backdrop_color #11171d;
+@define-color sidebar_bg_color #111822;
+@define-color sidebar_fg_color #d8dee9;
+@define-color sidebar_backdrop_color #0e141d;
 
-@define-color card_bg_color #1a2930;
-@define-color card_fg_color #e9f1ec;
-@define-color card_backdrop_color #17242a;
+@define-color card_bg_color #1a2434;
+@define-color card_fg_color #eceff4;
+@define-color card_backdrop_color #16202e;
 
-@define-color dialog_bg_color #0f141b;
-@define-color dialog_fg_color #e9f1ec;
-@define-color popover_bg_color #16222a;
-@define-color popover_fg_color #e9f1ec;
-@define-color borders #2c3e44;
+@define-color dialog_bg_color #0e141d;
+@define-color dialog_fg_color #eceff4;
+@define-color popover_bg_color #151d2a;
+@define-color popover_fg_color #eceff4;
+@define-color borders #25344a;
 
-@define-color theme_bg_color #0f141b;
-@define-color theme_fg_color #e9f1ec;
-@define-color theme_base_color #16222a;
-@define-color theme_selected_bg_color #8fb8a6;
-@define-color theme_selected_fg_color #0d131a;
+@define-color theme_bg_color #0e141d;
+@define-color theme_fg_color #eceff4;
+@define-color theme_base_color #151d2a;
+@define-color theme_selected_bg_color #88c0d0;
+@define-color theme_selected_fg_color #090d14;
 
 /* Window background and backdrop */
 window.background,
@@ -62,7 +62,7 @@ headerbar:backdrop {
   border-color: @borders;
 }
 
-/* Navigation sidebar & split view containers (fixes unfocused non-themed look!) */
+/* Navigation sidebar & split view containers (fixes unfocused non-themed look) */
 .navigation-sidebar,
 .navigation-sidebar:backdrop,
 placessidebar,
@@ -83,7 +83,7 @@ placessidebar row {
 
 .navigation-sidebar row:hover,
 placessidebar row:hover {
-  background-color: rgba(143, 184, 166, 0.10);
+  background-color: rgba(136, 192, 208, 0.12);
   color: @theme_fg_color;
 }
 
@@ -93,8 +93,8 @@ placessidebar row:hover {
 placessidebar row:selected,
 placessidebar row:selected:focus,
 placessidebar row:selected:backdrop {
-  background-color: rgba(143, 184, 166, 0.22);
-  color: #e9f1ec;
+  background-color: rgba(136, 192, 208, 0.24);
+  color: #eceff4;
 }
 
 /* Main view areas */
@@ -112,6 +112,7 @@ selection, textview text selection:focus, textview text selection {
   color: @theme_selected_fg_color;
 }
 
+/* Form controls focus ring */
 button:focus-visible, entry:focus-visible {
   outline-color: @accent_color;
 }

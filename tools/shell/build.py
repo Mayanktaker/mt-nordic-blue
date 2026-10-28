@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Build the MT Verdant Nocturne GNOME Shell theme per major Shell version:
+# Build the MT Nordic Blue GNOME Shell theme per major Shell version:
 # host major extracts its upstream CSS from the gresource, other majors use
 # vendored upstream CSS in src/shell/upstream-<major>/, then recolor via maps.
 

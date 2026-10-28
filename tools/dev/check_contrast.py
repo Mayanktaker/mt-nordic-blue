@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# WCAG contrast validation for MT Verdant Nocturne tokens (single source: palette/tokens.json).
+# WCAG contrast validation for MT Nordic Blue tokens (single source: palette/tokens.json).
 
 import json
 import sys

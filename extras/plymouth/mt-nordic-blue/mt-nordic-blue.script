@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Plymouth boot script for MT Verdant Nocturne
+# Plymouth boot script for MT Nordic Blue
 
 screen_width = Window.GetWidth();
 screen_height = Window.GetHeight();

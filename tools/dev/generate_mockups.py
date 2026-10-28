@@ -65,7 +65,7 @@ def generate_mockup_a():
     # Quick settings pill on panel right
     qs_pill = [(w - panel_margin - 110, panel_y + 4), (w - panel_margin - 12, panel_y + panel_h - 4)]
     draw_rounded_rect(draw, qs_pill, radius=14, fill=(29, 50, 56, 180), outline=(143, 184, 166, 120), width=1)
-    draw.text((w - panel_margin - 95, panel_y + 10), "📶  🔊  🔋", fill=(143, 184, 166), font=f_ui)
+    draw.text((w - panel_margin - 95, panel_y + 10), "📶  🔊  🔋", fill=(136, 192, 208), font=f_ui)
 
     # 2. Main Window: Text Editor / Code
     win_x, win_y = 160, 75
@@ -88,14 +88,14 @@ def generate_mockup_a():
     # macOS / Colloid style dots
     draw.ellipse([(win_x + 18, win_y + 16), (win_x + 30, win_y + 28)], fill=(229, 115, 127))
     draw.ellipse([(win_x + 38, win_y + 16), (win_x + 50, win_y + 28)], fill=(229, 181, 128))
-    draw.ellipse([(win_x + 58, win_y + 16), (win_x + 70, win_y + 28)], fill=(127, 200, 160))
+    draw.ellipse([(win_x + 58, win_y + 16), (win_x + 70, win_y + 28)], fill=(163, 190, 140))
 
     draw.text((win_x + win_w // 2 - 70, win_y + 14), "tokens.json — Editor", fill=(233, 241, 236), font=f_ui)
 
     # Code lines
     code_lines = [
-        ('{\n  "theme": "MT Verdant Nocturne",\n  "tweaks": ["float", "translucent", "macos"],\n  "size": "standard",\n  "blur": true,\n  "palette": {', (167, 184, 177)),
-        ('    "accent": "#8FB8A6",  /* Botanical Sage */', (143, 184, 166)),
+        ('{\n  "theme": "MT Nordic Blue",\n  "tweaks": ["float", "translucent", "macos"],\n  "size": "standard",\n  "blur": true,\n  "palette": {', (167, 184, 177)),
+        ('    "accent": "#8FB8A6",  /* Botanical Sage */', (136, 192, 208)),
         ('    "background": "#0F141B",\n    "surface": "#1D3238",\n    "border": "#2C3E44"', (233, 241, 236)),
         ('  }\n}', (167, 184, 177)),
         ('\n/* Live preview with frosted floating panel */', (82, 115, 111)),
@@ -134,7 +134,7 @@ def generate_mockup_a():
     # Volume slider
     draw.text((qs_x + 20, qs_y + 150), "Volume", fill=(167, 184, 177), font=f_ui)
     draw_rounded_rect(draw, [(qs_x + 20, qs_y + 172), (qs_x + qs_w - 20, qs_y + 184)], radius=6, fill=(29, 50, 56))
-    draw_rounded_rect(draw, [(qs_x + 20, qs_y + 172), (qs_x + 210, qs_y + 184)], radius=6, fill=(143, 184, 166))
+    draw_rounded_rect(draw, [(qs_x + 20, qs_y + 172), (qs_x + 210, qs_y + 184)], radius=6, fill=(136, 192, 208))
     draw.ellipse([(qs_x + 204, qs_y + 168), (qs_x + 218, qs_y + 188)], fill=(233, 241, 236))
 
     # Floating dock at bottom
@@ -149,7 +149,7 @@ def generate_mockup_a():
 
     # Bottom caption bar
     draw_rounded_rect(draw, [(30, h - 45), (w - 30, h - 12)], radius=8, fill=(13, 19, 26, 235), outline=(143, 184, 166, 180), width=1)
-    draw.text((45, h - 38), "Option A: Canopy Floating Glass — Standard Sizing · Frosted Translucency · macOS Traffic Dots · Glassmorphic Dock", fill=(143, 184, 166), font=f_bold)
+    draw.text((45, h - 38), "Option A: Canopy Floating Glass — Standard Sizing · Frosted Translucency · macOS Traffic Dots · Glassmorphic Dock", fill=(136, 192, 208), font=f_bold)
 
     for p in [SCREENSHOTS / "mockup-option-a.png", SCREENSHOTS / "option-a-floating-glass.png"]:
         im.save(p)
@@ -220,9 +220,9 @@ def generate_mockup_b():
         ("=> Sizing profile: COMPACT (reduced paddings, 36px headerbars, high-DPI density)", (233, 241, 236)),
         ("=> Blur profile: NO-BLUR (pure opaque crisp surfaces, zero GPU compositing overhead)", (167, 184, 177)),
         ("=> Palette flavor: Emerald Aurora (#3DD68C high-contrast)", (61, 214, 140)),
-        ("=> WCAG contrast check: 9.82:1 (PASS+)", (127, 200, 160)),
-        ("=> Installed successfully into ~/.themes/MT-Verdant-Nocturne", (233, 241, 236)),
-        ("=> Terminal color scheme: Ghostty & Kitty installed into ~/.config/", (143, 184, 166)),
+        ("=> WCAG contrast check: 9.82:1 (PASS+)", (163, 190, 140)),
+        ("=> Installed successfully into ~/.themes/MT-Nordic-Blue", (233, 241, 236)),
+        ("=> Terminal color scheme: Ghostty & Kitty installed into ~/.config/", (136, 192, 208)),
     ]
     cur_y = win_y + 52
     for tline, col in term_text:
@@ -327,7 +327,7 @@ def generate_mockup_c():
             draw_rounded_rect(draw, [(win_x + 8, iy - 4), (win_x + 152, iy + 24)], radius=8, fill=(45, 79, 68))
         draw.text((win_x + 20, iy), it, fill=(216, 226, 220) if is_sel else (150, 175, 165), font=f_ui)
 
-    cards = ["MT-Verdant-Nocturne", "Wallpapers-4K", "Tokens-Palette", "Upstream-Colormaps"]
+    cards = ["MT-Nordic-Blue", "Wallpapers-4K", "Tokens-Palette", "Upstream-Colormaps"]
     for i, card in enumerate(cards):
         cx = win_x + 180 + (i % 2) * 230
         cy = win_y + 70 + (i // 2) * 120
@@ -379,7 +379,7 @@ def generate_showcase_apps():
     f_mono_bold = get_font(FONT_BOLD, 11)
 
     draw.text((20, 8), "Activities", fill=(233, 241, 236), font=f_ui)
-    draw.text((w // 2 - 50, 8), "Verdant Nocturne Ecosystem", fill=(143, 184, 166), font=f_bold)
+    draw.text((w // 2 - 50, 8), "MT Nordic Blue Ecosystem", fill=(136, 192, 208), font=f_bold)
     draw.text((w - 140, 8), "GNOME 51 · Wayland", fill=(167, 184, 177), font=f_ui)
 
     # Window 1: Terminal running Fastfetch (Kitty/Ghostty/GNOME Terminal)
@@ -391,22 +391,22 @@ def generate_showcase_apps():
     # Window controls
     draw.ellipse([(w1_x + 12, w1_y + 11), (w1_x + 22, w1_y + 21)], fill=(229, 115, 127))
     draw.ellipse([(w1_x + 28, w1_y + 11), (w1_x + 38, w1_y + 21)], fill=(229, 181, 128))
-    draw.ellipse([(w1_x + 44, w1_y + 11), (w1_x + 54, w1_y + 21)], fill=(127, 200, 160))
+    draw.ellipse([(w1_x + 44, w1_y + 11), (w1_x + 54, w1_y + 21)], fill=(163, 190, 140))
     draw.text((w1_x + 70, w1_y + 9), "Terminal — Ghostty / Kitty / GNOME Terminal (Fastfetch)", fill=(216, 226, 220), font=f_bold)
 
     # Terminal Fastfetch Output
     ff_lines = [
-        ("       ▲        mayank@nocturne", (143, 184, 166)),
+        ("       ▲        mayank@nocturne", (136, 192, 208)),
         ("      ▲ ▲       -------------------------", (120, 150, 140)),
         ("     ▲ ▲ ▲      OS: Fedora Linux 43 (Rawhide) x86_64", (233, 241, 236)),
         ("    ▲ ▲ ▲ ▲     Host: Nocturne Rig", (233, 241, 236)),
         ("   ▲ ▲ ▲ ▲ ▲    Kernel: 6.14.0-rc3+", (233, 241, 236)),
         ("  ▲ ▲ ▲ ▲ ▲ ▲   DE: GNOME 51.1 (Wayland)", (233, 241, 236)),
-        (" ▲ ▲ ▲ ▲ ▲ ▲ ▲  WM Theme: MT-Verdant-Nocturne", (143, 184, 166)),
-        ("      |||       Theme: MT-Verdant-Nocturne [GTK2/3/4]", (143, 184, 166)),
-        ("      |||       Icons: MT-Verdant-Icons [High-DPI]", (127, 200, 160)),
+        (" ▲ ▲ ▲ ▲ ▲ ▲ ▲  WM Theme: MT-Nordic-Blue", (136, 192, 208)),
+        ("      |||       Theme: MT-Nordic-Blue [GTK2/3/4]", (136, 192, 208)),
+        ("      |||       Icons: MT-Nordic-Blue-Icons [High-DPI]", (163, 190, 140)),
         ("      |||       Terminal Font: Adwaita Mono 11", (167, 184, 177)),
-        ("                Color Palette: Botanical Deep Forest", (143, 184, 166)),
+        ("                Color Palette: Botanical Deep Forest", (136, 192, 208)),
     ]
     cur_y = w1_y + 44
     for line, col in ff_lines:
@@ -415,8 +415,8 @@ def generate_showcase_apps():
 
     # Terminal Color Blocks Palette
     p_colors = [
-        (15, 20, 27), (229, 115, 127), (127, 200, 160), (229, 181, 128),
-        (100, 160, 210), (180, 140, 210), (143, 184, 166), (233, 241, 236),
+        (15, 20, 27), (229, 115, 127), (163, 190, 140), (229, 181, 128),
+        (100, 160, 210), (180, 140, 210), (136, 192, 208), (233, 241, 236),
     ]
     for idx, c in enumerate(p_colors):
         px = w1_x + 190 + idx * 24
@@ -431,20 +431,20 @@ def generate_showcase_apps():
     # Window controls
     draw.ellipse([(w2_x + 12, w2_y + 11), (w2_x + 22, w2_y + 21)], fill=(229, 115, 127))
     draw.ellipse([(w2_x + 28, w2_y + 11), (w2_x + 38, w2_y + 21)], fill=(229, 181, 128))
-    draw.ellipse([(w2_x + 44, w2_y + 11), (w2_x + 54, w2_y + 21)], fill=(127, 200, 160))
-    draw.text((w2_x + 70, w2_y + 9), "Kate / Text Editor — MT-Verdant-Nocturne.colors", fill=(216, 226, 220), font=f_bold)
+    draw.ellipse([(w2_x + 44, w2_y + 11), (w2_x + 54, w2_y + 21)], fill=(163, 190, 140))
+    draw.text((w2_x + 70, w2_y + 9), "Kate / Text Editor — MT-Nordic-Blue.colors", fill=(216, 226, 220), font=f_bold)
 
     editor_code = [
-        ("1", "import { ThemeManager, BotanicalPalette } from '@mt/theme';", (143, 184, 166)),
+        ("1", "import { ThemeManager, BotanicalPalette } from '@mt/theme';", (136, 192, 208)),
         ("2", "", (233, 241, 236)),
-        ("3", "export class VerdantEngine {", (127, 200, 160)),
+        ("3", "export class NordicEngine {", (163, 190, 140)),
         ("4", "  constructor(readonly options: { size: 'standard' | 'compact' }) {", (216, 226, 220)),
-        ("5", "    console.log(`Initialized Verdant Nocturne in ${options.size} mode`);", (229, 181, 128)),
+        ("5", "    console.log(`Initialized Nordic Blue in ${options.size} mode`);", (229, 181, 128)),
         ("6", "  }", (216, 226, 220)),
-        ("7", "  public applyAccent(token = '#8FB8A6'): void {", (143, 184, 166)),
+        ("7", "  public applyAccent(token = '#8FB8A6'): void {", (136, 192, 208)),
         ("8", "    document.body.style.setProperty('--accent', token);", (233, 241, 236)),
         ("9", "  }", (216, 226, 220)),
-        ("10", "}", (127, 200, 160)),
+        ("10", "}", (163, 190, 140)),
         ("11", "/* Perfectly styled across GNOME, KDE & Terminal ecosystems */", (82, 115, 111)),
     ]
     cur_y = w2_y + 42
@@ -462,8 +462,8 @@ def generate_showcase_apps():
 
     draw.ellipse([(w3_x + 14, w3_y + 12), (w3_x + 24, w3_y + 22)], fill=(229, 115, 127))
     draw.ellipse([(w3_x + 30, w3_y + 12), (w3_x + 40, w3_y + 22)], fill=(229, 181, 128))
-    draw.ellipse([(w3_x + 46, w3_y + 12), (w3_x + 56, w3_y + 22)], fill=(127, 200, 160))
-    draw.text((w3_x + 72, w3_y + 10), "Files (Nautilus) — ~/.themes/MT-Verdant-Nocturne/extras/", fill=(216, 226, 220), font=f_bold)
+    draw.ellipse([(w3_x + 46, w3_y + 12), (w3_x + 56, w3_y + 22)], fill=(163, 190, 140))
+    draw.text((w3_x + 72, w3_y + 10), "Files (Nautilus) — ~/.themes/MT-Nordic-Blue/extras/", fill=(216, 226, 220), font=f_bold)
 
     # Sidebar
     draw.rectangle([(w3_x, w3_y + 37), (w3_x + 180, w3_y + w3_h - 12)], fill=(12, 18, 23))
@@ -484,7 +484,7 @@ def generate_showcase_apps():
         ("📁 foot/", "Wayland terminal", "#8FB8A6"),
         ("📄 gnome-terminal.sh", "dconf registration", "#A3C9A8"),
         ("📄 kate-colors.sh", "KDE color scheme", "#A3C9A8"),
-        ("📄 fastfetch.jsonc", "Verdant logo ASCII", "#7FB392"),
+        ("📄 fastfetch.jsonc", "Nordic logo ASCII", "#7FB392"),
         ("🖼️ grub-bg-4k.png", "Bootloader 3840x2160", "#64A0D2"),
     ]
     for idx, (title, sub, accent_hex) in enumerate(grid_items):
@@ -496,11 +496,11 @@ def generate_showcase_apps():
         draw.text((gx + 14, gy + 14), title, fill=(233, 241, 236), font=f_bold)
         draw.text((gx + 14, gy + 38), sub, fill=(140, 165, 155), font=f_ui)
         draw_rounded_rect(draw, [(gx + 14, gy + 62), (gx + 110, gy + 74)], radius=4, fill=(29, 50, 56))
-        draw.text((gx + 20, gy + 62), "MT-Verdant", fill=(143, 184, 166), font=get_font(FONT_REG, 10))
+        draw.text((gx + 20, gy + 62), "MT-Nordic-Blue", fill=(136, 192, 208), font=get_font(FONT_REG, 10))
 
     # Bottom caption bar
     draw_rounded_rect(draw, [(30, h - 45), (w - 30, h - 12)], radius=8, fill=(10, 15, 20, 245), outline=(143, 184, 166, 180), width=1)
-    draw.text((45, h - 38), "Multi-App Ecosystem Showcase — Ghostty · Kitty · GNOME Terminal · Fastfetch · Kate · Nautilus · GRUB", fill=(143, 184, 166), font=f_bold)
+    draw.text((45, h - 38), "Multi-App Ecosystem Showcase — Ghostty · Kitty · GNOME Terminal · Fastfetch · Kate · Nautilus · GRUB", fill=(136, 192, 208), font=f_bold)
 
     p = SCREENSHOTS / "showcase-terminals-apps.png"
     im.save(p)

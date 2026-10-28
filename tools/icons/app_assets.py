@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Extended Botanical Canopy Application Icons for MT-Verdant-Icons suite.
+# Extended Nordic Application Icons for MT-Nordic-Blue-Icons suite.
 # High-definition vector SVGs (64x64) matching the tokens in palette/tokens.json.
 
 EXTENDED_APP_ICONS = {

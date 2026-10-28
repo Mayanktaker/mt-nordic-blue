@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# AI editors, IDEs, terminals, and DevOps vector icons for MT-Verdant-Icons.
+# AI editors, IDEs, terminals, and DevOps vector icons for MT-Nordic-Blue-Icons.
 
 DEV_AI_APP_ICONS = {
     # 1. Android Studio (Mobile Development IDE)

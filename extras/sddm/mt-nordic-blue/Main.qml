@@ -1,5 +1,5 @@
 // © Mayanktaker Computers & Web Development | https://mayanktaker.com
-// SDDM greeter for MT Verdant Nocturne
+// SDDM greeter for MT Nordic Blue
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15

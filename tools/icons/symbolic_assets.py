@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Extended symbolic wireframes for MT-Verdant-Icons suite.
+# Extended symbolic wireframes for MT-Nordic-Blue-Icons suite.
 # Covers empty states, Libadwaita navigation, GNOME screenshot UI, and all Settings panels.
 
 EXTENDED_SYMBOLIC_ICONS = {

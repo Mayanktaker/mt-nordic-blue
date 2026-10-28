@@ -1,80 +1,64 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Generates Plymouth boot splash theme assets for MT Verdant Nocturne.
+# Generates Plymouth boot splash theme assets for MT Nordic Blue.
 
-import shutil
+import math
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-PLYMOUTH_DIR = REPO_ROOT / "extras" / "plymouth" / "mt-verdant-nocturne"
+PLYMOUTH_DIR = REPO_ROOT / "extras" / "plymouth" / "mt-nordic-blue"
 PLYMOUTH_DIR.mkdir(parents=True, exist_ok=True)
 
-def generate_logo():
-    # 128x128 nocturnal botanical emblem logo
-    size = 128
-    im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+def generate_spinner():
+    # 24-frame Nordic spinner (48x48) in frost cyan
+    for frame in range(24):
+        im = Image.new("RGBA", (48, 48), (0, 0, 0, 0))
+        d = ImageDraw.Draw(im)
+        angle_step = 2 * math.pi / 8
+        base_angle = frame * (2 * math.pi / 24)
+        for i in range(8):
+            a = base_angle + i * angle_step
+            r = 16
+            cx = 24 + r * math.cos(a)
+            cy = 24 + r * math.sin(a)
+            alpha = int(35 + (220 * (i + 1) / 8))
+            dot_r = 2.5
+            d.ellipse([cx - dot_r, cy - dot_r, cx + dot_r, cy + dot_r], fill=(136, 192, 208, alpha))
+        im.save(PLYMOUTH_DIR / f"throbber-{frame:02d}.png")
+
+def generate_lock_box():
+    # Password entry prompt box
+    w, h = 320, 42
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=10, fill=(21, 29, 42, 220), outline=(37, 52, 74, 255), width=1)
+    im.save(PLYMOUTH_DIR / "entry.png")
 
-    # Outer circle border
-    d.ellipse([(4, 4), (size - 4, size - 4)], fill=(22, 34, 42, 240), outline=(44, 62, 68, 255), width=2)
-    # Sage accent ring
-    d.ellipse([(10, 10), (size - 10, size - 10)], outline=(143, 184, 166, 200), width=1)
+    bullet = Image.new("RGBA", (10, 10), (0, 0, 0, 0))
+    bd = ImageDraw.Draw(bullet)
+    bd.ellipse([1, 1, 8, 8], fill=(136, 192, 208, 255))
+    bullet.save(PLYMOUTH_DIR / "bullet.png")
 
-    # Stylized central fern / leaf frond
-    stem = [(size // 2, size - 26), (size // 2, 28)]
-    d.line(stem, fill=(143, 184, 166, 255), width=3)
-
-    # Leaf pairs
-    for i in range(5):
-        y = 36 + i * 12
-        span = 24 - i * 3
-        # Left leaf
-        d.line([(size // 2, y), (size // 2 - span, y - 8)], fill=(61, 214, 140, 240), width=2)
-        # Right leaf
-        d.line([(size // 2, y), (size // 2 + span, y - 8)], fill=(61, 214, 140, 240), width=2)
-
-    im.save(PLYMOUTH_DIR / "logo.png")
-    print("  ✓ generated logo.png")
-
-def generate_progress():
-    # 280x10 progress bar box and fill
-    box_w, box_h = 280, 10
-    box = Image.new("RGBA", (box_w, box_h), (0, 0, 0, 0))
-    bd = ImageDraw.Draw(box)
-    bd.rounded_rectangle([(0, 0), (box_w - 1, box_h - 1)], radius=5, fill=(22, 34, 42, 220), outline=(44, 62, 68, 255), width=1)
-    box.save(PLYMOUTH_DIR / "progress_box.png")
-
-    bar_w, bar_h = box_w - 4, box_h - 4
-    bar = Image.new("RGBA", (bar_w, bar_h), (0, 0, 0, 0))
-    bard = ImageDraw.Draw(bar)
-    bard.rounded_rectangle([(0, 0), (bar_w - 1, bar_h - 1)], radius=3, fill=(143, 184, 166, 255))
-    bar.save(PLYMOUTH_DIR / "progress_bar.png")
-    print("  ✓ generated progress_box.png & progress_bar.png")
-
-def copy_background():
-    # Copy 1080p preview background
-    bg_src = REPO_ROOT / "wallpaper" / "preview" / "mt-verdant-canopy-1920x1080.jpg"
+def generate_config():
+    bg_src = REPO_ROOT / "wallpaper" / "preview" / "mt-nordic-blue-art-1-1920x1080.jpg"
     if bg_src.exists():
         im = Image.open(bg_src)
         im.save(PLYMOUTH_DIR / "background.png")
-        print("  ✓ copied background.png")
 
-def write_configs():
-    # Plymouth theme configuration
-    plymouth_cfg = """[Plymouth Theme]
-Name=MT Verdant Nocturne
-Description=Botanical Canopy dark green boot splash theme
+    plymouth_cfg = """# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+[Plymouth Theme]
+Name=MT Nordic Blue
+Description=Nordic Frost & Arctic Blue Boot Splash Theme
 ModuleName=script
 
 [script]
-ImageDir=/usr/share/plymouth/themes/mt-verdant-nocturne
-ScriptFile=/usr/share/plymouth/themes/mt-verdant-nocturne/mt-verdant-nocturne.script
+ImageDir=/usr/share/plymouth/themes/mt-nordic-blue
+ScriptFile=/usr/share/plymouth/themes/mt-nordic-blue/mt-nordic-blue.script
 """
-    (PLYMOUTH_DIR / "mt-verdant-nocturne.plymouth").write_text(plymouth_cfg)
+    (PLYMOUTH_DIR / "mt-nordic-blue.plymouth").write_text(plymouth_cfg)
 
-    # Plymouth script
     script_content = """# © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Plymouth boot script for MT Verdant Nocturne
+# Plymouth boot script for MT Nordic Blue
 
 screen_width = Window.GetWidth();
 screen_height = Window.GetHeight();
@@ -87,72 +71,63 @@ if (bg_image) {
     bg_sprite.SetZ(-100);
 }
 
-# 2. Centered Logo
-logo_image = Image("logo.png");
-if (logo_image) {
-    logo_sprite = Sprite(logo_image);
-    logo_x = screen_width / 2 - logo_image.GetWidth() / 2;
-    logo_y = screen_height / 2 - logo_image.GetHeight() / 2 - 30;
-    logo_sprite.SetPosition(logo_x, logo_y, 10);
+# 2. Animated Spinner
+for (i = 0; i < 24; i++) {
+    spinner_images[i] = Image("throbber-" + (i < 10 ? "0" : "") + i + ".png");
 }
 
-# 3. Progress bar
-box_image = Image("progress_box.png");
-if (box_image) {
-    box_sprite = Sprite(box_image);
-    box_x = screen_width / 2 - box_image.GetWidth() / 2;
-    box_y = logo_y + logo_image.GetHeight() + 35;
-    box_sprite.SetPosition(box_x, box_y, 10);
+spinner_sprite = Sprite();
+spinner_sprite.SetX(screen_width / 2 - 24);
+spinner_sprite.SetY(screen_height / 2 + 120);
+spinner_sprite.SetZ(10);
 
-    bar_image = Image("progress_bar.png");
-    bar_sprite = Sprite();
-    bar_sprite.SetPosition(box_x + 2, box_y + 2, 11);
-
-    fun progress_callback (duration, progress) {
-        new_width = (box_image.GetWidth() - 4) * progress;
-        if (new_width > 0) {
-            bar = bar_image.Scale(new_width, box_image.GetHeight() - 4);
-            bar_sprite.SetImage(bar);
-        }
-    }
-    Plymouth.SetBootProgressFunction(progress_callback);
+frame = 0;
+fun refresh_callback () {
+    frame = (frame + 1) % 24;
+    spinner_sprite.SetImage(spinner_images[frame]);
 }
+Plymouth.SetRefreshFunction(refresh_callback);
 
-fun quit_callback () {
-    if (logo_sprite) logo_sprite.SetOpacity(0);
+# 3. Password Dialog
+fun dialog_setup() {
+    entry_image = Image("entry.png");
+    entry_sprite = Sprite(entry_image);
+    entry_sprite.SetX(screen_width / 2 - 160);
+    entry_sprite.SetY(screen_height / 2 + 60);
+    entry_sprite.SetZ(20);
 }
-Plymouth.SetQuitFunction(quit_callback);
+Plymouth.SetDisplayPasswordFunction(dialog_setup);
 """
-    (PLYMOUTH_DIR / "mt-verdant-nocturne.script").write_text(script_content)
+    (PLYMOUTH_DIR / "mt-nordic-blue.script").write_text(script_content)
 
-    # Install script
-    install_sh = """#!/bin/sh
+    installer = """#!/bin/sh
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Install MT Verdant Nocturne Plymouth boot theme (requires sudo)
+# Install MT Nordic Blue Plymouth boot theme (requires sudo)
 
 set -eu
-THEME_NAME="mt-verdant-nocturne"
+THEME_NAME="mt-nordic-blue"
 DEST_DIR="/usr/share/plymouth/themes/${THEME_NAME}"
 SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "Installing MT Verdant Nocturne Plymouth theme to ${DEST_DIR}..."
-sudo mkdir -p "${DEST_DIR}"
-sudo cp -r "${SRC_DIR}"/* "${DEST_DIR}/"
+if [ "$(id -u)" -ne 0 ]; then
+  echo "This script must be run as root (use sudo)." >&2
+  exit 1
+fi
+
+echo "Installing MT Nordic Blue Plymouth theme to ${DEST_DIR}..."
+mkdir -p "${DEST_DIR}"
+cp -r "${SRC_DIR}/"* "${DEST_DIR}/"
 
 if command -v plymouth-set-default-theme >/dev/null 2>&1; then
-    echo "Setting default plymouth theme..."
-    sudo plymouth-set-default-theme -R "${THEME_NAME}" || true
-    echo "Done! Test with: sudo plymouthd && sudo plymouth --show-splash && sleep 5 && sudo plymouth --quit"
-else
-    echo "Plymouth utility not found. Update your initramfs/mkinitcpio configuration manually."
+  plymouth-set-default-theme -R "${THEME_NAME}" || true
+  echo "Set default theme to ${THEME_NAME} and rebuilt initramfs."
 fi
 """
-    (PLYMOUTH_DIR / "install.sh").write_text(install_sh)
+    (PLYMOUTH_DIR / "install.sh").write_text(installer)
     (PLYMOUTH_DIR / "install.sh").chmod(0o755)
-    print("  ✓ wrote configs & install.sh")
 
 if __name__ == "__main__":
-    generate_logo()
-    generate_progress()
-    copy_background()
-    write_configs()
+    generate_spinner()
+    generate_lock_box()
+    generate_config()
+    print(f"Generated Plymouth assets in {PLYMOUTH_DIR}")

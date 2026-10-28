@@ -1,7 +1,7 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Procedural 4K wallpaper suite generator for MT Verdant Nocturne.
+# Procedural 4K wallpaper suite generator for MT Nordic Blue.
 # Deterministic: pinned seeds, colors derived from palette/tokens.json.
-# Generates 4 distinct 4K artworks: Canopy, Aurora, Flora, River.
+# Generates 4 distinct 4K artworks: Fjord Canopy, Radiant Aurora, Glacial Flow, Topographic Frost.
 
 import argparse
 import json
@@ -174,7 +174,7 @@ def generate_canopy(seed: int = 20261027) -> Image.Image:
 
 
 # =========================================================================
-# Wallpaper 2: Verdant Aurora (Nordic Pines)
+# Wallpaper 2: Nordic Aurora (Nordic Pines)
 # =========================================================================
 
 def draw_pine_tree(draw: ImageDraw.ImageDraw, x: float, y: float, height: float, width: float, color: tuple) -> None:
@@ -190,7 +190,7 @@ def draw_pine_tree(draw: ImageDraw.ImageDraw, x: float, y: float, height: float,
 
 
 def generate_aurora(seed: int = 20261028) -> Image.Image:
-    # Compose Wallpaper 2: Verdant Aurora.
+    # Compose Wallpaper 2: Nordic Aurora.
     random.seed(seed)
     rng = random.Random(seed)
 
@@ -394,7 +394,7 @@ def dominant_palette(image: Image.Image, count: int = 8) -> list:
 
 def main() -> None:
     # Generate requested wallpapers (1-4 or all).
-    parser = argparse.ArgumentParser(description="Generate 4K procedural wallpapers for MT Verdant Nocturne")
+    parser = argparse.ArgumentParser(description="Generate 4K procedural wallpapers for MT Nordic Blue")
     parser.add_argument("--which", default="all", choices=["1", "2", "3", "4", "all"], help="Which wallpaper to generate")
     args = parser.parse_args()
 

@@ -1,7 +1,7 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# MT Verdant Nocturne — GTK2 legacy application fallback (GIMP 2.10, Audacity, etc.)
+# MT Nordic Blue — GTK2 legacy application fallback (GIMP 2.10, Audacity, etc.)
 
-gtk-color-scheme = "base_color:#16222A\nbg_color:#0F141B\ntext_color:#E9F1EC\nfg_color:#E9F1EC\nselected_bg_color:#8FB8A6\nselected_fg_color:#0D131A\ntooltip_bg_color:#1D3238\ntooltip_fg_color:#E9F1EC"
+gtk-color-scheme = "base_color:#151D2A\nbg_color:#0E141D\ntext_color:#ECEFF4\nfg_color:#ECEFF4\nselected_bg_color:#88C0D0\nselected_fg_color:#090D14\ntooltip_bg_color:#202D40\ntooltip_fg_color:#ECEFF4"
 
 style "default" {
   xthickness = 1
@@ -13,63 +13,63 @@ style "default" {
   GtkRange::trough-border = 0
   GtkRange::slider-width = 12
 
-  bg[NORMAL]        = "#0F141B"
-  bg[ACTIVE]        = "#1D3238"
-  bg[PRELIGHT]      = "#1D3238"
-  bg[SELECTED]      = "#8FB8A6"
-  bg[INSENSITIVE]   = "#0B0F14"
+  bg[NORMAL]        = "#0E141D"
+  bg[ACTIVE]        = "#202D40"
+  bg[PRELIGHT]      = "#202D40"
+  bg[SELECTED]      = "#88C0D0"
+  bg[INSENSITIVE]   = "#090D14"
 
-  base[NORMAL]      = "#16222A"
-  base[ACTIVE]      = "#1D3238"
-  base[PRELIGHT]    = "#1D3238"
-  base[SELECTED]    = "#8FB8A6"
-  base[INSENSITIVE] = "#0F141B"
+  base[NORMAL]      = "#151D2A"
+  base[ACTIVE]      = "#202D40"
+  base[PRELIGHT]    = "#202D40"
+  base[SELECTED]    = "#88C0D0"
+  base[INSENSITIVE] = "#0E141D"
 
-  fg[NORMAL]        = "#E9F1EC"
-  fg[ACTIVE]        = "#E9F1EC"
-  fg[PRELIGHT]      = "#E9F1EC"
-  fg[SELECTED]      = "#0D131A"
-  fg[INSENSITIVE]   = "#76877F"
+  fg[NORMAL]        = "#ECEFF4"
+  fg[ACTIVE]        = "#ECEFF4"
+  fg[PRELIGHT]      = "#ECEFF4"
+  fg[SELECTED]      = "#090D14"
+  fg[INSENSITIVE]   = "#7B88A1"
 
-  text[NORMAL]      = "#E9F1EC"
-  text[ACTIVE]      = "#E9F1EC"
-  text[PRELIGHT]    = "#E9F1EC"
-  text[SELECTED]    = "#0D131A"
-  text[INSENSITIVE] = "#76877F"
+  text[NORMAL]      = "#ECEFF4"
+  text[ACTIVE]      = "#ECEFF4"
+  text[PRELIGHT]    = "#ECEFF4"
+  text[SELECTED]    = "#090D14"
+  text[INSENSITIVE] = "#7B88A1"
 }
 
 style "button" = "default" {
   xthickness = 3
   ythickness = 3
-  bg[NORMAL]   = "#16222A"
-  bg[PRELIGHT] = "#1D3238"
-  bg[ACTIVE]   = "#8FB8A6"
-  fg[ACTIVE]   = "#0D131A"
+  bg[NORMAL]   = "#151D2A"
+  bg[PRELIGHT] = "#202D40"
+  bg[ACTIVE]   = "#88C0D0"
+  fg[ACTIVE]   = "#090D14"
 }
 
 style "entry" = "default" {
   xthickness = 3
   ythickness = 3
-  base[NORMAL] = "#16222A"
+  base[NORMAL] = "#151D2A"
 }
 
 style "menu" = "default" {
   xthickness = 2
   ythickness = 2
-  bg[NORMAL]   = "#16222A"
-  bg[PRELIGHT] = "#8FB8A6"
-  fg[PRELIGHT] = "#0D131A"
+  bg[NORMAL]   = "#151D2A"
+  bg[PRELIGHT] = "#88C0D0"
+  fg[PRELIGHT] = "#090D14"
 }
 
 style "menubar" = "default" {
-  bg[NORMAL]   = "#0F141B"
+  bg[NORMAL]   = "#0E141D"
 }
 
 style "tooltip" {
   xthickness = 4
   ythickness = 4
-  bg[NORMAL]   = "#1D3238"
-  fg[NORMAL]   = "#E9F1EC"
+  bg[NORMAL]   = "#202D40"
+  fg[NORMAL]   = "#ECEFF4"
 }
 
 class "GtkWidget" style "default"

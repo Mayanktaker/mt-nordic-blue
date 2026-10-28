@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Install MT Verdant Nocturne color scheme into KDE Plasma / Qt.
+# Install MT Nordic Blue color scheme into KDE Plasma / Qt.
 
-set -eu
-SRC_FILE="$(cd "$(dirname "$0")" && pwd)/MTVerdantNocturne.colors"
 DEST_DIR="${HOME}/.local/share/color-schemes"
+SRC_FILE="$(cd "$(dirname "$0")" && pwd)/MTNordicBlue.colors"
 
 mkdir -p "${DEST_DIR}"
-cp "${SRC_FILE}" "${DEST_DIR}/"
-echo "Installed to ${DEST_DIR}/MTVerdantNocturne.colors"
-echo "Select 'MT Verdant Nocturne' in KDE System Settings -> Appearance -> Colors."
+cp "${SRC_FILE}" "${DEST_DIR}/MTNordicBlue.colors"
+
+echo "Installed to ${DEST_DIR}/MTNordicBlue.colors"
+echo "Select 'MT Nordic Blue' in KDE System Settings -> Appearance -> Colors."
