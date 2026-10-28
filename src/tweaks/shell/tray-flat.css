@@ -1,0 +1,25 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: classic full-width edge-to-edge square top panel */
+
+#panelBox {
+  padding: 0 !important;
+  background-color: transparent !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+#panelBox #panel,
+#panel {
+  border-radius: 0px !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 1px solid rgba(136, 192, 208, 0.18) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+#panelBox #panel:overview,
+#panel:overview {
+  border-radius: 0px !important;
+}

@@ -1,0 +1,20 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK accent flavor: Cyber Frost Neon Cyan */
+
+@define-color accent_color #00d2ff;
+@define-color accent_bg_color #00d2ff;
+@define-color theme_selected_bg_color #00d2ff;
+@define-color theme_selected_fg_color #0a0e17;
+
+button.suggested-action,
+.quick-toggle:checked {
+  background-color: #00d2ff;
+  color: #0a0e17;
+}
+
+selection,
+textview text selection:focus,
+textview text selection {
+  background-color: #00d2ff;
+  color: #0a0e17;
+}

@@ -1,0 +1,19 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK base flavor: Arctic Cyber Frost Midnight Navy (#0A0E17) */
+
+@define-color window_bg_color #0a0e17;
+@define-color headerbar_bg_color #0a0e17;
+@define-color view_bg_color #111827;
+@define-color card_bg_color #162033;
+@define-color dialog_bg_color #0a0e17;
+@define-color popover_bg_color #111827;
+@define-color borders #1d2a43;
+
+window.background,
+headerbar {
+  background-color: #0a0e17;
+}
+
+window.csd {
+  background-color: #0a0e17;
+}

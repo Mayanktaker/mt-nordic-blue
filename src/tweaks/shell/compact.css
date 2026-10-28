@@ -1,0 +1,22 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: compact top bar and tight density spacing */
+
+#panel {
+  height: 2.0em;
+  font-size: 10pt;
+}
+
+#panel .panel-button {
+  -natural-hpadding: 8px;
+  -minimum-hpadding: 4px;
+}
+
+.quick-toggle {
+  min-height: 40px;
+  padding: 6px 10px;
+}
+
+.popup-menu-item {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

@@ -1,0 +1,35 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK tweak: sharp 0px corners for non-rounded industrial aesthetic */
+
+window.background,
+window.csd,
+dialog,
+messagedialog {
+  border-radius: 0px !important;
+}
+
+headerbar {
+  border-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+button {
+  border-radius: 0px !important;
+}
+
+entry {
+  border-radius: 0px !important;
+}
+
+popover.background,
+popover {
+  border-radius: 0px !important;
+}
+
+notebook > header.top > tabs > tab,
+notebook > header.bottom > tabs > tab,
+notebook > header.left > tabs > tab,
+notebook > header.right > tabs > tab {
+  border-radius: 0px !important;
+}

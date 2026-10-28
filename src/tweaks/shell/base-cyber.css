@@ -1,0 +1,27 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell base flavor: Arctic Cyber Frost Midnight Navy (#0A0E17) */
+
+#panel {
+  background-color: #0a0e17 !important;
+  border-color: #1d2a43 !important;
+}
+
+#panel:overview {
+  background-color: #060910 !important;
+}
+
+.popup-menu-content {
+  background-color: #111827 !important;
+  border-color: #1d2a43 !important;
+}
+
+.modal-dialog,
+.message-dialog-content {
+  background-color: #0a0e17 !important;
+  border-color: #1d2a43 !important;
+}
+
+#dash .dash-background {
+  background-color: rgba(10, 14, 23, 0.94) !important;
+  border-color: #1d2a43 !important;
+}

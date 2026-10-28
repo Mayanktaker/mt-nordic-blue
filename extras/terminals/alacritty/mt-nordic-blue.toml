@@ -1,0 +1,34 @@
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# Alacritty terminal color scheme — MT Nordic Blue
+
+[colors.primary]
+background = "#0E141D"
+foreground = "#ECEFF4"
+
+[colors.cursor]
+text = "#090D14"
+cursor = "#88C0D0"
+
+[colors.selection]
+text = "#090D14"
+background = "#88C0D0"
+
+[colors.normal]
+black = "#151D2A"
+red = "#BF616A"
+green = "#A3BE8C"
+yellow = "#EBCB8B"
+blue = "#81A1C1"
+magenta = "#B48EAD"
+cyan = "#88C0D0"
+white = "#D8DEE9"
+
+[colors.bright]
+black = "#25344A"
+red = "#D08770"
+green = "#8FBCBB"
+yellow = "#F0D7A3"
+blue = "#5E81AC"
+magenta = "#C9A7C5"
+cyan = "#A3D4E2"
+white = "#ECEFF4"

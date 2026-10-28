@@ -1,0 +1,20 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK accent flavor: Nordic Amber Blaze */
+
+@define-color accent_color #d08770;
+@define-color accent_bg_color #d08770;
+@define-color theme_selected_bg_color #d08770;
+@define-color theme_selected_fg_color #0e141d;
+
+button.suggested-action,
+.quick-toggle:checked {
+  background-color: #d08770;
+  color: #0e141d;
+}
+
+selection,
+textview text selection:focus,
+textview text selection {
+  background-color: #d08770;
+  color: #0e141d;
+}

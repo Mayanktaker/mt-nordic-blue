@@ -1,0 +1,19 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK tweak: true pitch-black OLED background */
+
+@define-color window_bg_color #040609;
+@define-color headerbar_bg_color #040609;
+@define-color view_bg_color #070a0f;
+@define-color card_bg_color #0a1017;
+@define-color dialog_bg_color #040609;
+@define-color popover_bg_color #070a0f;
+@define-color borders #141c28;
+
+window.background,
+headerbar {
+  background-color: #040609;
+}
+
+window.csd {
+  background-color: #040609;
+}

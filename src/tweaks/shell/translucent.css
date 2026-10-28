@@ -1,0 +1,63 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: frosted translucent glassmorphism for panel, menus & dialogs */
+
+#panelBox {
+  background-color: transparent !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+#panelBox #panel,
+#panel {
+  background-color: rgba(14, 20, 29, 0.78) !important;
+  backdrop-filter: blur(28px) saturate(140%) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(136, 192, 208, 0.12) !important;
+}
+
+#panelBox #panel:overview,
+#panel:overview {
+  background-color: rgba(9, 13, 20, 0.65) !important;
+}
+
+#panel .panel-button {
+  background-color: transparent;
+}
+
+#panel .panel-button:focus,
+#panel .panel-button:hover {
+  box-shadow: inset 0 0 0 100px rgba(136, 192, 208, 0.16) !important;
+}
+
+#panel .panel-button:active,
+#panel .panel-button:checked {
+  box-shadow: inset 0 0 0 100px rgba(136, 192, 208, 0.28) !important;
+}
+
+.popup-menu-content {
+  background-color: rgba(21, 29, 42, 0.86) !important;
+  backdrop-filter: blur(26px) saturate(140%) !important;
+  border: 1px solid rgba(136, 192, 208, 0.18) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
+}
+
+.modal-dialog {
+  background-color: rgba(14, 20, 29, 0.90) !important;
+  backdrop-filter: blur(32px) saturate(140%) !important;
+  border: 1px solid rgba(136, 192, 208, 0.22) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7) !important;
+}
+
+#dash .dash-background {
+  background-color: rgba(14, 20, 29, 0.75) !important;
+  backdrop-filter: blur(24px) saturate(140%) !important;
+  border: 1px solid rgba(136, 192, 208, 0.15) !important;
+}
+
+.osd-window,
+.workspace-switcher {
+  background-color: rgba(14, 20, 29, 0.82) !important;
+  backdrop-filter: blur(24px) saturate(140%) !important;
+  border: 1px solid rgba(136, 192, 208, 0.15) !important;
+}

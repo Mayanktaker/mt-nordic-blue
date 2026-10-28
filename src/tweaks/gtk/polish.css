@@ -1,0 +1,51 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK modern polish: smooth hover states, scrollbars, focus glows */
+
+/* Refined buttons and inputs */
+button {
+  transition: all 150ms ease-in-out;
+  border-radius: 8px;
+}
+
+button:focus-visible,
+entry:focus-visible {
+  outline: 2px solid #88c0d0;
+  outline-offset: 1px;
+}
+
+button.suggested-action {
+  background-color: #88c0d0;
+  color: #090d14;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(136, 192, 208, 0.3);
+}
+
+button.suggested-action:hover {
+  background-color: #a3d4e2;
+  box-shadow: 0 4px 12px rgba(136, 192, 208, 0.45);
+}
+
+/* Slim modern scrollbars */
+scrollbar {
+  background-color: transparent;
+  transition: all 200ms ease;
+}
+
+scrollbar slider {
+  min-width: 6px;
+  min-height: 6px;
+  border-radius: 999px;
+  background-color: rgba(136, 192, 208, 0.4);
+}
+
+scrollbar slider:hover {
+  background-color: rgba(136, 192, 208, 0.8);
+}
+
+/* Selected text and lists */
+selection,
+textview text selection:focus,
+textview text selection {
+  background-color: #88c0d0;
+  color: #090d14;
+}

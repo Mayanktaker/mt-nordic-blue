@@ -1,0 +1,24 @@
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# MT Nordic Blue fish color theme
+
+fish_color_normal ECEFF4
+fish_color_command 88C0D0 --bold
+fish_color_keyword 81A1C1
+fish_color_quote A3BE8C
+fish_color_redirection A3D4E2
+fish_color_end D8DEE9
+fish_color_error BF616A
+fish_color_param ECEFF4
+fish_color_comment 4C566A --italics
+fish_color_selection --background=1A2434
+fish_color_search_match --background=25344A
+fish_color_operator 8FBCBB
+fish_color_escape B48EAD
+fish_color_autosuggestion 4C566A
+fish_color_cancel BF616A --reverse
+
+fish_pager_color_prefix 88C0D0 --bold
+fish_pager_color_completion ECEFF4
+fish_pager_color_description D8DEE9
+fish_pager_color_progress 88C0D0
+fish_pager_color_secondary_background 151D2A

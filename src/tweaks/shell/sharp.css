@@ -1,0 +1,33 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: sharp 0px corners for non-rounded industrial look */
+
+#panelBox,
+#panel,
+#panel .panel-button {
+  border-radius: 0px !important;
+}
+
+.popup-menu-content {
+  border-radius: 0px !important;
+}
+
+.modal-dialog {
+  border-radius: 0px !important;
+}
+
+.quick-toggle,
+.quick-toggle-button,
+.quick-toggle-has-menu,
+.quick-toggle-has-menu .quick-toggle:ltr,
+.quick-toggle-has-menu .quick-toggle:rtl,
+.quick-toggle-has-menu .quick-toggle-menu-button:ltr,
+.quick-toggle-has-menu .quick-toggle-menu-button:rtl {
+  border-radius: 0px !important;
+}
+
+.osd-window,
+.workspace-switcher,
+#dash .dash-background,
+.notification-banner {
+  border-radius: 0px !important;
+}

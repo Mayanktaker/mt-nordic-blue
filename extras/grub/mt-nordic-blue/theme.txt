@@ -1,0 +1,43 @@
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# GRUB2 theme: MT Nordic Blue
+
+title-text: "MT Nordic Blue"
+title-color: "#88C0D0"
+title-font: "Unifont Regular 16"
+message-font: "Unifont Regular 14"
+message-color: "#D8DEE9"
+terminal-font: "Unifont Regular 14"
+terminal-box: "select_box.png"
+
+desktop-image: "background.png"
+desktop-color: "#0E141D"
+
+# Boot Menu
++ boot_menu {
+  left = 30%
+  top = 35%
+  width = 40%
+  height = 40%
+  item_font = "Unifont Regular 16"
+  item_color = "#ECEFF4"
+  selected_item_color = "#090D14"
+  selected_item_pixmap_style = "select_box.png"
+  item_height = 40
+  item_padding = 10
+  item_spacing = 8
+}
+
+# Timeout progress bar
++ progress_bar {
+  id = "__timeout__"
+  left = 35%
+  top = 80%
+  width = 30%
+  height = 12
+  text = "@TIMEOUT_NOTIFICATION_MIDDLE@"
+  text_color = "#88C0D0"
+  font = "Unifont Regular 12"
+  bg_color = "#151D2A"
+  fg_color = "#88C0D0"
+  border_color = "#25344A"
+}

@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "name": "MT Nordic Blue (Cyber Frost)",
+    "tech_name": "MT-Nordic-Blue",
+    "direction": "Arctic Cyber Frost & Neon Ice",
+    "source": "Midnight navy base with luminescent electric cyan ice accents",
+    "version": "0.1.0"
+  },
+  "color": {
+    "bg": {
+      "base": "#0A0E17",
+      "base_darker": "#060910",
+      "oled": "#020408",
+      "tile": "#111827",
+      "raised": "#162033",
+      "surface": "#1D2A43",
+      "surface_hover": "#263756",
+      "surface_active": "#31466C",
+      "osd_alpha": 0.85
+    },
+    "accent": {
+      "base": "#00D2FF",
+      "strong": "#56E5FF",
+      "dim": "#0090B3",
+      "text_on_accent": "#0A0E17"
+    },
+    "accent_flavors": {
+      "frost": "#88C0D0",
+      "glacier": "#81A1C1",
+      "aurora": "#56B6C2",
+      "arctic": "#5E81AC",
+      "cyber": "#00D2FF",
+      "blaze": "#FF9E64"
+    },
+    "window_controls": {
+      "close": "#FF5D62",
+      "minimize": "#EBCB8B",
+      "maximize": "#7EE787"
+    },
+    "text": {
+      "primary": "#F0F6FC",
+      "secondary": "#C9D1D9",
+      "disabled": "#6E7681"
+    },
+    "status": {
+      "destructive": "#FF5D62",
+      "success": "#7EE787",
+      "warning": "#EBCB8B",
+      "petal_decorative": "#D2A8FF"
+    },
+    "border": {
+      "default": "#202E48",
+      "subtle": "#152033",
+      "focus": "#00D2FF"
+    },
+    "shadow_alpha": 0.60
+  }
+}

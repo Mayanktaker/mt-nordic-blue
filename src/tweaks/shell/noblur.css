@@ -1,0 +1,32 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: solid opaque surfaces (no blur / translucency) */
+
+#panel {
+  background-color: #0e141d !important;
+  backdrop-filter: none !important;
+}
+
+#panel:overview {
+  background-color: #090d14 !important;
+  backdrop-filter: none !important;
+}
+
+#dash .dash-background {
+  background-color: #0e141d !important;
+  backdrop-filter: none !important;
+}
+
+.popup-menu-content {
+  background-color: #151d2a !important;
+  backdrop-filter: none !important;
+}
+
+.osd-window, .workspace-switcher {
+  background-color: #090d14 !important;
+  backdrop-filter: none !important;
+}
+
+.modal-dialog {
+  background-color: #0e141d !important;
+  backdrop-filter: none !important;
+}

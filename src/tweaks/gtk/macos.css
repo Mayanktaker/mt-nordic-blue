@@ -1,0 +1,69 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK tweak: macOS circular traffic lights for window buttons in Nordic tones */
+
+headerbar windowcontrols {
+  padding: 0 4px;
+}
+
+headerbar windowcontrols button,
+headerbar windowcontrols button.image-button,
+headerbar button.titlebutton {
+  min-width: 14px;
+  min-height: 14px;
+  padding: 0;
+  margin: 9px 3px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2);
+  color: transparent;
+  background-clip: padding-box;
+}
+
+headerbar windowcontrols button > image,
+headerbar button.titlebutton > image {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+/* Close button - Nordic Aurora Red */
+headerbar windowcontrols button.close,
+headerbar button.titlebutton.close {
+  background-color: #BF616A;
+}
+
+headerbar windowcontrols button.close:hover,
+headerbar button.titlebutton.close:hover {
+  background-color: #D08770;
+}
+
+/* Minimize button - Nordic Frost Yellow */
+headerbar windowcontrols button.minimize,
+headerbar button.titlebutton.minimize {
+  background-color: #EBCB8B;
+}
+
+headerbar windowcontrols button.minimize:hover,
+headerbar button.titlebutton.minimize:hover {
+  background-color: #F0D7A3;
+}
+
+/* Maximize button - Nordic Green */
+headerbar windowcontrols button.maximize,
+headerbar button.titlebutton.maximize {
+  background-color: #A3BE8C;
+}
+
+headerbar windowcontrols button.maximize:hover,
+headerbar button.titlebutton.maximize:hover {
+  background-color: #B5D2A0;
+}
+
+/* Show subtle glyph on hover */
+headerbar windowcontrols:hover button > image,
+headerbar:hover button.titlebutton > image {
+  opacity: 0.85;
+}

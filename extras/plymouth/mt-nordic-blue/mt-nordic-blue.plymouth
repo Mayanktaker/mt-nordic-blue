@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=MT Nordic Blue
+Description=Nordic Frost atmospheric boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/mt-nordic-blue
+ScriptFile=/usr/share/plymouth/themes/mt-nordic-blue/mt-nordic-blue.script

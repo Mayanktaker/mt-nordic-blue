@@ -1,0 +1,27 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: true pitch-black OLED background */
+
+#panel {
+  background-color: #040609 !important;
+  border-color: #141c28 !important;
+}
+
+#panel:overview {
+  background-color: #040609 !important;
+}
+
+.popup-menu-content {
+  background-color: #040609 !important;
+  border-color: #141c28 !important;
+}
+
+.modal-dialog,
+.message-dialog-content {
+  background-color: #040609 !important;
+  border-color: #141c28 !important;
+}
+
+#dash .dash-background {
+  background-color: rgba(4, 6, 9, 0.94) !important;
+  border-color: #141c28 !important;
+}

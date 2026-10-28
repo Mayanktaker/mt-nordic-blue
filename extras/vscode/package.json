@@ -1,0 +1,22 @@
+{
+  "name": "mt-nordic-blue-theme",
+  "displayName": "MT Nordic Blue",
+  "description": "Nordic Frost & Arctic Blue dark theme for Visual Studio Code",
+  "version": "0.1.0",
+  "publisher": "mayanktaker",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "MT Nordic Blue",
+        "uiTheme": "vs-dark",
+        "path": "./themes/mt-nordic-blue-color-theme.json"
+      }
+    ]
+  }
+}

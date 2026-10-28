@@ -1,0 +1,26 @@
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# Ghostty terminal color scheme — MT Nordic Blue
+
+palette = 0=#151d2a
+palette = 1=#bf616a
+palette = 2=#a3be8c
+palette = 3=#ebcb8b
+palette = 4=#81a1c1
+palette = 5=#b48ead
+palette = 6=#88c0d0
+palette = 7=#d8dee9
+palette = 8=#25344a
+palette = 9=#d08770
+palette = 10=#8fbcbb
+palette = 11=#f0d7a3
+palette = 12=#5e81ac
+palette = 13=#c9a7c5
+palette = 14=#a3d4e2
+palette = 15=#eceff4
+
+background = 0e141d
+foreground = eceff4
+cursor-color = 88c0d0
+cursor-text = 090d14
+selection-background = 88c0d0
+selection-foreground = 090d14

@@ -1,0 +1,19 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK base flavor: Classic Nord Spec Slate (#2E3440) */
+
+@define-color window_bg_color #2e3440;
+@define-color headerbar_bg_color #2e3440;
+@define-color view_bg_color #3b4252;
+@define-color card_bg_color #434c5e;
+@define-color dialog_bg_color #2e3440;
+@define-color popover_bg_color #3b4252;
+@define-color borders #4c566a;
+
+window.background,
+headerbar {
+  background-color: #2e3440;
+}
+
+window.csd {
+  background-color: #2e3440;
+}

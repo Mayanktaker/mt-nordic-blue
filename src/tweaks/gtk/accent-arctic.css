@@ -1,0 +1,20 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GTK accent flavor: Deep Arctic Blue */
+
+@define-color accent_color #5e81ac;
+@define-color accent_bg_color #5e81ac;
+@define-color theme_selected_bg_color #5e81ac;
+@define-color theme_selected_fg_color #eceff4;
+
+button.suggested-action,
+.quick-toggle:checked {
+  background-color: #5e81ac;
+  color: #eceff4;
+}
+
+selection,
+textview text selection:focus,
+textview text selection {
+  background-color: #5e81ac;
+  color: #eceff4;
+}
