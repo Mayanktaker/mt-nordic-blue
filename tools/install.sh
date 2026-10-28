@@ -774,6 +774,9 @@ EOF_CUR_INI
 
 # ---------- GNOME settings activation ----------
 if have dconf; then
+  # Toggle to blank then theme name to trigger immediate live reload in GNOME Shell
+  dconf write /org/gnome/shell/extensions/user-theme/name "''" 2>/dev/null || true
+  sleep 0.2
   dconf write /org/gnome/shell/extensions/user-theme/name "'${THEME_NAME}'" 2>/dev/null || true
 fi
 if have gsettings; then
