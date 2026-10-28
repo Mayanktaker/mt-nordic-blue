@@ -6,9 +6,9 @@ GNOME dark theme suite: Shell + GTK3 + GTK4 (best-effort) + Flatpak GTK3 extensi
 Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 
 ## Stack & toolchain (verify before assuming; update when versions change)
-- Targets: GNOME Shell 50.x and 51.x (Wayland/X11). Host: GNOME Shell 51.1.
+- Targets: GNOME Shell 50.x and 51.x (host dev machine: GNOME Shell 51.1, Wayland).
 - Build: `sassc` (libsass 3.6.6), Python 3 + `numpy` 2.5.4 + `Pillow` 13.0.0 + `pycairo` + `PyGObject` (Rsvg, Gio).
-- Repo: git 2.56, `gh` authenticated as `Mayanktaker`, default branch `master`.
+- Repo: git 2.56, `gh` 2.102.1 authenticated as `Mayanktaker`, default branch `master`.
 - **Installation policy:** ALWAYS install user themes into the user's `~/.themes` (e.g. `/home/<user>/.themes`) ONLY, and user icon/cursor packs into the user's `~/.icons` (e.g. `/home/<user>/.icons`) ONLY — never `~/.local/share/themes`, `~/.local/share/icons`, or system dirs. `tools/install.sh` implements and maintains this. Shell activation requires the **User Themes** extension (`user-theme@gnome-shell-extensions.gcampax.github.com`).
 - **Installer behavior:** `tools/install.sh` detects distro (`/etc/os-release`) + GNOME Shell major (50/51), checks missing dependencies (python3, gi, sassc, numpy, Pillow, User Themes extension), prints distro install commands, and uses **sudo only for system package installs** via `--install-deps`; theme install itself is strictly unprivileged. Old installs under `~/.local/share/themes` are moved to `deleted_files_folders/`, never hard-deleted.
 
@@ -21,20 +21,17 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 - Shell theme is derived from upstream GNOME Shell CSS per major version, recolored via `src/shell/` maps (never hand-edit generated CSS).
 - Icons & Cursors dynamically draw gradients and geometry fills from `palette/tokens.json`.
 
-## Quick Scaffold / Initialization
-- Rebrand or switch palette: `python3 init_theme.py [--preset <name>] [--name "Theme Name"] [--accent "#HEX"]`
-
-## Build & Test Commands
-- Unified master build: `python3 build_all.py` (runs contrast gate, GTK, Shell 50/51, icons, cursors, wallpapers in sequence).
+## Commands
 - Contrast gate: `python3 tools/dev/check_contrast.py` (must pass before commits).
+- Wallpaper suite: `python3 tools/wallpaper/generate.py [--which 1|2|3|4|all]` (dark) and `python3 tools/wallpaper/process_light.py` (light) → generates 4K renders into `wallpaper/dist/` and `wallpaper/dist/light/` + preview JPGs in `wallpaper/preview/`.
+- Icons & Cursors build: `python3 tools/icons/generate_icons.py && python3 tools/icons/generate_cursors.py` → builds `src/icons/MT-Nordic-Blue-Icons` and `src/cursors/MT-Nordic-Blue-Cursors`.
+- Icons packaging: `tools/icons/package.sh [version]` → creates `dist/mt-nordic-blue-icons-v<version>.tar.xz`.
+- Shell theme build: `python3 tools/shell/build.py [--major N | --all]` (host major extracts from gresource; others use vendored `src/shell/upstream-<major>/`).
 - GTK build: `python3 tools/gtk/build.py` → `build/theme/gtk-{3,4}.0/`.
-- Shell build: `python3 tools/shell/build.py [--major N | --all]` (extracts host CSS or uses `src/shell/upstream-<major>/`).
-- Icons build: `python3 tools/icons/generate_icons.py` → `src/icons/MT-Nordic-Blue-Icons/`.
-- Cursors build: `python3 tools/icons/generate_cursors.py` → `src/cursors/MT-Nordic-Blue-Cursors/`.
-- Wallpaper suite: `python3 tools/wallpaper/generate.py [--which 1|2|3|4|all]` (dark) and `python3 tools/wallpaper/process_light.py` (light).
-- Install suite: `./install.sh` (interactive CLI wizard) or `tools/install.sh [--panel round-island|pill|bottom-round|flat] [--corners round|sharp] [--controls standard|macos] [--size standard|compact] [--base polar|classic|cyber|oled] [--accent frost|glacier|aurora|arctic|cyber|blaze] [--blur|--no-blur] [--icons] [--gtk4-libadwaita] [--wallpaper all]`.
-- App ecosystem install: `tools/extras/install-all.sh`.
-- Package release: `tools/release.sh <version>`.
+- Unified master build: `python3 build_all.py` (runs contrast gate, GTK, Shell 50/51, icons, cursors, wallpapers in sequence).
+- Install: `./install.sh` (interactive CLI wizard) or `tools/install.sh [--panel round-island|pill|bottom-round|flat] [--corners round|sharp] [--controls standard|macos] [--size standard|compact] [--base polar|classic|cyber|oled] [--accent frost|glacier|aurora|arctic|cyber|blaze] [--blur|--no-blur] [--icons] [--gtk4-libadwaita] [--wallpaper [1-4|all|none]] [--install-deps]` → installs theme into `~/.themes/MT-Nordic-Blue` and companion packs into `~/.icons/`.
+- App extras install: `tools/extras/install-all.sh` (scans & installs for all detected apps) or individual scripts under `extras/`.
+- Package release: `tools/release.sh <version>` → creates complete tarball in `dist/`.
 
 ## Layout
 - `palette/` tokens (`tokens.json` single source of truth) + `presets/` library
@@ -42,17 +39,20 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 - `tools/` build engines (gtk, shell, icons, wallpapers, dev contrast gate, installer, packager)
 - `extras/` application themes (terminals, shells, editors, KDE, GDM, SDDM, GRUB, Plymouth)
 - `flatpak/` extension manifest + appdata (`org.gtk.Gtk3theme.MT-Nordic-Blue`)
-- `docs/` documentation (`workflow.md`, `design.md`, `compatibility.md`, `flatpak.md`)
-- `init_theme.py` rapid rebranding & setup script
-- `build_all.py` master build runner
+- `docs/` documentation (`workflow.md`, `design.md`, `compatibility.md`, `flatpak.md`, `index.html`)
+- `build/` generated output (gitignored)
+- `dist/` release packages (gitignored)
+- `wallpaper/preview/` committed previews
 
 ## Documentation pointers (do not duplicate content here)
-- `docs/design.md` — design direction, token table, wallpaper rules
+- `docs/design.md` — Nordic design direction, token table, wallpaper rules
 - `docs/compatibility.md` — GNOME version matrix + test checklist
 - `docs/flatpak.md` — Flatpak GTK3 theme extension plan & status
 - `docs/workflow.md` — build/release workflow
+- `docs/index.html` — GitHub Pages interactive showcase site
 
 ## Conventions
 - Every file starts with the © header: `© Mayanktaker Computers & Web Development | https://mayanktaker.com`.
 - Every function/block gets ≤1-line comment.
 - License: GPL-3.0 (code/CSS) + CC BY-SA 4.0 (artwork). See `LICENSES/`.
+- Public repo `Mayanktaker/mt-nordic-blue`; commit at verified milestones, never force-push, secrets/license scan before push.
