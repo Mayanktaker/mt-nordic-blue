@@ -64,7 +64,45 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
 <!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
 <!-- © Mayanktaker Computers & Web Development | https://mayanktaker.com -->
 <wallpapers>
-  <!-- Adaptive Light/Dark Pairs (GNOME 42+ automatic switch) -->
+  <!-- Inverted High-Contrast Adaptive Pairs (Dark Wallpaper on Light Theme / Light Wallpaper on Dark Theme) -->
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Fjord Canopy (Inverted High-Contrast)</name>
+    <filename>{w_dir}/{TECH_SLUG}-art-1-3840x2160.png</filename>
+    <filename-dark>{w_dir}/light/{TECH_SLUG}-canopy-dawn-3840x2160.png</filename-dark>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0E141D</pcolor>
+    <scolor>#0E141D</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Aurora Rift (Inverted High-Contrast)</name>
+    <filename>{w_dir}/{TECH_SLUG}-art-2-3840x2160.png</filename>
+    <filename-dark>{w_dir}/light/{TECH_SLUG}-celestial-rift-3840x2160.png</filename-dark>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0E141D</pcolor>
+    <scolor>#0E141D</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Glacial Flow (Inverted High-Contrast)</name>
+    <filename>{w_dir}/{TECH_SLUG}-art-3-3840x2160.png</filename>
+    <filename-dark>{w_dir}/light/{TECH_SLUG}-cosmic-dawn-3840x2160.png</filename-dark>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0E141D</pcolor>
+    <scolor>#0E141D</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Topographic Frost (Inverted High-Contrast)</name>
+    <filename>{w_dir}/{TECH_SLUG}-art-4-3840x2160.png</filename>
+    <filename-dark>{w_dir}/light/{TECH_SLUG}-botanical-horizon-3840x2160.png</filename-dark>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0E141D</pcolor>
+    <scolor>#0E141D</scolor>
+  </wallpaper>
+
+  <!-- Adaptive Natural Light/Dark Pairs (GNOME 42+ automatic switch) -->
   <wallpaper deleted="false">
     <name>{DISPLAY_NAME} Fjord Canopy (Adaptive Day/Night)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-canopy-dawn-3840x2160.png</filename>
@@ -140,6 +178,36 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <options>zoom</options>
     <pcolor>#0E141D</pcolor>
     <scolor>#0E141D</scolor>
+  </wallpaper>
+
+  <!-- Standalone 4K Light Artworks -->
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Canopy Dawn (Light 4K)</name>
+    <filename>{w_dir}/light/{TECH_SLUG}-canopy-dawn-3840x2160.png</filename>
+    <options>zoom</options>
+    <pcolor>#E5E9F0</pcolor>
+    <scolor>#E5E9F0</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Celestial Rift (Light 4K)</name>
+    <filename>{w_dir}/light/{TECH_SLUG}-celestial-rift-3840x2160.png</filename>
+    <options>zoom</options>
+    <pcolor>#E5E9F0</pcolor>
+    <scolor>#E5E9F0</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Cosmic Dawn (Light 4K)</name>
+    <filename>{w_dir}/light/{TECH_SLUG}-cosmic-dawn-3840x2160.png</filename>
+    <options>zoom</options>
+    <pcolor>#E5E9F0</pcolor>
+    <scolor>#E5E9F0</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Botanical Horizon (Light 4K)</name>
+    <filename>{w_dir}/light/{TECH_SLUG}-botanical-horizon-3840x2160.png</filename>
+    <options>zoom</options>
+    <pcolor>#E5E9F0</pcolor>
+    <scolor>#E5E9F0</scolor>
   </wallpaper>
 </wallpapers>
 """

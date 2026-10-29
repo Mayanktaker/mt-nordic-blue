@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "name": "MT Nordic Light (Glacial Snow Storm)",
+    "tech_name": "MT-Nordic-Light",
+    "direction": "Nordic Snow Storm & Glacial Daylight",
+    "source": "Soft Nordic glacial mist and daylight snow without harsh pure white",
+    "version": "1.1.0"
+  },
+  "color": {
+    "bg": {
+      "base": "#E5E9F0",
+      "base_darker": "#D8DEE9",
+      "oled": "#FFFFFF",
+      "tile": "#ECEFF4",
+      "raised": "#F4F7FB",
+      "surface": "#ECEFF4",
+      "surface_hover": "#E1E6EE",
+      "surface_active": "#D8DEE9",
+      "osd_alpha": 0.88
+    },
+    "accent": {
+      "base": "#4C719C",
+      "strong": "#5E81AC",
+      "dim": "#88C0D0",
+      "text_on_accent": "#FFFFFF"
+    },
+    "accent_flavors": {
+      "frost": "#4C719C",
+      "glacier": "#5E81AC",
+      "aurora": "#8FBCBB",
+      "arctic": "#88C0D0",
+      "cyber": "#0099CC",
+      "blaze": "#D08770"
+    },
+    "window_controls": {
+      "close": "#BF616A",
+      "minimize": "#D08770",
+      "maximize": "#A3BE8C"
+    },
+    "text": {
+      "primary": "#2E3440",
+      "secondary": "#4C566A",
+      "disabled": "#8E99AC"
+    },
+    "status": {
+      "destructive": "#BF616A",
+      "success": "#A3BE8C",
+      "warning": "#D08770",
+      "petal_decorative": "#B48EAD"
+    },
+    "border": {
+      "default": "#D8DEE9",
+      "subtle": "#E5E9F0",
+      "focus": "#4C719C"
+    },
+    "shadow_alpha": 0.18
+  }
+}
