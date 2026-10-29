@@ -352,3 +352,20 @@
 .message-media-control StIcon {
   icon-size: 16px;
 }
+
+/* Refined glowing focus on Shell entries and search */
+StEntry,
+.search-entry {
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #2e3440;
+  border: 1px solid rgba(76, 113, 156, 0.25);
+  transition-duration: 150ms;
+}
+
+StEntry:focus,
+.search-entry:focus {
+  border: 1px solid #4c719c;
+  box-shadow: inset 0 0 0 1px #4c719c, 0 0 0 2px rgba(76, 113, 156, 0.30);
+  background-color: #f4f7fb;
+}

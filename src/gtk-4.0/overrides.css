@@ -261,7 +261,13 @@ button:hover {
   color: #ffffff;
 }
 
-button:active,
+button:active {
+  background-color: #2b3d54;
+  border-color: #88c0d0;
+  color: #ffffff;
+  transform: translateY(1px);
+}
+
 button:checked {
   background-color: #2b3d54;
   border-color: #88c0d0;
@@ -752,18 +758,24 @@ listview:backdrop {
   color: @view_fg_color;
 }
 
-entry {
+entry,
+searchentry {
   background-color: #151d2a;
   color: #eceff4;
-  border: 1px solid #25344a;
+  border: 1px solid rgba(136, 192, 208, 0.20);
   border-radius: 8px;
   padding: 6px 12px;
   min-height: 32px;
+  transition: all 140ms ease-in-out;
 }
 
-entry:focus {
+entry:focus,
+entry:focus-within,
+searchentry:focus,
+searchentry:focus-within {
   border-color: #88c0d0;
-  box-shadow: 0 0 0 1px #88c0d0;
+  box-shadow: 0 0 0 2px rgba(136, 192, 208, 0.38);
+  outline: none;
 }
 
 selection,
