@@ -89,6 +89,12 @@
   border-color: #4c719c !important;
 }
 
+/* Top panel: clean daylight floating bar without unclipped box-shadow halo */
+#panelBox #panel,
+#panel {
+  box-shadow: none !important;
+}
+
 /* Top panel: status indicators alignment and spacing */
 #panel .panel-button {
   -natural-hpadding: 9px;

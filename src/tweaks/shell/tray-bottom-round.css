@@ -12,9 +12,9 @@
 #panelBox #panel,
 #panel {
   border-radius: 0 0 16px 16px !important;
-  border-bottom: 1px solid rgba(136, 192, 208, 0.22);
-  border-left: 1px solid rgba(136, 192, 208, 0.22);
-  border-right: 1px solid rgba(136, 192, 208, 0.22);
-  border-top: none;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  border-bottom: 1px solid rgba(136, 192, 208, 0.28) !important;
+  border-left: 1px solid rgba(136, 192, 208, 0.28) !important;
+  border-right: 1px solid rgba(136, 192, 208, 0.28) !important;
+  border-top: none !important;
+  box-shadow: none !important;
 }

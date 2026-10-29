@@ -10,6 +10,7 @@
 #panel.blurred {
   background-color: rgba(14, 20, 29, 0.45) !important;
   border-bottom: 1px solid rgba(136, 192, 208, 0.15) !important;
+  box-shadow: none !important;
 }
 
 /* Overview background and Dash blur compatibility */

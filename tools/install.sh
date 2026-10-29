@@ -473,11 +473,7 @@ cp "${REPO_ROOT}/src/index.theme" "${THEME_DIR}/index.theme"
 rm -rf "${THEME_DIR}/gnome-shell"
 cp -r "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}" "${THEME_DIR}/gnome-shell"
 cp -r "${REPO_ROOT}/build/theme/gtk-3.0" "${THEME_DIR}/"
-if [ -f "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" ]; then
-  cp "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" "${THEME_DIR}/gtk-4.0/gtk.css"
-else
-  cp "${REPO_ROOT}/src/gtk-4.0/overrides.css" "${THEME_DIR}/gtk-4.0/gtk.css"
-fi
+cp "${REPO_ROOT}/src/gtk-4.0/overrides.css" "${THEME_DIR}/gtk-4.0/gtk.css"
 cp "${REPO_ROOT}/src/gtk-4.0/overrides.css" "${THEME_DIR}/gtk-4.0/gtk-dark.css"
 
 if [ -f "${REPO_ROOT}/src/gtk-2.0/gtkrc" ]; then
@@ -513,18 +509,22 @@ if [ -d "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}-light" ]; then
   fi
 fi
 cp -r "${REPO_ROOT}/build/theme/gtk-3.0" "${LIGHT_THEME_DIR}/"
-cp "${THEME_DIR}/gtk-4.0/gtk.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
-cp "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
+if [ -f "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" ]; then
+  cp "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
+  cp "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
+else
+  cp "${THEME_DIR}/gtk-4.0/gtk.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
+  cp "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
+fi
+if [ -f "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" ]; then
+  cat "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" >> "${LIGHT_THEME_DIR}/gtk-3.0/gtk.css"
+  cat "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" >> "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
+fi
 
 # ---------- apply base polish layer ----------
 cat "${REPO_ROOT}/src/tweaks/shell/polish.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-if [ -f "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" ]; then
-  cat "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-  cat "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-else
-  cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-  cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-fi
+cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
 cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
 cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
 
