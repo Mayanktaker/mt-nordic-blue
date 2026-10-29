@@ -84,74 +84,99 @@ def extract_dominant_colors(image: Image.Image, count: int = 8) -> List[str]:
 # Light Wallpaper 1: Nordic Fjord & Glacial Peaks Dawn
 # =========================================================================
 
+def make_fractal_ridge_light(w: int, seed_val: int = 0, octaves: int = 7, lacunarity: float = 2.1, gain: float = 0.52) -> np.ndarray:
+    # Continuous multi-octave fractional Brownian motion for daylight mountain relief
+    r = np.random.default_rng(seed_val)
+    x = np.linspace(0, 14, w)
+    h = np.zeros(w, dtype=float)
+    amp = 1.0
+    freq = 1.0
+    for _ in range(octaves):
+        phase = r.uniform(0, 2 * math.pi)
+        h += amp * (1.0 - np.abs(np.sin(freq * x + phase))) ** 2
+        amp *= gain
+        freq *= lacunarity
+    return (h - h.min()) / (h.max() - h.min())
+
+
 def generate_fjord_light(seed: int = 20261101) -> Image.Image:
-    # Compose Light Wallpaper 1: Nordic Fjord Peaks at Morning Mist / Dawn.
+    # Compose Light Wallpaper 1: Photorealistic Scandinavian Dawn Fjord & Alpine Glacial Ridges.
     rng = random.Random(seed)
 
-    # Sky gradient: Crisp Scandinavian dawn sky
+    # 1. Sky gradient: Crisp Scandinavian dawn sky
     sky_top = np.array((216, 222, 233), dtype=float)  # #D8DEE9
     sky_bot = np.array((236, 239, 244), dtype=float)  # #ECEFF4
     t = np.linspace(0.0, 1.0, HEIGHT)[:, None, None]
     rows = sky_top * (1 - t) + sky_bot * t
     canvas = Image.fromarray(np.repeat(rows, WIDTH, axis=1).astype(np.uint8), "RGB").convert("RGBA")
 
-    # Morning sun / frost cyan glow
+    # 2. Morning sun / frost cyan glow
     cyan_rgb = hex_to_rgb(COLOR["accent"]["base"])[:3]
     canvas.alpha_composite(radial_glow((WIDTH, HEIGHT), (WIDTH * 0.74, HEIGHT * 0.24), WIDTH * 0.45, cyan_rgb, 36))
 
-    # Mountain Layer 1: Distant snow peaks
+    # 3. Mountain Layer 1: Distant snow peaks
+    r1 = make_fractal_ridge_light(WIDTH, seed_val=seed + 101, octaves=6)
+    y1 = (HEIGHT * 0.62 - r1 * (HEIGHT * 0.22)).astype(int)
     m1 = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     d1 = ImageDraw.Draw(m1)
-    base_y1 = HEIGHT * 0.65
-    peak_xs1 = [0, 240, 520, 840, 1180, 1540, 1920, 2280, 2660, 3040, 3400, 3700, WIDTH]
-    peak_ys1 = [base_y1 - 180, base_y1 - 320, base_y1 - 220, base_y1 - 440, base_y1 - 310, base_y1 - 490,
-                base_y1 - 360, base_y1 - 530, base_y1 - 380, base_y1 - 460, base_y1 - 290, base_y1 - 380, base_y1 - 200]
-    for i in range(len(peak_xs1) - 1):
-        x_left, y_left = peak_xs1[i], base_y1
-        x_peak, y_peak = (peak_xs1[i] + peak_xs1[i + 1]) / 2, (peak_ys1[i] + peak_ys1[i + 1]) / 2
-        x_right, y_right = peak_xs1[i + 1], base_y1
-        # Lit snow slope
-        d1.polygon([(x_left, y_left), (x_peak, y_peak), (x_peak, base_y1)], fill=(245, 248, 252, 230))
-        # Shadow slope
-        d1.polygon([(x_peak, y_peak), (x_right, y_right), (x_peak, base_y1)], fill=(195, 206, 222, 235))
-        d1.line([(x_left, y_left), (x_peak, y_peak), (x_right, y_right)], fill=hex_to_rgb(COLOR["accent"]["base"], 140), width=2)
-    canvas.alpha_composite(m1.filter(ImageFilter.GaussianBlur(1.8)))
+    pts1 = [(0, HEIGHT)] + [(x, int(y1[x])) for x in range(WIDTH)] + [(WIDTH, HEIGHT)]
+    d1.polygon(pts1, fill=(216, 225, 238, 210))
+    d1.line([(x, int(y1[x])) for x in range(WIDTH)], fill=hex_to_rgb(COLOR["accent"]["base"], 140), width=2)
+    canvas.alpha_composite(m1)
 
-    # Mountain Layer 2: Midground jagged snowy peaks
-    m2 = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    d2 = ImageDraw.Draw(m2)
-    base_y2 = HEIGHT * 0.74
-    peaks2 = [
-        (-40, base_y2), (280, base_y2 - 580), (640, base_y2 - 280), (1020, base_y2 - 680),
-        (1420, base_y2 - 340), (1800, base_y2 - 760), (2240, base_y2 - 380), (2680, base_y2 - 720),
-        (3120, base_y2 - 360), (3560, base_y2 - 640), (WIDTH + 60, base_y2)
-    ]
-    for i in range(1, len(peaks2) - 1, 2):
-        left_pt = peaks2[i - 1]
-        peak_pt = peaks2[i]
-        right_pt = peaks2[i + 1]
-        mid_x = peak_pt[0]
-        # Lit snow slope
-        d2.polygon([(left_pt[0], base_y2), (mid_x, peak_pt[1]), (mid_x, base_y2)], fill=(255, 255, 255, 245))
-        # Cool blue-gray shadow slope
-        d2.polygon([(mid_x, peak_pt[1]), (right_pt[0], base_y2), (mid_x, base_y2)], fill=(129, 161, 193, 230))
-        # Frost Cyan ridge highlight
-        d2.line([(left_pt[0], base_y2), (mid_x, peak_pt[1]), (right_pt[0], base_y2)], fill=hex_to_rgb(COLOR["accent"]["base"], 220), width=3)
-    canvas.alpha_composite(m2)
+    # Valley dawn mist
+    mist = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    md = ImageDraw.Draw(mist)
+    md.rectangle([(0, int(HEIGHT * 0.50)), (WIDTH, int(HEIGHT * 0.72))], fill=(240, 244, 250, 95))
+    canvas.alpha_composite(mist.filter(ImageFilter.GaussianBlur(28)))
 
-    # Mountain Layer 3: Foreground crags
-    m3 = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    d3 = ImageDraw.Draw(m3)
-    base_y3 = HEIGHT * 0.80
-    crags_left = [(0, HEIGHT), (0, base_y3 - 340), (320, base_y3 - 440), (740, base_y3 - 160), (980, base_y3), (0, base_y3)]
-    crags_right = [(WIDTH, HEIGHT), (WIDTH, base_y3 - 380), (WIDTH - 360, base_y3 - 480), (WIDTH - 780, base_y3 - 180), (WIDTH - 1040, base_y3), (WIDTH, base_y3)]
-    d3.polygon(crags_left, fill=(76, 86, 106, 245))
-    d3.line([(0, base_y3 - 340), (320, base_y3 - 440), (740, base_y3 - 160), (980, base_y3)], fill=hex_to_rgb(COLOR["accent"]["base"], 200), width=3)
-    d3.polygon(crags_right, fill=(59, 66, 82, 245))
-    d3.line([(WIDTH, base_y3 - 380), (WIDTH - 360, base_y3 - 480), (WIDTH - 780, base_y3 - 180), (WIDTH - 1040, base_y3)], fill=hex_to_rgb(COLOR["accent_flavors"]["cyber"], 200), width=3)
-    canvas.alpha_composite(m3)
+    # 4. Mountain Layer 2: Main alpine massif with snow slope shading
+    r2 = make_fractal_ridge_light(WIDTH, seed_val=seed + 202, octaves=8)
+    y2 = (HEIGHT * 0.72 - r2 * (HEIGHT * 0.36)).astype(int)
+    dy2 = np.gradient(y2)
+    slope_norm = np.clip((dy2 - dy2.min()) / (dy2.max() - dy2.min() + 1e-5), 0.0, 1.0)
 
-    # Fjord Glacial Meltwater
+    yy, xx = np.mgrid[0:HEIGHT, 0:WIDTH]
+    mask2 = yy >= y2
+
+    # Lit snow slopes (#FFFFFF), cool blue glacier shadows (#81A1C1 to #A3D4E2)
+    col_r = 140.0 + slope_norm * 115.0
+    col_g = 170.0 + slope_norm * 85.0
+    col_b = 205.0 + slope_norm * 50.0
+
+    # Pristine white summit caps
+    depth = yy - y2
+    summit_mask = mask2 & (depth < 30)
+    col_r = np.where(summit_mask, 255.0 - depth * 1.5, col_r)
+    col_g = np.where(summit_mask, 255.0 - depth * 1.5, col_g)
+    col_b = np.where(summit_mask, 255.0 - depth * 1.0, col_b)
+
+    m2_arr = np.zeros((HEIGHT, WIDTH, 4), dtype=np.uint8)
+    m2_arr[..., 0] = np.where(mask2, np.clip(col_r, 0, 255), 0)
+    m2_arr[..., 1] = np.where(mask2, np.clip(col_g, 0, 255), 0)
+    m2_arr[..., 2] = np.where(mask2, np.clip(col_b, 0, 255), 0)
+    m2_arr[..., 3] = np.where(mask2, 255, 0)
+    canvas.alpha_composite(Image.fromarray(m2_arr, "RGBA"))
+
+    # Frost Cyan ridge highlight
+    crest_img = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    cd = ImageDraw.Draw(crest_img)
+    cd.line([(x, int(y2[x])) for x in range(WIDTH)], fill=hex_to_rgb(COLOR["accent"]["base"], 220), width=3)
+    canvas.alpha_composite(crest_img)
+
+    # 5. Mountain Layer 3: Foreground coastal crags
+    r3 = make_fractal_ridge_light(WIDTH, seed_val=seed + 303, octaves=7)
+    y3 = (HEIGHT * 0.84 - r3 * (HEIGHT * 0.24)).astype(int)
+    crag_mask = (xx < WIDTH * 0.36) | (xx > WIDTH * 0.64)
+    mask3 = (yy >= y3) & crag_mask
+    m3_arr = np.zeros((HEIGHT, WIDTH, 4), dtype=np.uint8)
+    m3_arr[..., 0] = np.where(mask3, 59, 0)
+    m3_arr[..., 1] = np.where(mask3, 66, 0)
+    m3_arr[..., 2] = np.where(mask3, 82, 0)
+    m3_arr[..., 3] = np.where(mask3, 245, 0)
+    canvas.alpha_composite(Image.fromarray(m3_arr, "RGBA"))
+
+    # 6. Fjord Glacial Meltwater
     water = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     water_y = int(HEIGHT * 0.78)
     h_water = HEIGHT - water_y
@@ -163,11 +188,11 @@ def generate_fjord_light(seed: int = 20261101) -> Image.Image:
 
     # Water ripples
     wd_surf = ImageDraw.Draw(water_surf)
-    for idx in range(16):
-        ry = int(h_water * (0.08 + (idx / 16.0) * 0.88))
-        rw = rng.uniform(WIDTH * 0.3, WIDTH * 0.85)
-        rx = rng.uniform(WIDTH * 0.05, WIDTH * 0.95 - rw)
-        wd_surf.line([(rx, ry), (rx + rw, ry)], fill=(255, 255, 255, 140), width=max(1, int(2.5 * (1 - idx / 16.0))))
+    for idx in range(24):
+        ry = int(h_water * (0.06 + (idx / 24.0) * 0.88))
+        rw = rng.uniform(WIDTH * 0.25, WIDTH * 0.85)
+        rx = rng.uniform(WIDTH * 0.08, WIDTH * 0.92 - rw)
+        wd_surf.line([(rx, ry), (rx + rw, ry)], fill=(255, 255, 255, 140), width=max(1, int(2.5 * (1 - idx / 24.0))))
 
     water.paste(water_surf, (0, water_y))
     canvas.alpha_composite(water)

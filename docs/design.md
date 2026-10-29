@@ -45,7 +45,7 @@ All text/accent pairs verified ≥4.5:1 on their backgrounds (most ≥9:1 to 16:
 
 ## Wallpaper Generation Rules
 Original procedural 4K artworks generated via `tools/wallpaper/generate.py`:
-1. **Nordic Fjord & Glacial Peaks (Art 1)**: Low-poly faceted glacial mountain ranges and reflective fjord water under starry polar night with cyan aurora glow.
+1. **Nordic Fjord & Glacial Peaks (Art 1)**: Photorealistic multi-octave fractal ridge (fBm) alpine peaks with slope shading, atmospheric valley mist, and calm reflective fjord water under starry polar night with cyan aurora glow.
 2. **Radiant Aurora Borealis (Art 2)**: Undulating harmonic curtain folds of electric cyber cyan, frost blue, and aurora teal over dark mountain horizon.
 3. **Glacial Flow & Topographic Contours (Art 3)**: Scandinavian alpine elevation isolines with multi-pass glowing arterial glacial rivers.
 4. **Nordic Cyber Horizon (Art 4)**: Retro-futuristic ground perspective grid vanishing into a glowing cyber cyan horizon with faceted ice crystal monoliths.

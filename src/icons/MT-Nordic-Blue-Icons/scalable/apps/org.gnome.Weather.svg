@@ -9,7 +9,7 @@
     <stop offset="100%" stop-color="#00D2FF"/>
   </linearGradient>
 </defs>
-<rect x="8" y="8" width="48" height="48" rx="10" fill="url(#weaBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8" y="8" width="48" height="48" rx="10" fill="url(#weaBg)" stroke="#435C7E" stroke-width="1.5"/>
 <circle cx="34" cy="24" r="10" fill="url(#sunGrad)"/>
 <path d="M 20 45 C 16.5 45 14 42.5 14 39 C 14 36 16 33.5 19 33 C 20 28 24.5 24.5 29.5 24.5 C 34.5 24.5 38.5 27.5 39.5 32 C 40.5 31.5 41.5 31.5 42.5 31.5 C 46.5 31.5 50 34.8 50 39 C 50 43 46.5 45 42.5 45 Z" fill="#25344A" stroke="#88C0D0" stroke-width="1.5"/>
 </svg>

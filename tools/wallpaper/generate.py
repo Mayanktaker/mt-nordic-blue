@@ -78,122 +78,130 @@ def draw_starfield(draw: ImageDraw.ImageDraw, rng: random.Random, count: int, ma
             draw.line([(sx, sy - spike), (sx, sy + spike)], fill=(col[0], col[1], col[2], int(alpha * 0.7)), width=1)
 
 
+def make_fractal_ridge(w: int, seed_val: int = 0, octaves: int = 7, lacunarity: float = 2.1, gain: float = 0.52) -> np.ndarray:
+    # Continuous multi-octave fractional Brownian motion with harmonic ridge folding
+    r = np.random.default_rng(seed_val)
+    x = np.linspace(0, 14, w)
+    h = np.zeros(w, dtype=float)
+    amp = 1.0
+    freq = 1.0
+    for _ in range(octaves):
+        phase = r.uniform(0, 2 * math.pi)
+        h += amp * (1.0 - np.abs(np.sin(freq * x + phase))) ** 2
+        amp *= gain
+        freq *= lacunarity
+    return (h - h.min()) / (h.max() - h.min())
+
+
 def generate_fjord(seed: int = 20261027) -> Image.Image:
-    # Compose Wallpaper 1: Nordic Fjord & Glacial Peaks.
+    # Compose Wallpaper 1: Photorealistic Cinematic Nordic Fjord & Alpine Glacial Ridges.
     rng = random.Random(seed)
 
-    # Sky gradient: deep polar night to rich dark navy
-    sky_top = np.array(hex_to_rgb(COLOR["bg"]["oled"])[:3], dtype=float)
-    sky_bot = np.array(hex_to_rgb(COLOR["bg"]["tile"])[:3], dtype=float)
+    # 1. Sky gradient: Non-linear atmospheric polar twilight (OLED space navy to horizon cyan)
+    sky_top = np.array(hex_to_rgb(COLOR["bg"]["oled"])[:3], dtype=float)       # #040609
+    sky_bot = np.array(hex_to_rgb(COLOR["bg"]["tile"])[:3], dtype=float)       # #151D2A
     t = np.linspace(0.0, 1.0, HEIGHT)[:, None, None]
-    rows = sky_top * (1 - t) + sky_bot * t
+    rows = sky_top * (1 - t**1.3) + sky_bot * (t**1.3)
     canvas = Image.fromarray(np.repeat(rows, WIDTH, axis=1).astype(np.uint8), "RGB").convert("RGBA")
 
-    # Polar celestial moon & aurora ambient wash
+    # 2. Polar celestial moon glow & ambient atmospheric wash
     cyan_rgb = hex_to_rgb(COLOR["accent_flavors"]["cyber"])[:3]
     frost_rgb = hex_to_rgb(COLOR["accent"]["base"])[:3]
-    canvas.alpha_composite(radial_glow((WIDTH, HEIGHT), (WIDTH * 0.76, HEIGHT * 0.22), WIDTH * 0.40, cyan_rgb, 36))
-    canvas.alpha_composite(radial_glow((WIDTH, HEIGHT), (WIDTH * 0.30, HEIGHT * 0.35), WIDTH * 0.45, frost_rgb, 24))
+    canvas.alpha_composite(radial_glow((WIDTH, HEIGHT), (WIDTH * 0.76, HEIGHT * 0.22), WIDTH * 0.42, cyan_rgb, 36))
+    canvas.alpha_composite(radial_glow((WIDTH, HEIGHT), (WIDTH * 0.28, HEIGHT * 0.35), WIDTH * 0.48, frost_rgb, 26))
 
-    # Starfield
+    # 3. Crystal starfield
     stars = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    draw_starfield(ImageDraw.Draw(stars), rng, count=280, max_y=HEIGHT * 0.62)
+    draw_starfield(ImageDraw.Draw(stars), rng, count=320, max_y=HEIGHT * 0.62)
     canvas.alpha_composite(stars)
 
-    # Distant aurora haze ribbon behind peaks
+    # 4. Ethereal aurora haze curtain behind distant peaks
     aurora_haze = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     ahd = ImageDraw.Draw(aurora_haze)
-    points_ah = []
-    for x in range(0, WIDTH + 60, 40):
-        y = HEIGHT * 0.42 + math.sin(x * 0.0014) * 110 + math.cos(x * 0.003) * 60
-        points_ah.append((x, y))
-    for p in points_ah:
-        ahd.line([(p[0], p[1] - 120), (p[0], p[1] + 90)], fill=hex_to_rgb(COLOR["accent_flavors"]["aurora"], 44), width=44)
-        ahd.line([(p[0], p[1] - 60), (p[0], p[1] + 40)], fill=hex_to_rgb(COLOR["accent_flavors"]["cyber"], 60), width=28)
-    canvas.alpha_composite(aurora_haze.filter(ImageFilter.GaussianBlur(28)))
+    for x in range(0, WIDTH + 40, 30):
+        y_aurora = HEIGHT * 0.42 + math.sin(x * 0.0016) * 140 + math.cos(x * 0.0031) * 70
+        ahd.line([(x, y_aurora - 240), (x, y_aurora + 100)], fill=hex_to_rgb(COLOR["accent_flavors"]["cyber"], 34), width=48)
+        ahd.line([(x, y_aurora - 140), (x, y_aurora + 50)], fill=hex_to_rgb(COLOR["accent_flavors"]["aurora"], 50), width=30)
+    canvas.alpha_composite(aurora_haze.filter(ImageFilter.GaussianBlur(32)))
 
-    # Mountain Layer 1: Distant low-poly glacial peaks
+    # 5. Mountain Layer 1: Distant misty glacial peaks (fractal fBm ridge)
+    r1 = make_fractal_ridge(WIDTH, seed_val=seed + 101, octaves=6)
+    y1 = (HEIGHT * 0.60 - r1 * (HEIGHT * 0.22)).astype(int)
     m1 = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     d1 = ImageDraw.Draw(m1)
-    base_y1 = HEIGHT * 0.65
-    peak_xs1 = [0, 240, 520, 840, 1180, 1540, 1920, 2280, 2660, 3040, 3400, 3700, WIDTH]
-    peak_ys1 = [base_y1 - 180, base_y1 - 320, base_y1 - 220, base_y1 - 440, base_y1 - 310, base_y1 - 490,
-                base_y1 - 360, base_y1 - 530, base_y1 - 380, base_y1 - 460, base_y1 - 290, base_y1 - 380, base_y1 - 200]
-    for i in range(len(peak_xs1) - 1):
-        x_left, y_left = peak_xs1[i], base_y1
-        x_peak, y_peak = (peak_xs1[i] + peak_xs1[i + 1]) / 2, (peak_ys1[i] + peak_ys1[i + 1]) / 2
-        x_right, y_right = peak_xs1[i + 1], base_y1
-        # Left lit facet
-        d1.polygon([(x_left, y_left), (x_peak, y_peak), (x_peak, base_y1)], fill=hex_to_rgb(COLOR["bg"]["raised"], 230))
-        # Right shadow facet
-        d1.polygon([(x_peak, y_peak), (x_right, y_right), (x_peak, base_y1)], fill=hex_to_rgb(COLOR["bg"]["tile"], 240))
-        # Distant snow crest
-        d1.line([(x_left, y_left), (x_peak, y_peak), (x_right, y_right)], fill=hex_to_rgb(COLOR["accent"]["dim"], 160), width=2)
-    canvas.alpha_composite(m1.filter(ImageFilter.GaussianBlur(1.8)))
+    pts1 = [(0, HEIGHT)] + [(x, int(y1[x])) for x in range(WIDTH)] + [(WIDTH, HEIGHT)]
+    d1.polygon(pts1, fill=hex_to_rgb(COLOR["bg"]["raised"], 210))
+    d1.line([(x, int(y1[x])) for x in range(WIDTH)], fill=hex_to_rgb(COLOR["accent"]["dim"], 160), width=2)
+    canvas.alpha_composite(m1)
 
-    # Mountain Layer 2: Midground jagged glacial massif
-    m2 = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    d2 = ImageDraw.Draw(m2)
-    base_y2 = HEIGHT * 0.74
-    peaks2 = [
-        (-40, base_y2), (280, base_y2 - 580), (640, base_y2 - 280), (1020, base_y2 - 680),
-        (1420, base_y2 - 340), (1800, base_y2 - 760), (2240, base_y2 - 380), (2680, base_y2 - 720),
-        (3120, base_y2 - 360), (3560, base_y2 - 640), (WIDTH + 60, base_y2)
-    ]
-    for i in range(1, len(peaks2) - 1, 2):
-        left_pt = peaks2[i - 1]
-        peak_pt = peaks2[i]
-        right_pt = peaks2[i + 1]
-        mid_x = peak_pt[0]
-        # Lit glacial slope
-        d2.polygon([(left_pt[0], base_y2), (mid_x, peak_pt[1]), (mid_x, base_y2)], fill=hex_to_rgb(COLOR["bg"]["surface"], 250))
-        # Shadow slope
-        d2.polygon([(mid_x, peak_pt[1]), (right_pt[0], base_y2), (mid_x, base_y2)], fill=hex_to_rgb(COLOR["bg"]["raised"], 255))
-        # Icy snow cap on crest
-        cap_h = (base_y2 - peak_pt[1]) * 0.35
-        cap_base_y = peak_pt[1] + cap_h
-        d2.polygon([(mid_x - 70, cap_base_y), (mid_x, peak_pt[1]), (mid_x + 60, cap_base_y)], fill=hex_to_rgb(COLOR["accent"]["base"], 180))
-        # Sharp ridge highlight line
-        d2.line([(left_pt[0], base_y2), (mid_x, peak_pt[1]), (right_pt[0], base_y2)], fill=hex_to_rgb(COLOR["accent"]["base"], 220), width=3)
-    canvas.alpha_composite(m2)
+    # Atmospheric valley mist between distant and midground ranges
+    valley_mist = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    vmd = ImageDraw.Draw(valley_mist)
+    vmd.rectangle([(0, int(HEIGHT * 0.50)), (WIDTH, int(HEIGHT * 0.72))], fill=hex_to_rgb(COLOR["bg"]["tile"], 85))
+    canvas.alpha_composite(valley_mist.filter(ImageFilter.GaussianBlur(28)))
 
-    # Mountain Layer 3: Foreground dramatic fjord crags
-    m3 = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    d3 = ImageDraw.Draw(m3)
-    base_y3 = HEIGHT * 0.80
-    crags_left = [(0, HEIGHT), (0, base_y3 - 340), (320, base_y3 - 440), (740, base_y3 - 160), (980, base_y3), (0, base_y3)]
-    crags_right = [(WIDTH, HEIGHT), (WIDTH, base_y3 - 380), (WIDTH - 360, base_y3 - 480), (WIDTH - 780, base_y3 - 180), (WIDTH - 1040, base_y3), (WIDTH, base_y3)]
-    d3.polygon(crags_left, fill=hex_to_rgb(COLOR["bg"]["base"], 255))
-    d3.line([(0, base_y3 - 340), (320, base_y3 - 440), (740, base_y3 - 160), (980, base_y3)], fill=hex_to_rgb(COLOR["accent_flavors"]["cyber"], 160), width=3)
-    d3.polygon(crags_right, fill=hex_to_rgb(COLOR["bg"]["base_darker"], 255))
-    d3.line([(WIDTH, base_y3 - 380), (WIDTH - 360, base_y3 - 480), (WIDTH - 780, base_y3 - 180), (WIDTH - 1040, base_y3)], fill=hex_to_rgb(COLOR["accent"]["base"], 160), width=3)
-    canvas.alpha_composite(m3)
+    # 6. Mountain Layer 2: Main alpine glacial massif with slope shading & snow crests
+    r2 = make_fractal_ridge(WIDTH, seed_val=seed + 202, octaves=8)
+    y2 = (HEIGHT * 0.72 - r2 * (HEIGHT * 0.36)).astype(int)
+    dy2 = np.gradient(y2)
+    slope_norm = np.clip((dy2 - dy2.min()) / (dy2.max() - dy2.min() + 1e-5), 0.0, 1.0)
 
-    # Fjord Glacial Water: Lower 22% of canvas with reflective calmness
-    water = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    wd = ImageDraw.Draw(water)
+    yy, xx = np.mgrid[0:HEIGHT, 0:WIDTH]
+    mask2 = yy >= y2
+
+    # Lit faces receive Nordic Glacier Slate (#2A3A52), shadow couloirs receive Deep Polar Night (#0E141D)
+    col_r = 14.0 + slope_norm * 36.0
+    col_g = 20.0 + slope_norm * 48.0
+    col_b = 29.0 + slope_norm * 64.0
+
+    # Snow caps along upper ridges
+    depth = yy - y2
+    snow_mask = mask2 & (depth < 30)
+    col_r = np.where(snow_mask, 236.0 - depth * 2.8, col_r)
+    col_g = np.where(snow_mask, 239.0 - depth * 2.6, col_g)
+    col_b = np.where(snow_mask, 244.0 - depth * 2.4, col_b)
+
+    m2_arr = np.zeros((HEIGHT, WIDTH, 4), dtype=np.uint8)
+    m2_arr[..., 0] = np.where(mask2, np.clip(col_r, 0, 255), 0)
+    m2_arr[..., 1] = np.where(mask2, np.clip(col_g, 0, 255), 0)
+    m2_arr[..., 2] = np.where(mask2, np.clip(col_b, 0, 255), 0)
+    m2_arr[..., 3] = np.where(mask2, 255, 0)
+    canvas.alpha_composite(Image.fromarray(m2_arr, "RGBA"))
+
+    # Sharp specular frost cyan highlight along crest
+    crest_img = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    cd = ImageDraw.Draw(crest_img)
+    cd.line([(x, int(y2[x])) for x in range(WIDTH)], fill=hex_to_rgb(COLOR["accent"]["base"], 220), width=3)
+    canvas.alpha_composite(crest_img)
+
+    # 7. Mountain Layer 3: Foreground coastal fjord crags framing the left & right
+    r3 = make_fractal_ridge(WIDTH, seed_val=seed + 303, octaves=7)
+    y3 = (HEIGHT * 0.84 - r3 * (HEIGHT * 0.24)).astype(int)
+    crag_mask = (xx < WIDTH * 0.36) | (xx > WIDTH * 0.64)
+    mask3 = (yy >= y3) & crag_mask
+    m3_arr = np.zeros((HEIGHT, WIDTH, 4), dtype=np.uint8)
+    m3_arr[..., 0] = np.where(mask3, 9, 0)
+    m3_arr[..., 1] = np.where(mask3, 13, 0)
+    m3_arr[..., 2] = np.where(mask3, 20, 0)
+    m3_arr[..., 3] = np.where(mask3, 255, 0)
+    canvas.alpha_composite(Image.fromarray(m3_arr, "RGBA"))
+
+    # 8. Fjord Glacial Water: Lower 22% with calm reflection sheen & ice ripples
     water_y = int(HEIGHT * 0.78)
-    water_grad_top = np.array(hex_to_rgb(COLOR["bg"]["base_darker"])[:3], dtype=float)
-    water_grad_bot = np.array(hex_to_rgb(COLOR["bg"]["oled"])[:3], dtype=float)
-    h_water = HEIGHT - water_y
-    tw = np.linspace(0.0, 1.0, h_water)[:, None, None]
-    w_rows = water_grad_top * (1 - tw) + water_grad_bot * tw
-    w_arr = np.repeat(w_rows, WIDTH, axis=1).astype(np.uint8)
-    water_surf = Image.fromarray(w_arr, "RGB").convert("RGBA")
-    # Soft reflection sheen of aurora and mountains in water
-    water_surf.alpha_composite(radial_glow((WIDTH, h_water), (WIDTH * 0.50, h_water * 0.15), WIDTH * 0.40, frost_rgb, 30))
+    water_h = HEIGHT - water_y
+    water = Image.new("RGBA", (WIDTH, water_h), (9, 13, 20, 255))
+    water.alpha_composite(radial_glow((WIDTH, water_h), (WIDTH * 0.50, water_h * 0.18), WIDTH * 0.42, frost_rgb, 35))
 
     # Crystalline horizontal ice ripples across fjord
-    wd_surf = ImageDraw.Draw(water_surf)
-    for idx in range(16):
-        ry = int(h_water * (0.08 + (idx / 16.0) * 0.88))
-        rw = rng.uniform(WIDTH * 0.3, WIDTH * 0.85)
-        rx = rng.uniform(WIDTH * 0.05, WIDTH * 0.95 - rw)
-        alpha = int(25 + (16 - idx) * 3)
-        wd_surf.line([(rx, ry), (rx + rw, ry)], fill=hex_to_rgb(COLOR["accent"]["base"], alpha), width=max(1, int(2.5 * (1 - idx / 16.0))))
+    wd_surf = ImageDraw.Draw(water)
+    for idx in range(36):
+        ry = int(water_h * (0.06 + (idx / 36.0) * 0.88))
+        rw = rng.uniform(WIDTH * 0.25, WIDTH * 0.85)
+        rx = rng.uniform(WIDTH * 0.08, WIDTH * 0.92 - rw)
+        alpha = int(22 + (36 - idx) * 3)
+        wd_surf.line([(rx, ry), (rx + rw, ry)], fill=hex_to_rgb(COLOR["accent"]["base"], alpha), width=max(1, int(3.0 * (1 - idx / 36.0))))
 
-    water.paste(water_surf, (0, water_y))
-    canvas.alpha_composite(water)
+    canvas.paste(water, (0, water_y))
 
     # Vignette and grain
     canvas.alpha_composite(vignette(75))

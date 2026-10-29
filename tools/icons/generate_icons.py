@@ -31,11 +31,11 @@ OUT_DIR = REPO_ROOT / "src" / "icons" / f"{TECH_NAME}-Icons"
 
 COLOR_ACCENT = TOKENS["color"]["accent"]["base"]
 COLOR_ACCENT_STRONG = TOKENS["color"]["accent"]["strong"]
-COLOR_BG_BASE = TOKENS["color"]["bg"]["base"]
-COLOR_BG_DARKER = TOKENS["color"]["bg"]["base_darker"]
-COLOR_SURFACE = TOKENS["color"]["bg"]["surface"]
-COLOR_SURFACE_HOVER = TOKENS["color"]["bg"]["surface_hover"]
-COLOR_BORDER = TOKENS["color"]["border"]["default"]
+COLOR_BG_BASE = TOKENS["color"]["bg"]["surface"]           # #202D40 - elevated container
+COLOR_BG_DARKER = TOKENS["color"]["bg"]["raised"]           # #1A2434
+COLOR_SURFACE = TOKENS["color"]["bg"]["surface_hover"]      # #2A3A52
+COLOR_SURFACE_HOVER = TOKENS["color"]["bg"]["surface_active"] # #354A68
+COLOR_BORDER = "#405878"                                   # Crisp high-contrast Nordic perimeter border
 
 # =========================================================================
 # High-Definition SVG Folder Template (Rich gradients, highlights, depth)
@@ -44,41 +44,43 @@ COLOR_BORDER = TOKENS["color"]["border"]["default"]
 SVG_FOLDER_BASE = '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <defs>
   <!-- Back body gradient -->
-  <linearGradient id="backGrad" x1="32" y1="10" x2="32" y2="56" gradientUnits="userSpaceOnUse">
-    <stop offset="0%" stop-color="{COLOR_SURFACE}"/>
-    <stop offset="100%" stop-color="{COLOR_BG_DARKER}"/>
+  <linearGradient id="backGrad" x1="32" y1="10" x2="32" y2="54" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#243346"/>
+    <stop offset="100%" stop-color="#141D28"/>
   </linearGradient>
-  <!-- Accent pill glow gradient -->
-  <linearGradient id="pillGrad" x1="8" y1="11" x2="30" y2="11" gradientUnits="userSpaceOnUse">
-    <stop offset="0%" stop-color="{COLOR_ACCENT}"/>
-    <stop offset="100%" stop-color="{COLOR_ACCENT_STRONG}"/>
+  <!-- Arctic Snow Paper insert gradient -->
+  <linearGradient id="paperGrad" x1="32" y1="12" x2="32" y2="28" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#ECEFF4"/>
+    <stop offset="100%" stop-color="#D8DEE9"/>
   </linearGradient>
-  <!-- Front flap rich gradient -->
+  <!-- Front flap rich Nord Glacier gradient -->
   <linearGradient id="flapGrad" x1="32" y1="20" x2="32" y2="58" gradientUnits="userSpaceOnUse">
-    <stop offset="0%" stop-color="{COLOR_SURFACE_HOVER}"/>
-    <stop offset="40%" stop-color="{COLOR_SURFACE}"/>
-    <stop offset="100%" stop-color="{COLOR_BG_BASE}"/>
+    <stop offset="0%" stop-color="#2E415A"/>
+    <stop offset="35%" stop-color="#223145"/>
+    <stop offset="100%" stop-color="#141D28"/>
   </linearGradient>
   <!-- Specular top edge highlight -->
-  <linearGradient id="specularGrad" x1="8" y1="21" x2="56" y2="21" gradientUnits="userSpaceOnUse">
-    <stop offset="0%" stop-color="{COLOR_ACCENT}" stop-opacity="0.8"/>
-    <stop offset="70%" stop-color="{COLOR_ACCENT_STRONG}" stop-opacity="0.5"/>
-    <stop offset="100%" stop-color="{COLOR_ACCENT}" stop-opacity="0.1"/>
+  <linearGradient id="specularGrad" x1="8" y1="22" x2="56" y2="22" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#88C0D0" stop-opacity="0.95"/>
+    <stop offset="50%" stop-color="#00D2FF" stop-opacity="0.75"/>
+    <stop offset="100%" stop-color="#81A1C1" stop-opacity="0.30"/>
   </linearGradient>
   <!-- Flap drop shadow filter -->
   <filter id="flapShadow" x="0" y="18" width="64" height="44" filterUnits="userSpaceOnUse">
-    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.45"/>
+    <feDropShadow dx="0" dy="2.5" stdDeviation="2" flood-color="#040609" flood-opacity="0.55"/>
   </filter>
 </defs>
 <!-- Back folder tab & body -->
-<rect x="6" y="9" width="26" height="11" rx="4" fill="url(#backGrad)" stroke="{COLOR_BORDER}" stroke-width="1"/>
-<rect x="8.5" y="10.5" width="21" height="3" rx="1.5" fill="url(#pillGrad)"/>
-<rect x="5.5" y="14.5" width="53" height="42" rx="6" fill="url(#backGrad)" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<path d="M 6 15 C 6 12.5 8 10.5 10.5 10.5 L 25 10.5 C 27.5 10.5 29.5 12 31 14 L 33 17 L 53.5 17 C 56 17 58 19 58 21.5 L 58 51.5 C 58 54 56 56 53.5 56 L 10.5 56 C 8 56 6 54 6 51.5 Z" fill="url(#backGrad)" stroke="#2B3C52" stroke-width="1"/>
+<!-- Crisp Arctic Snow Paper insert peeking out -->
+<rect x="12" y="14" width="40" height="14" rx="2" fill="url(#paperGrad)"/>
+<line x1="16" y1="18" x2="32" y2="18" stroke="#81A1C1" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="16" y1="21.5" x2="26" y2="21.5" stroke="#88C0D0" stroke-width="1.2" stroke-linecap="round"/>
 <!-- Front folder flap with shadow and curved geometry -->
 <g filter="url(#flapShadow)">
-  <path d="M 5.5 24.5 C 5.5 21 8 19 11.5 19 L 26.5 19 C 29 19 31.5 20.8 33 22.8 L 35.5 25.8 C 37 27.5 39 28 41.5 28 L 52.5 28 C 56 28 58.5 30.5 58.5 33.5 L 58.5 51.5 C 58.5 55 56 57.5 52.5 57.5 L 11.5 57.5 C 8 57.5 5.5 55 5.5 51.5 Z" fill="url(#flapGrad)" stroke="{COLOR_BORDER}" stroke-width="1"/>
+  <path d="M 6 25 C 6 22.5 8 20.5 10.5 20.5 L 24 20.5 C 26.5 20.5 28.5 22 30 24 L 32.5 27 C 34 28.5 36 29.5 38.5 29.5 L 53.5 29.5 C 56 29.5 58 31.5 58 34 L 58 51.5 C 58 54.5 55.5 57 52.5 57 L 11.5 57 C 8.5 57 6 54.5 6 51.5 Z" fill="url(#flapGrad)" stroke="#2C3F57" stroke-width="1"/>
   <!-- Specular highlight line along upper lip -->
-  <path d="M 7 24.5 C 7 22.5 8.5 20.5 11.5 20.5 L 26.5 20.5 C 28.5 20.5 30.5 22 32 24 L 34.5 27 C 36 28.5 38 29.5 41.5 29.5 L 52.5 29.5 C 55 29.5 57 31 57 33.5" stroke="url(#specularGrad)" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M 7.5 25 C 7.5 23 9 21.5 11 21.5 L 24 21.5 C 26 21.5 28 23 29.5 24.8 L 32 27.8 C 33.5 29.5 35.8 30.5 38.5 30.5 L 53 30.5 C 55 30.5 56.5 31.8 56.5 33.5" stroke="url(#specularGrad)" stroke-width="1.2" stroke-linecap="round"/>
 </g>
 '''
 
@@ -91,116 +93,114 @@ SVG_FOOTER = '''</svg>'''
 PLACES_EMBLEMS = {
     "folder": "",
     "folder-desktop": '''<!-- Desktop / Monitor emblem -->
-<rect x="21" y="32" width="22" height="15" rx="2" stroke="{COLOR_ACCENT}" stroke-width="2" fill="{COLOR_BG_BASE}"/>
-<rect x="23" y="34" width="18" height="11" fill="{COLOR_SURFACE}"/>
-<line x1="32" y1="47" x2="32" y2="52" stroke="{COLOR_ACCENT}" stroke-width="2"/>
-<line x1="26" y1="52" x2="38" y2="52" stroke="{COLOR_ACCENT}" stroke-width="2" stroke-linecap="round"/>
-<circle cx="32" cy="39.5" r="2.5" fill="{COLOR_ACCENT_STRONG}"/>''',
+<rect x="21" y="33" width="22" height="15" rx="2" stroke="#ECEFF4" stroke-width="2" fill="#141D28"/>
+<rect x="23" y="35" width="18" height="11" fill="#202D40"/>
+<line x1="32" y1="48" x2="32" y2="53" stroke="#00D2FF" stroke-width="2"/>
+<line x1="26" y1="53" x2="38" y2="53" stroke="#00D2FF" stroke-width="2" stroke-linecap="round"/>
+<circle cx="32" cy="40.5" r="2.5" fill="#88C0D0"/>''',
 
     "folder-home": '''<!-- Home emblem -->
-<path d="M 32 30 L 20 40 L 23 40 L 23 51 L 29 51 L 29 44 L 35 44 L 35 51 L 41 51 L 41 40 L 44 40 Z" fill="{COLOR_ACCENT}"/>
-<polygon points="32,34 38,39 26,39" fill="{COLOR_BG_BASE}"/>''',
+<path d="M 32 30 L 20 40 L 23 40 L 23 51 L 29 51 L 29 44 L 35 44 L 35 51 L 41 51 L 41 40 L 44 40 Z" fill="#ECEFF4"/>
+<polygon points="32,34 38,39 26,39" fill="#00D2FF"/>''',
 
     "folder-documents": '''<!-- Documents emblem -->
-<rect x="23" y="31" width="18" height="20" rx="2.5" fill="{COLOR_ACCENT}"/>
-<rect x="26" y="35" width="12" height="2.2" rx="1.1" fill="{COLOR_BG_BASE}"/>
-<rect x="26" y="39.5" width="12" height="2.2" rx="1.1" fill="{COLOR_BG_BASE}"/>
-<rect x="26" y="44" width="7" height="2.2" rx="1.1" fill="{COLOR_BG_BASE}"/>''',
+<rect x="23" y="33" width="18" height="19" rx="2" fill="#ECEFF4"/>
+<path d="M 35 33 L 41 39 L 35 39 Z" fill="#00D2FF"/>
+<line x1="26" y1="38" x2="33" y2="38" stroke="#141D28" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="26" y1="42" x2="38" y2="42" stroke="#141D28" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="26" y1="46" x2="34" y2="46" stroke="#141D28" stroke-width="1.5" stroke-linecap="round"/>''',
 
     "folder-download": '''<!-- Download emblem -->
-<path d="M 32 31 L 32 45 M 32 45 L 25 38 M 32 45 L 39 38" stroke="{COLOR_ACCENT}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="22" y1="50" x2="42" y2="50" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" stroke-linecap="round"/>''',
+<path d="M 32 32 L 32 45 M 32 45 L 26 39 M 32 45 L 38 39" stroke="#00D2FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 23 48 L 23 51 C 23 52 24 53 25 53 L 39 53 C 40 53 41 52 41 51 L 41 48" stroke="#ECEFF4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>''',
 
     "folder-music": '''<!-- Music emblem -->
-<path d="M 26 47 A 3.5 3.5 0 1 1 26 40 A 3.5 3.5 0 0 1 26 47 Z" fill="{COLOR_ACCENT}"/>
-<path d="M 38 44 A 3.5 3.5 0 1 1 38 37 A 3.5 3.5 0 0 1 38 44 Z" fill="{COLOR_ACCENT}"/>
-<path d="M 29.5 41 L 29.5 32 L 41.5 29 L 41.5 38" stroke="{COLOR_ACCENT}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polygon points="29.5,32 41.5,29 41.5,33 29.5,36" fill="{COLOR_ACCENT_STRONG}"/>''',
+<circle cx="26" cy="45" r="3.5" fill="#00D2FF"/>
+<circle cx="37" cy="42" r="3.5" fill="#00D2FF"/>
+<path d="M 29.5 45 L 29.5 33 L 40.5 30 L 40.5 42" stroke="#ECEFF4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="29.5,33 40.5,30 40.5,34.5 29.5,37.5" fill="#88C0D0"/>''',
 
     "folder-pictures": '''<!-- Pictures emblem -->
-<rect x="21" y="32" width="22" height="18" rx="3" stroke="{COLOR_ACCENT}" stroke-width="2" fill="{COLOR_BG_BASE}"/>
-<circle cx="27" cy="37.5" r="2.5" fill="{COLOR_ACCENT_STRONG}"/>
-<polygon points="23,48 28.5,41 33.5,46 37,42.5 41,48" fill="{COLOR_ACCENT}"/>''',
+<rect x="21" y="33" width="22" height="18" rx="3" stroke="#ECEFF4" stroke-width="2" fill="#141D28"/>
+<circle cx="27" cy="38" r="2.5" fill="#00D2FF"/>
+<polygon points="23,49 28.5,42 33.5,47 37,43.5 41,49" fill="#88C0D0"/>''',
 
     "folder-videos": '''<!-- Videos emblem -->
-<rect x="20" y="32" width="24" height="18" rx="3" stroke="{COLOR_ACCENT}" stroke-width="2" fill="{COLOR_BG_BASE}"/>
-<circle cx="32" cy="41" r="5" fill="{COLOR_ACCENT_STRONG}"/>
-<polygon points="30.5,38 35,41 30.5,44" fill="{COLOR_BG_BASE}"/>''',
+<rect x="20" y="33" width="24" height="18" rx="3" stroke="#ECEFF4" stroke-width="2" fill="#141D28"/>
+<circle cx="32" cy="42" r="5" fill="#00D2FF"/>
+<polygon points="30.5,39.5 35,42 30.5,44.5" fill="#ECEFF4"/>''',
 
     "folder-templates": '''<!-- Templates / Drafting emblem -->
-<rect x="22" y="32" width="20" height="18" rx="2" stroke="{COLOR_ACCENT}" stroke-width="2" fill="none"/>
-<line x1="22" y1="38" x2="42" y2="38" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
-<line x1="28" y1="32" x2="28" y2="50" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
-<polygon points="31,41 39,41 31,49" fill="{COLOR_ACCENT_STRONG}"/>''',
+<rect x="22" y="33" width="20" height="18" rx="2" stroke="#ECEFF4" stroke-width="2" fill="#141D28"/>
+<line x1="22" y1="39" x2="42" y2="39" stroke="#88C0D0" stroke-width="1.5"/>
+<line x1="28" y1="33" x2="28" y2="51" stroke="#88C0D0" stroke-width="1.5"/>
+<polygon points="31,42 39,42 31,50" fill="#00D2FF"/>''',
 
     "folder-publicshare": '''<!-- Public share emblem -->
-<circle cx="32" cy="36" r="3.5" fill="{COLOR_ACCENT}"/>
-<path d="M 24 49 C 24 44 27 42 32 42 C 37 42 40 44 40 49 Z" fill="{COLOR_ACCENT}"/>
-<circle cx="41" cy="37" r="2.5" fill="{COLOR_ACCENT_STRONG}"/>
-<circle cx="23" cy="37" r="2.5" fill="{COLOR_ACCENT_STRONG}"/>''',
+<circle cx="32" cy="37" r="3.5" fill="#00D2FF"/>
+<path d="M 24 50 C 24 45 27 43 32 43 C 37 43 40 45 40 50 Z" fill="#ECEFF4"/>
+<circle cx="41" cy="38" r="2.5" fill="#88C0D0"/>
+<circle cx="23" cy="38" r="2.5" fill="#88C0D0"/>''',
 
     "folder-remote": '''<!-- Network globe folder -->
-<circle cx="32" cy="41" r="9" stroke="{COLOR_ACCENT}" stroke-width="2" fill="{COLOR_BG_BASE}"/>
-<ellipse cx="32" cy="41" rx="4.5" ry="9" stroke="{COLOR_ACCENT}" stroke-width="1.5" fill="none"/>
-<line x1="23" y1="41" x2="41" y2="41" stroke="{COLOR_ACCENT_STRONG}" stroke-width="1.8"/>''',
+<circle cx="32" cy="42" r="9" stroke="#ECEFF4" stroke-width="2" fill="#141D28"/>
+<ellipse cx="32" cy="42" rx="4.5" ry="9" stroke="#00D2FF" stroke-width="1.5" fill="none"/>
+<line x1="23" y1="42" x2="41" y2="42" stroke="#88C0D0" stroke-width="1.8"/>''',
 
     "folder-projects": '''<!-- Code / Projects emblem -->
-<polygon points="26,35 20,41 26,47" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<polygon points="38,35 44,41 38,47" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="34" y1="33" x2="30" y2="49" stroke="{COLOR_ACCENT}" stroke-width="2.5" stroke-linecap="round"/>''',
+<polyline points="26,36 20,42 26,48" stroke="#00D2FF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="38,36 44,42 38,48" stroke="#00D2FF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="34" y1="34" x2="30" y2="50" stroke="#ECEFF4" stroke-width="2.5" stroke-linecap="round"/>''',
 
     "folder-applications": '''<!-- Apps grid emblem -->
-<rect x="23" y="32" width="6" height="6" rx="1.5" fill="{COLOR_ACCENT}"/>
-<rect x="35" y="32" width="6" height="6" rx="1.5" fill="{COLOR_ACCENT}"/>
-<rect x="23" y="42" width="6" height="6" rx="1.5" fill="{COLOR_ACCENT}"/>
-<rect x="35" y="42" width="6" height="6" rx="1.5" fill="{COLOR_ACCENT_STRONG}"/>''',
+<rect x="23" y="33" width="7" height="7" rx="2" fill="#00D2FF"/>
+<rect x="34" y="33" width="7" height="7" rx="2" fill="#ECEFF4"/>
+<rect x="23" y="43" width="7" height="7" rx="2" fill="#ECEFF4"/>
+<rect x="34" y="43" width="7" height="7" rx="2" fill="#88C0D0"/>''',
 
     "folder-books": '''<!-- Bookshelf emblem -->
-<rect x="22" y="32" width="4" height="18" rx="1" fill="{COLOR_ACCENT}"/>
-<rect x="28" y="30" width="4" height="20" rx="1" fill="{COLOR_ACCENT_STRONG}"/>
-<rect x="34" y="33" width="4" height="17" rx="1" fill="{COLOR_ACCENT}"/>
-<polygon points="32,35 38,45 26,45" fill="{COLOR_ACCENT}"/>''',
+<rect x="22" y="33" width="4" height="17" rx="1" fill="#ECEFF4"/>
+<rect x="28" y="31" width="4" height="19" rx="1" fill="#00D2FF"/>
+<rect x="34" y="34" width="4" height="16" rx="1" fill="#88C0D0"/>
+<polygon points="32,36 38,46 26,46" fill="#ECEFF4"/>''',
 
     "folder-saved-search": '''<!-- Search emblem -->
-<circle cx="29" cy="38" r="7" stroke="{COLOR_ACCENT}" stroke-width="2.5" fill="none"/>
-<line x1="34.5" y1="43.5" x2="43" y2="52" stroke="{COLOR_ACCENT_STRONG}" stroke-width="3.5" stroke-linecap="round"/>''',
+<circle cx="29" cy="39" r="6.5" stroke="#ECEFF4" stroke-width="2.5" fill="none"/>
+<line x1="34" y1="44" x2="42" y2="52" stroke="#00D2FF" stroke-width="3" stroke-linecap="round"/>''',
 
     "folder-github": '''<!-- Development emblem -->
-<path d="M 26 35 L 20 41 L 26 47" stroke="{COLOR_ACCENT}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 38 35 L 44 41 L 38 47" stroke="{COLOR_ACCENT}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="34" y1="34" x2="30" y2="48" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" stroke-linecap="round"/>''',
+<polyline points="26,36 20,42 26,48" stroke="#00D2FF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="38,36 44,42 38,48" stroke="#00D2FF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="34" y1="34" x2="30" y2="50" stroke="#ECEFF4" stroke-width="2.5" stroke-linecap="round"/>''',
 
     "folder-open": '''<!-- Open folder flap -->
-<path d="M 24 35 L 32 30 L 40 35" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" stroke-linecap="round"/>
-<rect x="23" y="37" width="18" height="12" rx="2" fill="{COLOR_ACCENT}" fill-opacity="0.8"/>''',
+<path d="M 24 35 L 32 30 L 40 35" stroke="#00D2FF" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="23" y="37" width="18" height="12" rx="2" fill="#ECEFF4" fill-opacity="0.8"/>''',
 
     "folder-recent": '''<!-- Clock / Recent emblem -->
-<circle cx="32" cy="41" r="9" stroke="{COLOR_ACCENT}" stroke-width="2" fill="none"/>
-<line x1="32" y1="36" x2="32" y2="41" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2" stroke-linecap="round"/>
-<line x1="32" y1="41" x2="36" y2="41" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2" stroke-linecap="round"/>''',
+<circle cx="32" cy="42" r="9" stroke="#ECEFF4" stroke-width="2" fill="none"/>
+<line x1="32" y1="37" x2="32" y2="42" stroke="#00D2FF" stroke-width="2" stroke-linecap="round"/>
+<line x1="32" y1="42" x2="36" y2="42" stroke="#00D2FF" stroke-width="2" stroke-linecap="round"/>''',
 
     "folder-root": '''<!-- Root / Admin emblem -->
-<path d="M 32 30 L 42 34 L 42 42 C 42 48 32 52 32 52 C 32 52 22 48 22 42 L 22 34 Z" fill="{COLOR_ACCENT}"/>
-<circle cx="32" cy="38" r="2.5" fill="{COLOR_BG_BASE}"/>
-<line x1="32" y1="40.5" x2="32" y2="46" stroke="{COLOR_BG_BASE}" stroke-width="2"/>''',
+<path d="M 32 31 L 42 35 L 42 43 C 42 49 32 53 32 53 C 32 53 22 49 22 43 L 22 35 Z" fill="#00D2FF"/>
+<circle cx="32" cy="39" r="2.5" fill="#141D28"/>
+<line x1="32" y1="41.5" x2="32" y2="47" stroke="#141D28" stroke-width="2"/>''',
 
     "folder-locked": '''<!-- Padlock emblem -->
-<rect x="23" y="38" width="18" height="14" rx="2.5" fill="{COLOR_ACCENT}"/>
-<path d="M 27 38 L 27 34 C 27 31 29 29 32 29 C 35 29 37 31 37 34 L 37 38" stroke="{COLOR_ACCENT}" stroke-width="2.5" fill="none"/>
-<circle cx="32" cy="44" r="1.5" fill="{COLOR_BG_BASE}"/>
-<line x1="32" y1="45.5" x2="32" y2="49" stroke="{COLOR_BG_BASE}" stroke-width="1.5"/>''',
+<rect x="23" y="39" width="18" height="13" rx="2" fill="#ECEFF4"/>
+<path d="M 27 39 L 27 35 C 27 32 29 30 32 30 C 35 30 37 32 37 35 L 37 39" stroke="#00D2FF" stroke-width="2.5" fill="none"/>
+<circle cx="32" cy="44.5" r="1.5" fill="#141D28"/>
+<line x1="32" y1="46" x2="32" y2="49" stroke="#141D28" stroke-width="1.5"/>''',
 
     "folder-tar": '''<!-- Archive / Zipper emblem -->
-<line x1="32" y1="30" x2="32" y2="52" stroke="{COLOR_ACCENT}" stroke-width="3" stroke-dasharray="2 3"/>
-<rect x="29" y="38" width="6" height="8" rx="1.5" fill="{COLOR_ACCENT_STRONG}"/>''',
+<line x1="32" y1="31" x2="32" y2="53" stroke="#88C0D0" stroke-width="3" stroke-dasharray="2 3"/>
+<rect x="29" y="39" width="6" height="8" rx="1.5" fill="#00D2FF"/>''',
 
     "user-trash": '''<!-- Trash emblem -->
-<path d="M 24 34 L 40 34 L 38 51 L 26 51 Z" stroke="{COLOR_ACCENT}" stroke-width="2" fill="{COLOR_BG_BASE}"/>
-<line x1="21" y1="32" x2="43" y2="32" stroke="{COLOR_ACCENT}" stroke-width="2.5" stroke-linecap="round"/>
-<rect x="29" y="29" width="6" height="3" rx="1" fill="{COLOR_ACCENT_STRONG}"/>
-<line x1="28.5" y1="37" x2="28.5" y2="47" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
-<line x1="32" y1="37" x2="32" y2="47" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
-<line x1="35.5" y1="37" x2="35.5" y2="47" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>''',
+<path d="M 24 35 L 40 35 L 38 52 L 26 52 Z" stroke="#ECEFF4" stroke-width="2" fill="#141D28"/>
+<line x1="21" y1="33" x2="43" y2="33" stroke="#00D2FF" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="29" y="30" width="6" height="3" rx="1" fill="#ECEFF4"/>''',
 }
 
 PLACES_ALIASES = {
@@ -364,43 +364,6 @@ SYMBOLIC_ICONS = {
 
     "external-link-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
   <path fill="currentColor" class="ColorScheme-Text" d="M 5 2 C 3.34 2 2 3.34 2 5 L 2 11 C 2 12.66 3.34 14 5 14 L 11 14 C 12.66 14 14 12.66 14 11 L 14 8 L 12 8 L 12 11 C 12 11.55 11.55 12 11 12 L 5 12 C 4.45 12 4 11.55 4 11 L 4 5 C 4 4.45 4.45 4 5 4 L 8 4 L 8 2 Z M 10 2 L 10 4 L 12.59 4 L 7.29 9.29 L 8.71 10.71 L 14 5.41 L 14 8 L 16 8 L 16 2 Z"/>
-</svg>''',
-
-    # Fixes Extension Manager right expander rows across all Libadwaita apps!
-    "adw-expander-arrow-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 4 6 L 8 10 L 12 6"/>
-</svg>''',
-
-    "expander-open-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M 4 6 L 8 10 L 12 6"/>
-</svg>''',
-
-    # Fixes Nautilus current folder search & search filters
-    "nautilus-folder-search-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
-  <line x1="10.5" y1="10.5" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>''',
-
-    "nautilus-search-filters-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <line x1="2" y1="4" x2="14" y2="4" stroke="currentColor" stroke-width="1.5"/>
-  <circle cx="5" cy="4" r="1.5" fill="currentColor"/>
-  <line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5"/>
-  <circle cx="11" cy="8" r="1.5" fill="currentColor"/>
-  <line x1="2" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="1.5"/>
-  <circle cx="7" cy="12" r="1.5" fill="currentColor"/>
-</svg>''',
-
-    # Fixes Sidebar toggle in Nautilus & Settings
-    "sidebar-hide-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <rect x="2" y="2" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <line x1="6" y1="2" x2="6" y2="14" stroke="currentColor" stroke-width="1.5"/>
-  <polyline points="4.5,7 3,8.5 4.5,10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-</svg>''',
-
-    "sidebar-show-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <rect x="2" y="2" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <line x1="6" y1="2" x2="6" y2="14" stroke="currentColor" stroke-width="1.5"/>
-  <polyline points="3.5,7 5,8.5 3.5,10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
 </svg>''',
 
     # Fixes Extension Manager and app extras

@@ -1,8 +1,8 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <defs>
   <linearGradient id="camBg" x1="32" y1="14" x2="32" y2="54" gradientUnits="userSpaceOnUse">
-    <stop offset="0%" stop-color="#25344A"/>
-    <stop offset="100%" stop-color="#0e141d"/>
+    <stop offset="0%" stop-color="#2E415A"/>
+    <stop offset="100%" stop-color="#182332"/>
   </linearGradient>
   <linearGradient id="lensGrad" x1="32" y1="21" x2="32" y2="47" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="#00D2FF"/>
@@ -10,10 +10,10 @@
   </linearGradient>
 </defs>
 <rect x="22" y="10" width="20" height="6" rx="3" fill="#1A2434"/>
-<rect x="8" y="14" width="48" height="40" rx="10" fill="url(#camBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8" y="14" width="48" height="40" rx="10" fill="url(#camBg)" stroke="#435C7E" stroke-width="1.5"/>
 <circle cx="16" cy="22" r="3" fill="#E5737F"/>
 <circle cx="48" cy="22" r="2.5" fill="#88C0D0"/>
-<circle cx="32" cy="34" r="14" fill="#151d2a" stroke="#25344A" stroke-width="2"/>
+<circle cx="32" cy="34" r="14" fill="#151d2a" stroke="#435C7E" stroke-width="2"/>
 <circle cx="32" cy="34" r="10" fill="url(#lensGrad)"/>
 <circle cx="32" cy="34" r="5" fill="#090D14"/>
 <circle cx="35" cy="31" r="2" fill="#ECEFF4" opacity="0.8"/>
