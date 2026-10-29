@@ -35,7 +35,7 @@
 
 .notification-banner {
   background-color: transparent !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: none !important;
   border: none !important;
 }
 

@@ -38,15 +38,15 @@
 .popup-menu-content {
   background-color: rgba(21, 29, 42, 0.86) !important;
   backdrop-filter: blur(26px) saturate(140%) !important;
-  border: 1px solid rgba(136, 192, 208, 0.18) !important;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(136, 192, 208, 0.28) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
 }
 
 .modal-dialog {
   background-color: rgba(14, 20, 29, 0.90) !important;
   backdrop-filter: blur(32px) saturate(140%) !important;
-  border: 1px solid rgba(136, 192, 208, 0.22) !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid rgba(136, 192, 208, 0.28) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 
 #dash .dash-background,
@@ -67,7 +67,7 @@
 /* Frosted Glassmorphism for Notification Banners */
 .notification-banner {
   background-color: transparent !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: none !important;
   border: none !important;
 }
 

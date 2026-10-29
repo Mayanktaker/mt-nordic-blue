@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# Toggle seamlessly between MT-Nordic-Blue (Dark) and MT-Nordic-Light (Snow Storm)
+# Updates GNOME color-scheme, GTK theme, Shell theme, Libadwaita GTK4 CSS, and wallpaper.
+
+set -euo pipefail
+
+CURRENT_SCHEME="$(gsettings get org.gnome.desktop.interface color-scheme | tr -d "'")"
+THEMES_DIR="${HOME}/.themes"
+CONFIG_GTK4="${HOME}/.config/gtk-4.0"
+
+# Determine target theme variant based on current color-scheme
+if [ "${CURRENT_SCHEME}" = "prefer-dark" ]; then
+  TARGET="light"
+  SCHEME="default"
+  THEME_NAME="MT-Nordic-Light"
+  WP_NAME="mt-nordic-blue-celestial-rift.png"
+  echo "Switching to MT Nordic Light (Snow Storm)..."
+else
+  TARGET="dark"
+  SCHEME="prefer-dark"
+  THEME_NAME="MT-Nordic-Blue"
+  WP_NAME="mt-nordic-blue-canopy-dawn.png"
+  echo "Switching to MT Nordic Blue (Polar Night)..."
+fi
+
+# Apply system interface settings
+gsettings set org.gnome.desktop.interface color-scheme "${SCHEME}"
+gsettings set org.gnome.desktop.interface gtk-theme "${THEME_NAME}"
+if [ -d "${THEMES_DIR}/${THEME_NAME}/gnome-shell" ]; then
+  dconf write /org/gnome/shell/extensions/user-theme/name "'${THEME_NAME}'" 2>/dev/null || true
+fi
+
+# Switch Libadwaita / GTK4 user overrides link
+if [ -d "${THEMES_DIR}/${THEME_NAME}/gtk-4.0" ]; then
+  mkdir -p "${CONFIG_GTK4}"
+  ln -sf "${THEMES_DIR}/${THEME_NAME}/gtk-4.0/gtk.css" "${CONFIG_GTK4}/gtk.css"
+  ln -sf "${THEMES_DIR}/${THEME_NAME}/gtk-4.0/gtk-dark.css" "${CONFIG_GTK4}/gtk-dark.css"
+fi
+
+# Sync 4K wallpaper if available in theme wallpapers
+WP_PATH="${THEMES_DIR}/${THEME_NAME}/wallpapers/${WP_NAME}"
+if [ -f "${WP_PATH}" ]; then
+  gsettings set org.gnome.desktop.background picture-uri "file://${WP_PATH}" 2>/dev/null || true
+  gsettings set org.gnome.desktop.background picture-uri-dark "file://${WP_PATH}" 2>/dev/null || true
+fi
+
+# Refresh running apps and compositor styles
+nautilus -q 2>/dev/null || true
+echo "✨ Switched to ${THEME_NAME} (${TARGET} mode)."

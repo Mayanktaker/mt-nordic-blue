@@ -21,3 +21,10 @@ Modern Freedesktop runtimes mount with `subdirectory-suffix gtk-3.0`. The extens
    ```bash
    flatpak-builder --user --install --force-clean flatpak/build flatpak/org.gtk.Gtk3theme.<tech_name>.json
    ```
+
+## User Filesystem Overrides (Fast Path)
+To enable Flatpak applications to read the installed GTK4 configuration and user themes immediately without building the extension:
+```bash
+bash flatpak/apply-overrides.sh
+```
+This grants read-only access to `~/.config/gtk-4.0`, `~/.themes`, and `~/.icons`.

@@ -247,11 +247,11 @@ button {
   background-color: #eceff4;
   color: #2e3440;
   border: 1px solid #d8dee9;
-  border-radius: 8px;
-  padding: 6px 14px;
-  min-height: 32px;
+  border-radius: 6px;
+  padding: 4px 10px;
+  min-height: 26px;
   font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   transition: all 150ms ease-in-out;
 }
 
@@ -259,7 +259,7 @@ button:hover {
   background-color: #e5e9f0;
   border-color: #4c719c;
   color: #2e3440;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }
 
 button:active,
@@ -267,6 +267,76 @@ button:checked {
   background-color: #d8dee9;
   border-color: #4c719c;
   color: #2e3440;
+}
+
+/* Linked / Segmented Buttons: shared borders without oversized overlapping pills */
+.linked:not(.vertical) > button,
+segmented-button > button {
+  min-height: 24px;
+  padding: 3px 10px;
+  border-radius: 0;
+  border-right: none;
+  box-shadow: none;
+}
+
+.linked:not(.vertical) > button:first-child,
+segmented-button > button:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.linked:not(.vertical) > button:last-child,
+segmented-button > button:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-right: 1px solid #d8dee9;
+}
+
+.linked.vertical > button {
+  min-height: 24px;
+  padding: 3px 8px;
+  border-radius: 0;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.linked.vertical > button:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.linked.vertical > button:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom: 1px solid #d8dee9;
+}
+
+.linked > button:checked,
+segmented-button > button:checked {
+  background-color: rgba(76, 113, 156, 0.20);
+  border-color: #4c719c;
+  color: #2e3440;
+  font-weight: 600;
+}
+
+/* Spinbutton compact controls */
+spinbutton {
+  border-radius: 6px;
+  padding: 0;
+}
+
+spinbutton > button {
+  min-height: 22px;
+  min-width: 24px;
+  padding: 2px 4px;
+  border: none;
+  box-shadow: none;
+}
+
+/* Action and preference rows buttons compact fit */
+row button:not(.suggested-action):not(.destructive-action) {
+  min-height: 24px;
+  padding: 3px 8px;
 }
 
 /* Flat, image, circular, titlebar, and headerbar buttons retain compact dimensions */

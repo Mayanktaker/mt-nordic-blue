@@ -629,6 +629,10 @@ fi
 if [ "${WANT_BLUR}" -eq 1 ]; then
   [ -f "${REPO_ROOT}/src/tweaks/shell/translucent.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/translucent.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
   [ -f "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+  if [ -d "${LIGHT_THEME_DIR}/gnome-shell" ]; then
+    [ -f "${REPO_ROOT}/src/tweaks/shell/translucent.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/translucent.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+    [ -f "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+  fi
   echo "  + surface: frosted glass translucency & blur enabled"
   if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
     dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur true 2>/dev/null || true
@@ -810,6 +814,16 @@ if have gsettings; then
     gsettings set org.gnome.desktop.interface icon-theme "${ICONS_NAME}" 2>/dev/null || true
     gsettings set org.gnome.desktop.interface cursor-theme "${CURSORS_NAME}" 2>/dev/null || true
   fi
+fi
+
+# ---------- install toggle CLI and Flatpak overrides ----------
+mkdir -p "${HOME}/.local/bin"
+if [ -f "${REPO_ROOT}/tools/dev/mt-nordic-toggle" ]; then
+  cp "${REPO_ROOT}/tools/dev/mt-nordic-toggle" "${HOME}/.local/bin/mt-nordic-toggle"
+  chmod +x "${HOME}/.local/bin/mt-nordic-toggle"
+fi
+if [ -f "${REPO_ROOT}/flatpak/apply-overrides.sh" ]; then
+  bash "${REPO_ROOT}/flatpak/apply-overrides.sh" 2>/dev/null || true
 fi
 
 # ---------- activation hint ----------

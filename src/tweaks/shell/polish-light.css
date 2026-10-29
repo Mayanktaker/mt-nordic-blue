@@ -147,7 +147,7 @@
 .popup-menu-content {
   border-radius: 18px;
   background-color: #f4f7fb;
-  box-shadow: 0 8px 30px rgba(46, 52, 64, 0.18);
+  box-shadow: 0 2px 6px rgba(46, 52, 64, 0.10);
   border: 1px solid #d8dee9;
   color: #2e3440;
 }
@@ -164,7 +164,7 @@
   border-radius: 20px;
   background-color: #eceff4;
   border: 1px solid rgba(76, 113, 156, 0.22);
-  box-shadow: 0 8px 28px rgba(46, 52, 64, 0.18);
+  box-shadow: 0 2px 8px rgba(46, 52, 64, 0.10);
   color: #2e3440;
 }
 
@@ -175,7 +175,7 @@
   margin: 6px;
   border-radius: 18px;
   background-color: transparent;
-  box-shadow: 0 6px 18px rgba(46, 52, 64, 0.14);
+  box-shadow: none !important;
 }
 
 .notification-banner .message,
