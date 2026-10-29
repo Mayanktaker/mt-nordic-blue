@@ -40,3 +40,8 @@
 .workspace-switcher {
   border-radius: 24px !important;
 }
+
+.notification-banner,
+.notification-banner .message {
+  border-radius: 18px !important;
+}

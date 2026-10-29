@@ -61,3 +61,20 @@
   backdrop-filter: blur(24px) saturate(140%) !important;
   border: 1px solid rgba(136, 192, 208, 0.15) !important;
 }
+
+/* Frosted Glassmorphism for Notification Banners */
+.notification-banner,
+.notification-banner .message {
+  background-color: rgba(21, 29, 42, 0.88) !important;
+  backdrop-filter: blur(28px) saturate(140%) !important;
+  border: 1px solid rgba(136, 192, 208, 0.22) !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.60), 0 0 1px rgba(136, 192, 208, 0.35) !important;
+}
+
+.notification-banner .message:second-in-stack {
+  background-color: rgba(17, 24, 34, 0.85) !important;
+}
+
+.notification-banner .message:lower-in-stack {
+  background-color: rgba(14, 20, 29, 0.80) !important;
+}

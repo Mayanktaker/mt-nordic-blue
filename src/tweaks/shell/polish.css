@@ -157,8 +157,128 @@
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
 }
 
+/* Notifications & Message Tray Banners */
+.notification-banner {
+  min-height: 64px;
+  width: 34em;
+  margin: 6px;
+  border-radius: 18px;
+  background-color: transparent;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+.notification-banner .message,
 .message {
-  border-radius: 14px;
+  border-radius: 18px;
   background-color: #151d2a;
-  border: 1px solid #1a2535;
+  border: 1px solid #25344a;
+  padding: 10px 14px;
+  color: #eceff4;
+}
+
+.message:second-in-stack {
+  background-color: #111822;
+  border-color: #1e2a3a;
+}
+
+.message:lower-in-stack {
+  background-color: #0e141d;
+  border-color: #16202e;
+}
+
+.message .message-header {
+  spacing: 8px;
+  color: #d8dee9;
+  padding: 2px 4px;
+}
+
+.message .message-header .message-source-icon {
+  icon-size: 1.15em;
+  color: #88c0d0;
+}
+
+.message .message-header .message-header-content .message-source-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #eceff4;
+}
+
+.message .message-header .message-header-content .event-time {
+  font-size: 11px;
+  color: #7b88a1;
+}
+
+.message .message-header .message-close-button {
+  border-radius: 999px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 4px;
+  color: #d8dee9;
+  background-color: rgba(136, 192, 208, 0.10);
+  border: 1px solid rgba(136, 192, 208, 0.20);
+  transition-duration: 150ms;
+}
+
+.message .message-header .message-close-button:hover {
+  background-color: rgba(136, 192, 208, 0.25);
+  border-color: #88c0d0;
+  color: #ffffff;
+}
+
+.message .message-header .message-close-button:active {
+  background-color: #88c0d0;
+  color: #090d14;
+}
+
+.message .message-box {
+  padding: 4px;
+  spacing: 12px;
+}
+
+.message .message-box .message-icon {
+  border-radius: 10px;
+  border: 1px solid #25344a;
+}
+
+.message .message-box .message-content .message-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #eceff4;
+}
+
+.message .message-box .message-content .message-secondary-bin {
+  font-size: 12px;
+  color: #d8dee9;
+}
+
+/* Notification Action Buttons */
+.message .message-action-bin {
+  padding-top: 6px;
+  spacing: 8px;
+}
+
+.message .message-action-bin button,
+.notification-banner button {
+  border-radius: 10px;
+  min-height: 30px;
+  padding: 4px 14px;
+  font-weight: 600;
+  font-size: 12px;
+  background-color: #1a2536;
+  border: 1px solid #25344a;
+  color: #eceff4;
+  transition-duration: 150ms;
+}
+
+.message .message-action-bin button:hover,
+.notification-banner button:hover {
+  background-color: rgba(136, 192, 208, 0.18);
+  border-color: #88c0d0;
+  color: #ffffff;
+}
+
+.message .message-action-bin button:active,
+.notification-banner button:active {
+  background-color: #88c0d0;
+  color: #090d14;
 }
