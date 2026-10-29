@@ -6,7 +6,15 @@
 
 set -eu
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+if [ -f "$(dirname "$0")/index.theme" ]; then
+  REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
+elif [ -f "$(dirname "$0")/../tools/install.sh" ]; then
+  REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+elif [ -f "$(dirname "$0")/tools/install.sh" ]; then
+  REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
+else
+  REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+fi
 if [ -f "${REPO_ROOT}/palette/tokens.json" ]; then
   THEME_NAME="$(python3 -c "import json; print(json.load(open('${REPO_ROOT}/palette/tokens.json'))['meta']['tech_name'])" 2>/dev/null || echo "MT-Nordic-Blue")"
   DISPLAY_NAME="$(python3 -c "import json; print(json.load(open('${REPO_ROOT}/palette/tokens.json'))['meta']['name'])" 2>/dev/null || echo "MT Nordic Blue")"
@@ -816,11 +824,18 @@ if have gsettings; then
   fi
 fi
 
-# ---------- install toggle CLI and Flatpak overrides ----------
-mkdir -p "${HOME}/.local/bin"
+# ---------- install toggle CLI, desktop entry, and Flatpak overrides ----------
+mkdir -p "${HOME}/.local/bin" "${HOME}/.local/share/applications"
 if [ -f "${REPO_ROOT}/tools/dev/mt-nordic-toggle" ]; then
   cp "${REPO_ROOT}/tools/dev/mt-nordic-toggle" "${HOME}/.local/bin/mt-nordic-toggle"
   chmod +x "${HOME}/.local/bin/mt-nordic-toggle"
+  "${HOME}/.local/bin/mt-nordic-toggle" --bind-shortcut 2>/dev/null || true
+fi
+if [ -f "${REPO_ROOT}/extras/desktop/mt-nordic-toggle.desktop" ]; then
+  cp "${REPO_ROOT}/extras/desktop/mt-nordic-toggle.desktop" "${HOME}/.local/share/applications/mt-nordic-toggle.desktop"
+  if command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database "${HOME}/.local/share/applications" 2>/dev/null || true
+  fi
 fi
 if [ -f "${REPO_ROOT}/flatpak/apply-overrides.sh" ]; then
   bash "${REPO_ROOT}/flatpak/apply-overrides.sh" 2>/dev/null || true
@@ -853,6 +868,7 @@ Settings Applied:
   GTK Theme:      ${THEME_NAME}
   Icon Theme:     ${ICONS_NAME}
   Cursor Theme:   ${CURSORS_NAME}
+  Theme Toggle:   Super+Shift+T or mt-nordic-toggle
 
 Restore Defaults (Adwaita):
   dconf write /org/gnome/shell/extensions/user-theme/name "''"

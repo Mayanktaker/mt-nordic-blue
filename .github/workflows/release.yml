@@ -1,0 +1,87 @@
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# Automated GitHub Actions workflow to build, verify, and release MT Nordic Blue theme packages.
+
+name: Release MT Nordic Blue
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build & Publish Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository with full git history
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Set up Python runtime
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Install Linux build libraries and Cairo/GObject bindings
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            sassc \
+            python3-cairo \
+            python3-gi \
+            python3-gi-cairo \
+            gir1.2-rsvg-2.0 \
+            gir1.2-glib-2.0 \
+            libglib2.0-bin \
+            optipng \
+            xz-utils
+
+      # Install Python imaging and numeric packages
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy Pillow pycairo PyGObject
+
+      # Verify WCAG contrast compliance
+      - name: Run WCAG Contrast Gate
+        run: |
+          python3 tools/dev/check_contrast.py
+
+      # Determine release version from tag or fallback
+      - name: Compute release version
+        id: vars
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            VER="${GITHUB_REF_NAME#v}"
+          else
+            VER="1.2.0"
+          fi
+          echo "VERSION=${VER}" >> "$GITHUB_OUTPUT"
+          echo "Building version ${VER}"
+
+      # Execute master build and package distribution tarballs
+      - name: Package release archives
+        run: |
+          chmod +x tools/release.sh tools/install.sh tools/dev/mt-nordic-toggle flatpak/apply-overrides.sh
+          ./tools/release.sh "${{ steps.vars.outputs.VERSION }}"
+
+      # Publish GitHub Release with bundled tarballs
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          name: MT Nordic Blue v${{ steps.vars.outputs.VERSION }}
+          files: |
+            dist/*.tar.xz
+          draft: false
+          prerelease: false
+          generate_release_notes: true

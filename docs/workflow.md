@@ -14,7 +14,13 @@
 - Tag `vX.Y`; run `tools/release.sh <version>`. The script generates:
   - Theme release bundle: `dist/<tech_name>-v<version>.tar.xz`
   - Standalone icons bundle: `dist/<tech_name>-icons-v<version>.tar.xz`
+- GitHub Actions CI/CD: Pushing any `v*` tag triggers `.github/workflows/release.yml`, executing the contrast gate, building release bundles, and publishing them directly to GitHub Releases.
 - Release notes are written for end users: what looks different, what got smoother, what was fixed — no internal identifiers or developer hashes.
+
+## Desktop & Shortcut Integration
+- `mt-nordic-toggle` switches between Dark (`MT-Nordic-Blue`) and Light (`MT-Nordic-Light`) modes.
+- Keyboard shortcut: `Super+Shift+T` is registered automatically during `./tools/install.sh` or via `mt-nordic-toggle --bind-shortcut`.
+- Desktop entry: installed to `~/.local/share/applications/mt-nordic-toggle.desktop` with `preferences-desktop-theme` icon and low-urgency `notify-send` desktop alert.
 
 ## Repo rules
 - Public GitHub repository (main branch).

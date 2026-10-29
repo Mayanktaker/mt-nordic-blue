@@ -1,0 +1,13 @@
+[Desktop Entry]
+# © Mayanktaker Computers & Web Development | https://mayanktaker.com
+# Desktop application entry for MT Nordic Theme Toggle
+Type=Application
+Name=MT Nordic Theme Toggle
+GenericName=Theme Toggle
+Comment=Toggle between MT Nordic Blue (Dark) and MT Nordic Light (Snow Storm)
+Exec=mt-nordic-toggle
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Utility;Settings;DesktopSettings;
+Keywords=Theme;Nordic;Dark;Light;Toggle;
+StartupNotify=false

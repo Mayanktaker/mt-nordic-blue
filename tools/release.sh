@@ -45,6 +45,9 @@ cp -r "${REPO_ROOT}/src/tweaks" "${DIST}/tweaks"
 cp -r "${REPO_ROOT}/src/icons" "${DIST}/icons"
 cp -r "${REPO_ROOT}/src/cursors" "${DIST}/cursors"
 cp -r "${REPO_ROOT}/extras" "${DIST}/extras"
+mkdir -p "${DIST}/tools/dev" "${DIST}/flatpak"
+cp "${REPO_ROOT}/tools/dev/mt-nordic-toggle" "${DIST}/tools/dev/mt-nordic-toggle"
+cp "${REPO_ROOT}/flatpak/apply-overrides.sh" "${DIST}/flatpak/apply-overrides.sh"
 cp "${REPO_ROOT}/tools/install.sh" "${DIST}/install.sh"
 
 if [ -d "${REPO_ROOT}/wallpaper/dist" ] && [ "$(ls -A "${REPO_ROOT}/wallpaper/dist" 2>/dev/null)" ]; then

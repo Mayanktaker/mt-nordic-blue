@@ -32,10 +32,10 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 - GTK build: `python3 tools/gtk/build.py` → `build/theme/gtk-{3,4}.0/`.
 - Unified master build: `python3 build_all.py` (runs contrast gate, GTK, Shell 50/51, icons, cursors, wallpapers in sequence).
 - Install: `./install.sh` (interactive CLI wizard) or `tools/install.sh [--panel round-island|pill|bottom-round|flat] [--corners round|sharp] [--controls standard|macos] [--size standard|compact] [--base polar|classic|cyber|oled] [--accent frost|glacier|aurora|arctic|cyber|blaze] [--blur|--no-blur] [--icons] [--gtk4-libadwaita] [--wallpaper [1-4|all|none]] [--install-deps]` → installs theme into `~/.themes/MT-Nordic-Blue` and companion packs into `~/.icons/`.
-- Theme toggle: `mt-nordic-toggle` (switches dark/light shell, GTK, libadwaita, and wallpaper).
+- Theme toggle: `mt-nordic-toggle` or shortcut `Super+Shift+T` (switches dark/light shell, GTK, libadwaita, and wallpaper).
 - Flatpak overrides: `flatpak/apply-overrides.sh` (grants read-only access to `~/.config/gtk-4.0`, `~/.themes`, and `~/.icons`).
 - App extras install: `tools/extras/install-all.sh` (scans & installs for all detected apps) or individual scripts under `extras/`.
-- Package release: `tools/release.sh <version>` → creates complete tarball in `dist/`.
+- Package release: `tools/release.sh <version>` → creates complete tarball in `dist/` (automated via `.github/workflows/release.yml` on tag push).
 
 ## Layout
 - `palette/` tokens (`tokens.json` single source of truth) + `presets/` library
