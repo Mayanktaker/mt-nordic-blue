@@ -11,9 +11,11 @@
   backdrop-filter: none !important;
 }
 
-#dash .dash-background {
+#dash .dash-background,
+#dashtodockContainer #dash .dash-background {
   background-color: #0e141d !important;
   backdrop-filter: none !important;
+  box-shadow: none !important;
 }
 
 .popup-menu-content {

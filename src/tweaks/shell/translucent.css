@@ -49,10 +49,12 @@
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7) !important;
 }
 
-#dash .dash-background {
+#dash .dash-background,
+#dashtodockContainer #dash .dash-background {
   background-color: rgba(14, 20, 29, 0.75) !important;
   backdrop-filter: blur(24px) saturate(140%) !important;
-  border: 1px solid rgba(136, 192, 208, 0.15) !important;
+  border: 1px solid rgba(136, 192, 208, 0.25) !important;
+  box-shadow: none !important;
 }
 
 .osd-window,

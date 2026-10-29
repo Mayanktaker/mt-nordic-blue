@@ -12,6 +12,12 @@
   <url type="homepage">https://mayanktaker.com</url>
   <developer_name>Mayanktaker Computers &amp; Web Development</developer_name>
   <releases>
+    <release version="1.2.0" date="2026-10-29">
+      <description>
+        <p>What's new: Added 4K 3D Glacial Silk Bloom wallpapers in both dark and daylight variants, dedicated MT Nordic Light desktop theme, and updated lock screen themes.</p>
+        <p>Bug fixes: Removed diffuse rectangular shadow halo around the floating dock for a razor-sharp, clean appearance on light and dark wallpapers.</p>
+      </description>
+    </release>
     <release version="1.1.0" date="2026-10-29">
       <description>
         <p>Adds MT Nordic Light (Glacial Snow Storm) variant, 4K 3D Glacial Silk Bloom wallpaper suite with inverted high-contrast adaptive pairing, dedicated Shell light theme, and refined notification cards with MPRIS media playback controls.</p>

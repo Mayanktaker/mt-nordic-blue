@@ -24,6 +24,7 @@ TARBALL="${REPO_ROOT}/dist/${TECH_SLUG}-v${VERSION}.tar.xz"
 # Rebuild all layers from tokens
 python3 "${REPO_ROOT}/tools/dev/check_contrast.py" > /dev/null
 python3 "${REPO_ROOT}/tools/wallpaper/generate.py" > /dev/null
+python3 "${REPO_ROOT}/tools/wallpaper/process_light.py" > /dev/null
 python3 "${REPO_ROOT}/tools/icons/generate_icons.py" > /dev/null
 python3 "${REPO_ROOT}/tools/icons/generate_cursors.py" > /dev/null
 python3 "${REPO_ROOT}/tools/shell/build.py" --all
@@ -33,6 +34,7 @@ python3 "${REPO_ROOT}/tools/gtk/build.py" > /dev/null
 rm -rf "${DIST}"
 mkdir -p "${DIST}"
 cp "${REPO_ROOT}/src/index.theme" "${DIST}/index.theme"
+cp "${REPO_ROOT}/src/index-light.theme" "${DIST}/index-light.theme" 2>/dev/null || true
 for major_dir in "${REPO_ROOT}"/build/theme/gnome-shell-*; do
   major="${major_dir##*-}"
   cp -r "${major_dir}" "${DIST}/gnome-shell-${major}"
