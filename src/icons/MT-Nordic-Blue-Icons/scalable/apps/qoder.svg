@@ -2,17 +2,21 @@
 <defs>
   <linearGradient id="qoderBg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="#25344A"/>
-    <stop offset="100%" stop-color="#0e141d"/>
+    <stop offset="100%" stop-color="#0E141D"/>
+  </linearGradient>
+  <linearGradient id="qoderQ" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#00D2FF"/>
+    <stop offset="100%" stop-color="#88C0D0"/>
   </linearGradient>
 </defs>
 <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#qoderBg)" stroke="#25344A" stroke-width="1.5"/>
 <rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
-<!-- Circular Q Ring -->
-<circle cx="31" cy="31" r="14" stroke="#00D2FF" stroke-width="3" fill="none"/>
-<!-- Agentic loop core -->
-<circle cx="31" cy="31" r="5" fill="#0E141D" stroke="#88C0D0" stroke-width="1.5"/>
-<circle cx="31" cy="31" r="2" fill="#ECEFF4"/>
-<!-- Tail pulse line breaking outward -->
-<path d="M 39 39 L 49 49" stroke="#00D2FF" stroke-width="3.5" stroke-linecap="round"/>
-<circle cx="49" cy="49" r="2" fill="#88C0D0"/>
+<!-- Outer Q Ring -->
+<circle cx="32" cy="31" r="15" fill="none" stroke="url(#qoderQ)" stroke-width="4.2"/>
+<!-- Code brackets inside Q -->
+<path d="M 27 26 L 23 31 L 27 36" fill="none" stroke="#ECEFF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 37 26 L 41 31 L 37 36" fill="none" stroke="#ECEFF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Q kick tail / spark -->
+<path d="M 38 37 L 46 45" stroke="#00D2FF" stroke-width="4.5" stroke-linecap="round"/>
+<circle cx="46" cy="45" r="2.2" fill="#ECEFF4"/>
 </svg>

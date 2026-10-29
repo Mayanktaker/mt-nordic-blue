@@ -792,6 +792,16 @@ APP_ALIASES = {
     "cachyos-package-installer": "cachyos-pi",
     "org.cachyos.PackageInstaller": "cachyos-pi",
     "org.cachyos.cachyos-pi": "cachyos-pi",
+    # Shelly Package Manager
+    "com.shellyorg.shelly": "shelly",
+    "com.shellyorg.shelly-notifications": "shelly",
+    "shelly-tray": "shelly",
+    # Android Studio & Mobile Dev
+    "studio": "android-studio",
+    "Android_Studio": "android-studio",
+    # Hardware & System daemons
+    "hwloc": "utilities-system-monitor",
+    "org.gnome.goa-daemon-symbolic": "dialog-password-symbolic",
 }
 
 # Merge extended application aliases for full desktop compatibility
@@ -1201,6 +1211,8 @@ def build_places() -> None:
             render_svg_to_png(svg_content, png_file, size)
 
     for alias, target in PLACES_ALIASES.items():
+        if alias == target:
+            continue
         dst_svg = scalable_dir / f"{alias}.svg"
         if dst_svg.exists() or dst_svg.is_symlink():
             dst_svg.unlink()
@@ -1236,6 +1248,8 @@ def build_apps() -> None:
             render_svg_to_png(svg_content, png_file, size)
 
     for alias, target in APP_ALIASES.items():
+        if alias == target:
+            continue
         dst_svg = scalable_dir / f"{alias}.svg"
         if dst_svg.exists() or dst_svg.is_symlink():
             dst_svg.unlink()
@@ -1405,6 +1419,8 @@ def build_devices() -> None:
 
     # Link device aliases
     for alias, target in DEVICE_ALIASES.items():
+        if alias == target:
+            continue
         svg_alias = scalable_dir / f"{alias}.svg"
         if svg_alias.exists() or svg_alias.is_symlink():
             svg_alias.unlink()

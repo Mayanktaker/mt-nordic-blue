@@ -420,18 +420,119 @@ DEV_AI_APP_ICONS = {
 <line x1="32" y1="32" x2="26" y2="32" stroke="#88C0D0" stroke-width="2" stroke-linecap="round"/>
 <circle cx="32" cy="32" r="2.5" fill="#00D2FF"/>
 </svg>''',
+
+    # 24. Qoder (Agent Workbench IDE)
+    "qoder": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="qoderBg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0E141D"/>
+  </linearGradient>
+  <linearGradient id="qoderQ" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#00D2FF"/>
+    <stop offset="100%" stop-color="#88C0D0"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#qoderBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+<!-- Outer Q Ring -->
+<circle cx="32" cy="31" r="15" fill="none" stroke="url(#qoderQ)" stroke-width="4.2"/>
+<!-- Code brackets inside Q -->
+<path d="M 27 26 L 23 31 L 27 36" fill="none" stroke="#ECEFF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 37 26 L 41 31 L 37 36" fill="none" stroke="#ECEFF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Q kick tail / spark -->
+<path d="M 38 37 L 46 45" stroke="#00D2FF" stroke-width="4.5" stroke-linecap="round"/>
+<circle cx="46" cy="45" r="2.2" fill="#ECEFF4"/>
+</svg>''',
+
+    # 25. Limine Snapper Sync (Btrfs Snapshot Recovery & Boot Restore)
+    "LimineSnapperSync": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="lssBg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0E141D"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#lssBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+<!-- Camera Snapshot Shield Outline -->
+<path d="M 32 16 L 45 22 L 45 35 C 45 43 39 48 32 50 C 25 48 19 43 19 35 L 19 22 Z" fill="#151D2A" stroke="#25344A" stroke-width="2"/>
+<!-- Circular Rollback Sync Arrows -->
+<path d="M 32 23 A 9 9 0 1 0 41 32" fill="none" stroke="#00D2FF" stroke-width="2.8" stroke-linecap="round"/>
+<polygon points="38,20 42,25 36,26" fill="#00D2FF"/>
+<!-- Center Snapshot Node -->
+<circle cx="32" cy="32" r="3" fill="#88C0D0"/>
+</svg>''',
+
+    # 26. PI Desktop (Developer App)
+    "pi-desktop": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="piBg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0E141D"/>
+  </linearGradient>
+  <linearGradient id="piGrad" x1="20" y1="20" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#00D2FF"/>
+    <stop offset="100%" stop-color="#88C0D0"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#piBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+<!-- Pi Symbol Topology -->
+<path d="M 18 24 C 24 24 40 24 46 24" stroke="url(#piGrad)" stroke-width="4.5" stroke-linecap="round"/>
+<path d="M 26 24 L 26 44 C 26 44 26 46 23 46" stroke="url(#piGrad)" stroke-width="4.5" stroke-linecap="round"/>
+<path d="M 38 24 L 38 42 C 38 45 42 46 45 44" stroke="url(#piGrad)" stroke-width="4.5" stroke-linecap="round"/>
+<circle cx="20" cy="24" r="2" fill="#ECEFF4"/>
+<circle cx="44" cy="24" r="2" fill="#ECEFF4"/>
+</svg>''',
+
+    # 27. T3 Code (AI/Web Developer Editor)
+    "t3code": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="t3Bg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0E141D"/>
+  </linearGradient>
+  <linearGradient id="t3Cyan" x1="18" y1="20" x2="46" y2="44" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#00D2FF"/>
+    <stop offset="100%" stop-color="#88C0D0"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#t3Bg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+<!-- "T" Monogram -->
+<path d="M 18 24 L 32 24 M 25 24 L 25 44" stroke="url(#t3Cyan)" stroke-width="4.2" stroke-linecap="round"/>
+<!-- "3" Monogram -->
+<path d="M 35 24 C 40 24 45 25 45 30 C 45 33 42 34 38 34 C 43 34 46 36 46 40 C 46 45 39 45 34 44" fill="none" stroke="#ECEFF4" stroke-width="4" stroke-linecap="round"/>
+<circle cx="25" cy="44" r="2" fill="#00D2FF"/>
+</svg>''',
 }
 
 DEV_AI_APP_ALIASES = {
     "androidstudio": "android-studio",
+    "android-studio": "android-studio",
+    "Android_Studio": "android-studio",
+    "studio": "android-studio",
     "com.google.AndroidStudio": "android-studio",
+    "t3code": "t3code",
+    "t3-code": "t3code",
+    "com.t3tools.T3Code": "t3code",
+    "com.t3tools.T3Code.desktop": "t3code",
     "cursor-ide": "cursor",
     "cursor-bin": "cursor",
     "claude-ai": "claude",
     "anthropic-claude": "claude",
     "openai-codex": "codex",
     "codex-editor": "codex",
+    "qoder": "qoder",
     "qoder-ide": "qoder",
+    "com.qoder.app.stable": "qoder",
+    "c79147cee8ede1984bce7a5b18094090c566746c0dbe5f892dbc69a0b0521144": "qoder",
+    "LimineSnapperSync": "LimineSnapperSync",
+    "limine-snapper-restore": "LimineSnapperSync",
+    "snapper": "LimineSnapperSync",
+    "pi-desktop": "pi-desktop",
+    "pi-desktop-icon": "pi-desktop",
     "io.github.alainm23.paseo": "paseo",
     "windsurf-editor": "windsurf",
     "codeium-windsurf": "windsurf",
