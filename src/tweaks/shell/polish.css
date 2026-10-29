@@ -164,16 +164,17 @@
   margin: 6px;
   border-radius: 18px;
   background-color: transparent;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 
 .notification-banner .message,
 .message {
   border-radius: 18px;
   background-color: #151d2a;
-  border: 1px solid #25344a;
+  border: 1px solid rgba(136, 192, 208, 0.25);
   padding: 10px 14px;
   color: #eceff4;
+  box-shadow: none;
 }
 
 .message:second-in-stack {
@@ -281,4 +282,60 @@
 .notification-banner button:active {
   background-color: #88c0d0;
   color: #090d14;
+}
+
+/* MPRIS Media Player Card & Playback Controls */
+.media-message .message-icon {
+  border-radius: 12px !important;
+  border: 1px solid #25344a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.media-message .message-icon.message-themed-icon {
+  icon-size: 36px !important;
+  background-color: rgba(136, 192, 208, 0.12);
+  color: #88c0d0;
+}
+
+.media-message .message-content .message-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #eceff4;
+}
+
+.media-message .message-content .message-secondary-bin {
+  font-weight: 500;
+  font-size: 12px;
+  color: #88c0d0;
+}
+
+.message-media-control {
+  padding: 4px 16px;
+  margin: 0 3px;
+  border-radius: 10px;
+  color: #eceff4;
+  background-color: #1a2536;
+  border: 1px solid #25344a;
+  transition-duration: 150ms;
+}
+
+.message-media-control:hover {
+  background-color: rgba(136, 192, 208, 0.20);
+  border-color: #88c0d0;
+  color: #ffffff;
+}
+
+.message-media-control:active {
+  background-color: #88c0d0;
+  border-color: #88c0d0;
+  color: #090d14;
+}
+
+.message-media-control:insensitive {
+  color: #7b88a1;
+  opacity: 0.45;
+}
+
+.message-media-control StIcon {
+  icon-size: 16px;
 }

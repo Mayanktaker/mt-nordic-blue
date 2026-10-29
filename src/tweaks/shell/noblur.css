@@ -31,9 +31,16 @@
   backdrop-filter: none !important;
 }
 
-.notification-banner,
-.notification-banner .message {
+.notification-banner {
+  background-color: transparent !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+  border: none !important;
+}
+
+.notification-banner .message,
+.message {
   background-color: #151d2a !important;
   backdrop-filter: none !important;
-  border: 1px solid #25344a !important;
+  border: 1px solid rgba(136, 192, 208, 0.25) !important;
+  box-shadow: none !important;
 }
