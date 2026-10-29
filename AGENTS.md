@@ -18,6 +18,7 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
   - `nordic-polar-night.json` (Deep Polar Night #0E141D, default)
   - `nordic-classic.json` (Classic Nord Spec #2E3440)
   - `nordic-cyber-frost.json` (Arctic Cyber Frost #0A0E17 / #00D2FF)
+  - `nordic-snow-storm.json` (Nordic Snow Storm Light #E5E9F0 / #ECEFF4)
 - Shell theme is derived from upstream GNOME Shell CSS per major version, recolored via `src/shell/` maps (never hand-edit generated CSS).
 - Icons & Cursors dynamically draw gradients and geometry fills from `palette/tokens.json`.
 
