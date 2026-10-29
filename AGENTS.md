@@ -19,7 +19,8 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
   - `nordic-classic.json` (Classic Nord Spec #2E3440)
   - `nordic-cyber-frost.json` (Arctic Cyber Frost #0A0E17 / #00D2FF)
   - `nordic-snow-storm.json` (Nordic Snow Storm Light #E5E9F0 / #ECEFF4)
-- Shell theme is derived from upstream GNOME Shell CSS per major version, recolored via `src/shell/` maps (never hand-edit generated CSS).
+- Shell theme is derived from upstream GNOME Shell CSS per major version, recolored via `src/shell/` maps into both **MT Nordic Blue** (`~/.themes/MT-Nordic-Blue/gnome-shell/`) and **MT Nordic Light** (`~/.themes/MT-Nordic-Light/gnome-shell/`) (never hand-edit generated CSS).
+- Wallpapers: 4K 3D Glacial Silk Bloom suite generated procedurally via Cairo vectors (`tools/wallpaper/generate.py` for dark and `tools/wallpaper/process_light.py` for light) with inverted high-contrast adaptive pairing in GNOME Settings.
 - Icons & Cursors dynamically draw gradients and geometry fills from `palette/tokens.json`.
 
 ## Commands

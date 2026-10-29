@@ -1,0 +1,347 @@
+/* MT Nordic Light (Glacial Snow Storm) — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell modern polish for Light theme: quick settings, sliders, dash, popovers */
+
+/* Quick Settings: modern pill tiles and soft ambient daylight glow */
+.quick-settings {
+  padding: 18px;
+}
+
+/* Standalone quick toggles */
+.quick-toggle:not(.quick-toggle-has-menu .quick-toggle) {
+  border-radius: 14px;
+  background-color: #eceff4;
+  border: 1px solid #d8dee9;
+  color: #2e3440;
+  font-weight: 600;
+  transition-duration: 150ms;
+}
+
+.quick-toggle:not(.quick-toggle-has-menu .quick-toggle):hover {
+  background-color: #e1e6ee;
+  border-color: #4c719c;
+}
+
+.quick-toggle:not(.quick-toggle-has-menu .quick-toggle):checked {
+  background-color: #4c719c !important;
+  color: #ffffff !important;
+  border-color: #4c719c !important;
+  box-shadow: 0 2px 10px rgba(76, 113, 156, 0.35);
+}
+
+.quick-toggle:not(.quick-toggle-has-menu .quick-toggle):checked:hover {
+  background-color: #5e81ac !important;
+  box-shadow: 0 4px 14px rgba(76, 113, 156, 0.45);
+}
+
+/* Quick toggles with submenus (Network, Power Mode, Bluetooth) */
+.quick-toggle-has-menu {
+  border-radius: 14px;
+}
+
+.quick-toggle-has-menu .quick-toggle {
+  border-radius: 14px 0 0 14px !important;
+  background-color: #eceff4;
+  border: 1px solid #d8dee9;
+  border-right: none;
+  color: #2e3440;
+  font-weight: 600;
+  transition-duration: 150ms;
+}
+
+.quick-toggle-has-menu .quick-toggle:hover {
+  background-color: #e1e6ee;
+  border-color: #4c719c;
+}
+
+.quick-toggle-has-menu .quick-toggle:checked {
+  background-color: #4c719c !important;
+  color: #ffffff !important;
+  border-color: #4c719c !important;
+}
+
+.quick-toggle-has-menu .quick-toggle:checked:hover {
+  background-color: #5e81ac !important;
+}
+
+.quick-toggle-has-menu .quick-toggle-separator {
+  width: 1px;
+  background-color: #d8dee9;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button {
+  border-radius: 0 14px 14px 0 !important;
+  background-color: #eceff4;
+  border: 1px solid #d8dee9;
+  border-left: none;
+  color: #2e3440;
+  padding: 0.4em 0.8em;
+  transition-duration: 150ms;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button:hover {
+  background-color: #e1e6ee;
+  border-color: #4c719c;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button:checked {
+  background-color: #5e81ac !important;
+  color: #ffffff !important;
+  border-color: #4c719c !important;
+}
+
+/* Top panel: status indicators alignment and spacing */
+#panel .panel-button {
+  -natural-hpadding: 9px;
+  -minimum-hpadding: 6px;
+}
+
+#panel .panel-button .panel-status-indicators-box {
+  spacing: 3px;
+}
+
+#panel .panel-button .panel-status-indicators-box > .system-status-icon {
+  padding: 0 1px;
+  margin: 0 1px;
+}
+
+/* Sliders: volume, brightness with rounded trough and glowing handle */
+.slider {
+  height: 20px;
+  -barlevel-height: 8px;
+  -barlevel-background-color: #d8dee9;
+  -barlevel-active-background-color: #4c719c;
+  -barlevel-overdrive-color: #bf616a;
+  -barlevel-overdrive-separator-width: 2px;
+  -slider-handle-radius: 8px;
+  color: #2e3440;
+}
+
+.slider:hover {
+  -barlevel-active-background-color: #5e81ac;
+}
+
+/* Dash: modern floating daylight pill dock */
+#dash .dash-background {
+  background-color: rgba(229, 233, 240, 0.92);
+  border: 1px solid rgba(76, 113, 156, 0.22);
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(46, 52, 64, 0.16);
+}
+
+#dash .app-well-app-running-dot {
+  background-color: #4c719c;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  margin-bottom: 2px;
+}
+
+/* Popover menus & Calendar */
+.popup-menu-content {
+  border-radius: 18px;
+  background-color: #f4f7fb;
+  box-shadow: 0 8px 30px rgba(46, 52, 64, 0.18);
+  border: 1px solid #d8dee9;
+  color: #2e3440;
+}
+
+.calendar .calendar-day.calendar-today {
+  background-color: #4c719c !important;
+  color: #ffffff !important;
+  border-radius: 999px;
+  font-weight: bold;
+}
+
+/* Notifications & OSD cards */
+.osd-window, .workspace-switcher {
+  border-radius: 20px;
+  background-color: #eceff4;
+  border: 1px solid rgba(76, 113, 156, 0.22);
+  box-shadow: 0 8px 28px rgba(46, 52, 64, 0.18);
+  color: #2e3440;
+}
+
+/* Notifications & Message Tray Banners */
+.notification-banner {
+  min-height: 64px;
+  width: 34em;
+  margin: 6px;
+  border-radius: 18px;
+  background-color: transparent;
+  box-shadow: 0 6px 18px rgba(46, 52, 64, 0.14);
+}
+
+.notification-banner .message,
+.message {
+  border-radius: 18px;
+  background-color: #eceff4;
+  border: 1px solid #d8dee9;
+  padding: 10px 14px;
+  color: #2e3440;
+  box-shadow: none;
+}
+
+.message:second-in-stack {
+  background-color: #e5e9f0;
+  border-color: #d8dee9;
+}
+
+.message:lower-in-stack {
+  background-color: #d8dee9;
+  border-color: #caced8;
+}
+
+.message .message-header {
+  spacing: 8px;
+  color: #4c566a;
+  padding: 2px 4px;
+}
+
+.message .message-header .message-source-icon {
+  icon-size: 1.15em;
+  color: #4c719c;
+}
+
+.message .message-header .message-header-content .message-source-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #2e3440;
+}
+
+.message .message-header .message-header-content .event-time {
+  font-size: 11px;
+  color: #8e99ac;
+}
+
+.message .message-header .message-close-button {
+  border-radius: 999px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 4px;
+  color: #4c566a;
+  background-color: rgba(76, 113, 156, 0.10);
+  border: 1px solid rgba(76, 113, 156, 0.18);
+  transition-duration: 150ms;
+}
+
+.message .message-header .message-close-button:hover {
+  background-color: rgba(76, 113, 156, 0.25);
+  border-color: #4c719c;
+  color: #2e3440;
+}
+
+.message .message-header .message-close-button:active {
+  background-color: #4c719c;
+  color: #ffffff;
+}
+
+.message .message-box {
+  padding: 4px;
+  spacing: 12px;
+}
+
+.message .message-box .message-icon {
+  border-radius: 10px;
+  border: 1px solid #d8dee9;
+}
+
+.message .message-box .message-content .message-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #2e3440;
+}
+
+.message .message-box .message-content .message-secondary-bin {
+  font-size: 12px;
+  color: #4c566a;
+}
+
+/* Notification Action Buttons */
+.message .message-action-bin {
+  padding-top: 8px;
+  spacing: 8px;
+}
+
+.message .message-action-bin button,
+.notification-banner button {
+  border-radius: 12px;
+  min-height: 36px;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 13px;
+  background-color: #d8dee9;
+  border: 1px solid #caced8;
+  color: #2e3440;
+  transition-duration: 150ms;
+}
+
+.message .message-action-bin button:hover,
+.notification-banner button:hover {
+  background-color: #4c719c;
+  border-color: #4c719c;
+  color: #ffffff;
+}
+
+.message .message-action-bin button:active,
+.notification-banner button:active {
+  background-color: #5e81ac;
+  border-color: #5e81ac;
+  color: #ffffff;
+}
+
+/* MPRIS Media Player Card & Playback Controls */
+.media-message .message-icon {
+  border-radius: 14px !important;
+  border: 1px solid #d8dee9;
+  box-shadow: 0 4px 14px rgba(46, 52, 64, 0.12);
+}
+
+.media-message .message-icon.message-themed-icon {
+  icon-size: 38px !important;
+  background-color: rgba(76, 113, 156, 0.12);
+  color: #4c719c;
+}
+
+.media-message .message-content .message-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #2e3440;
+}
+
+.media-message .message-content .message-secondary-bin {
+  font-weight: 500;
+  font-size: 12px;
+  color: #4c719c;
+}
+
+.message-media-control {
+  padding: 6px 18px;
+  margin: 0 4px;
+  min-height: 34px;
+  border-radius: 12px;
+  color: #2e3440;
+  background-color: #d8dee9;
+  border: 1px solid #caced8;
+  transition-duration: 150ms;
+}
+
+.message-media-control:hover {
+  background-color: #4c719c;
+  border-color: #4c719c;
+  color: #ffffff;
+}
+
+.message-media-control:active {
+  background-color: #5e81ac;
+  border-color: #5e81ac;
+  color: #ffffff;
+}
+
+.message-media-control:insensitive {
+  color: #8e99ac;
+  opacity: 0.45;
+}
+
+.message-media-control StIcon {
+  icon-size: 16px;
+}

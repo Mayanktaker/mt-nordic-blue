@@ -66,7 +66,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
 <wallpapers>
   <!-- Inverted High-Contrast Adaptive Pairs (Dark Wallpaper on Light Theme / Light Wallpaper on Dark Theme) -->
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Fjord Canopy (Inverted High-Contrast)</name>
+    <name>{DISPLAY_NAME} Glacial Silk Bloom Prime (Inverted High-Contrast)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-1-3840x2160.png</filename>
     <filename-dark>{w_dir}/light/{TECH_SLUG}-canopy-dawn-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -75,7 +75,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Aurora Rift (Inverted High-Contrast)</name>
+    <name>{DISPLAY_NAME} Aurora Ribbon Drift (Inverted High-Contrast)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-2-3840x2160.png</filename>
     <filename-dark>{w_dir}/light/{TECH_SLUG}-celestial-rift-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -84,7 +84,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Glacial Flow (Inverted High-Contrast)</name>
+    <name>{DISPLAY_NAME} Glacial Fold Sanctuary (Inverted High-Contrast)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-3-3840x2160.png</filename>
     <filename-dark>{w_dir}/light/{TECH_SLUG}-cosmic-dawn-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -93,7 +93,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Topographic Frost (Inverted High-Contrast)</name>
+    <name>{DISPLAY_NAME} Ascending Frost Crest (Inverted High-Contrast)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-4-3840x2160.png</filename>
     <filename-dark>{w_dir}/light/{TECH_SLUG}-botanical-horizon-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -104,7 +104,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
 
   <!-- Adaptive Natural Light/Dark Pairs (GNOME 42+ automatic switch) -->
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Fjord Canopy (Adaptive Day/Night)</name>
+    <name>{DISPLAY_NAME} Glacial Silk Bloom Prime (Adaptive Day/Night)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-canopy-dawn-3840x2160.png</filename>
     <filename-dark>{w_dir}/{TECH_SLUG}-art-1-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -113,7 +113,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Aurora Rift (Adaptive Light/Dark)</name>
+    <name>{DISPLAY_NAME} Aurora Ribbon Drift (Adaptive Light/Dark)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-celestial-rift-3840x2160.png</filename>
     <filename-dark>{w_dir}/{TECH_SLUG}-art-2-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -122,7 +122,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Glacial Flow (Adaptive Light/Dark)</name>
+    <name>{DISPLAY_NAME} Glacial Fold Sanctuary (Adaptive Light/Dark)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-cosmic-dawn-3840x2160.png</filename>
     <filename-dark>{w_dir}/{TECH_SLUG}-art-3-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -131,7 +131,7 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Topographic Frost (Adaptive Light/Dark)</name>
+    <name>{DISPLAY_NAME} Ascending Frost Crest (Adaptive Light/Dark)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-botanical-horizon-3840x2160.png</filename>
     <filename-dark>{w_dir}/{TECH_SLUG}-art-4-3840x2160.png</filename-dark>
     <options>zoom</options>
@@ -152,28 +152,28 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
 
   <!-- Standalone 4K Dark Artworks -->
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Fjord Canopy (Dark 4K)</name>
+    <name>{DISPLAY_NAME} Glacial Silk Bloom Prime (Dark 4K)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-1-3840x2160.png</filename>
     <options>zoom</options>
     <pcolor>#0E141D</pcolor>
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Radiant Aurora (Dark 4K)</name>
+    <name>{DISPLAY_NAME} Aurora Ribbon Drift (Dark 4K)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-2-3840x2160.png</filename>
     <options>zoom</options>
     <pcolor>#0E141D</pcolor>
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Glacial Flow (Dark 4K)</name>
+    <name>{DISPLAY_NAME} Glacial Fold Sanctuary (Dark 4K)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-3-3840x2160.png</filename>
     <options>zoom</options>
     <pcolor>#0E141D</pcolor>
     <scolor>#0E141D</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Topographic Frost (Dark 4K)</name>
+    <name>{DISPLAY_NAME} Ascending Frost Crest (Dark 4K)</name>
     <filename>{w_dir}/{TECH_SLUG}-art-4-3840x2160.png</filename>
     <options>zoom</options>
     <pcolor>#0E141D</pcolor>
@@ -182,22 +182,33 @@ def build_gnome_properties_xml(wallpaper_base_dir: str) -> str:
 
   <!-- Standalone 4K Light Artworks -->
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Canopy Dawn (Light 4K)</name>
+    <name>{DISPLAY_NAME} Glacial Snow Storm Bloom (Light 4K)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-canopy-dawn-3840x2160.png</filename>
     <options>zoom</options>
     <pcolor>#E5E9F0</pcolor>
     <scolor>#E5E9F0</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Celestial Rift (Light 4K)</name>
+    <name>{DISPLAY_NAME} Daylight Aurora Ribbon Drift (Light 4K)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-celestial-rift-3840x2160.png</filename>
     <options>zoom</options>
     <pcolor>#E5E9F0</pcolor>
     <scolor>#E5E9F0</scolor>
   </wallpaper>
   <wallpaper deleted="false">
-    <name>{DISPLAY_NAME} Cosmic Dawn (Light 4K)</name>
+    <name>{DISPLAY_NAME} Glacial Petal Core (Light 4K)</name>
     <filename>{w_dir}/light/{TECH_SLUG}-cosmic-dawn-3840x2160.png</filename>
+    <options>zoom</options>
+    <pcolor>#E5E9F0</pcolor>
+    <scolor>#E5E9F0</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>{DISPLAY_NAME} Ascending Snow Storm Crest (Light 4K)</name>
+    <filename>{w_dir}/light/{TECH_SLUG}-botanical-horizon-3840x2160.png</filename>
+    <options>zoom</options>
+    <pcolor>#E5E9F0</pcolor>
+    <scolor>#E5E9F0</scolor>
+  </wallpaper>
     <options>zoom</options>
     <pcolor>#E5E9F0</pcolor>
     <scolor>#E5E9F0</scolor>

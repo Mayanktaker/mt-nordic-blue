@@ -501,6 +501,21 @@ if [ -d "${REPO_ROOT}/extras" ]; then
   cp -r "${REPO_ROOT}/extras/"* "${THEME_DIR}/extras/" 2>/dev/null || true
 fi
 
+# ---------- install dedicated MT-Nordic-Light into ~/.themes/MT-Nordic-Light ----------
+LIGHT_THEME_DIR="${HOME}/.themes/MT-Nordic-Light"
+mkdir -p "${LIGHT_THEME_DIR}/gnome-shell"
+mkdir -p "${LIGHT_THEME_DIR}/gtk-4.0"
+cp "${REPO_ROOT}/src/index-light.theme" "${LIGHT_THEME_DIR}/index.theme"
+if [ -d "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}-light" ]; then
+  cp -r "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}-light/"* "${LIGHT_THEME_DIR}/gnome-shell/"
+  if [ -f "${REPO_ROOT}/src/tweaks/shell/polish-light.css" ]; then
+    cat "${REPO_ROOT}/src/tweaks/shell/polish-light.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+  fi
+fi
+cp -r "${REPO_ROOT}/build/theme/gtk-3.0" "${LIGHT_THEME_DIR}/"
+cp "${THEME_DIR}/gtk-4.0/gtk.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
+cp "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
+
 # ---------- apply base polish layer ----------
 cat "${REPO_ROOT}/src/tweaks/shell/polish.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
 if [ -f "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" ]; then
@@ -700,45 +715,46 @@ fi
 
 # ---------- optional: wallpaper (explicit opt-in) ----------
 if [ "${WANT_WALLPAPER}" -eq 1 ] && [ "${WALLPAPER_CHOICE}" != "none" ]; then
-  WP_SRC=""
+  WP_DARK_SRC=""
+  WP_LIGHT_SRC=""
   case "${WALLPAPER_CHOICE}" in
-    1|fjord|canopy)
-      WP_SRC="${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-art-1-3840x2160.png"
-      WP_NAME="mt-nordic-blue-art-1.png"
+    1|bloom|prime|canopy|fjord)
+      WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-1-3840x2160.png"
+      WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-canopy-dawn-3840x2160.png"
       ;;
-    2|aurora)
-      WP_SRC="${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-art-2-3840x2160.png"
-      WP_NAME="mt-nordic-blue-art-2.png"
+    2|aurora|drift)
+      WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-2-3840x2160.png"
+      WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-celestial-rift-3840x2160.png"
       ;;
-    3|flow)
-      WP_SRC="${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-art-3-3840x2160.png"
-      WP_NAME="mt-nordic-blue-art-3.png"
+    3|sanctuary|macro|flow)
+      WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-3-3840x2160.png"
+      WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-cosmic-dawn-3840x2160.png"
       ;;
-    4|frost|topographic)
-      WP_SRC="${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-art-4-3840x2160.png"
-      WP_NAME="mt-nordic-blue-art-4.png"
+    4|crest|frost|topographic)
+      WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-4-3840x2160.png"
+      WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-botanical-horizon-3840x2160.png"
       ;;
     all)
-      WP_SRC="${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-art-1-3840x2160.png"
-      WP_NAME="mt-nordic-blue-art-1.png"
-      mkdir -p "${HOME}/Pictures/wallpapers-mt-nordic-blue"
+      WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-1-3840x2160.png"
+      WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-canopy-dawn-3840x2160.png"
+      mkdir -p "${HOME}/Pictures/wallpapers-mt-nordic-blue/light"
       cp "${REPO_ROOT}/wallpaper/dist/"*.png "${HOME}/Pictures/wallpapers-mt-nordic-blue/" 2>/dev/null || true
-      echo "all 4 wallpapers copied to ~/Pictures/wallpapers-mt-nordic-blue/"
+      cp "${REPO_ROOT}/wallpaper/dist/light/"*.png "${HOME}/Pictures/wallpapers-mt-nordic-blue/light/" 2>/dev/null || true
+      echo "all 4K wallpapers (dark & light) copied to ~/Pictures/wallpapers-mt-nordic-blue/"
       ;;
     *)
-      WP_SRC="${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-3840x2160.png"
-      WP_NAME="mt-nordic-blue.png"
+      WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-1-3840x2160.png"
+      WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-canopy-dawn-3840x2160.png"
       ;;
   esac
 
-  if [ -n "${WP_SRC}" ] && [ -f "${WP_SRC}" ]; then
-    DEST="${HOME}/Pictures/${WP_NAME}"
-    mkdir -p "${HOME}/Pictures"
-    cp "${WP_SRC}" "${DEST}"
-    cp "${WP_SRC}" "${HOME}/.config/background" 2>/dev/null || true
-    gsettings set org.gnome.desktop.background picture-uri "file://${DEST}" 2>/dev/null || true
-    gsettings set org.gnome.desktop.background picture-uri-dark "file://${DEST}" 2>/dev/null || true
-    echo "wallpaper applied: ${DEST}"
+  if [ -n "${WP_DARK_SRC}" ] && [ -f "${WP_DARK_SRC}" ]; then
+    # Inverted High-Contrast pairing: Dark wallpaper on Light mode, Light wallpaper on Dark mode
+    gsettings set org.gnome.desktop.background picture-uri "file://${WP_DARK_SRC}" 2>/dev/null || true
+    if [ -n "${WP_LIGHT_SRC}" ] && [ -f "${WP_LIGHT_SRC}" ]; then
+      gsettings set org.gnome.desktop.background picture-uri-dark "file://${WP_LIGHT_SRC}" 2>/dev/null || true
+    fi
+    echo "applied inverted high-contrast 4K Bloom wallpaper pairing: dark on light theme, light on dark theme"
   fi
 fi
 

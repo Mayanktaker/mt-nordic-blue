@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=MT-Nordic-Light
+Comment=MT Nordic Light — Glacial Snow Storm modular GNOME theme suite by Mayanktaker (https://mayanktaker.com)
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=MT-Nordic-Blue
+MetacityTheme=Adwaita
+IconTheme=MT-Nordic-Blue-Icons
+CursorTheme=MT-Nordic-Blue-Cursors
+ButtonLayout=:minimize,maximize,close

@@ -44,9 +44,9 @@ All text/accent pairs verified ≥4.5:1 on their backgrounds (most ≥9:1 to 16:
 - **Accent Flavors**: `frost` (#88C0D0), `glacier` (#81A1C1), `aurora` (#8FBCBB), `arctic` (#5E81AC), `cyber` (#00D2FF), `blaze` (#D08770).
 
 ## Wallpaper Generation Rules
-Original procedural 4K artworks generated via `tools/wallpaper/generate.py`:
-1. **Nordic Fjord & Glacial Peaks (Art 1)**: Photorealistic multi-octave fractal ridge (fBm) alpine peaks with slope shading, atmospheric valley mist, and calm reflective fjord water under starry polar night with cyan aurora glow.
-2. **Radiant Aurora Borealis (Art 2)**: Undulating harmonic curtain folds of electric cyber cyan, frost blue, and aurora teal over dark mountain horizon.
-3. **Glacial Flow & Topographic Contours (Art 3)**: Scandinavian alpine elevation isolines with multi-pass glowing arterial glacial rivers.
-4. **Nordic Cyber Horizon (Art 4)**: Retro-futuristic ground perspective grid vanishing into a glowing cyber cyan horizon with faceted ice crystal monoliths.
-Plus matching adaptive Light/Day counterparts (`tools/wallpaper/process_light.py`) and 24-hour dynamic cycle XML (`tools/wallpaper/generate_dynamic.py`).
+Procedural 4K (3840x2160) 3D Glacial Silk Bloom artworks generated via Cairo vectors and film grain in `tools/wallpaper/generate.py` (dark) and `tools/wallpaper/process_light.py` (light):
+1. **Glacial Silk Bloom Prime (Art 1)**: Majestic centered 3D folded silk rosette sculpture with 3 tiers of flowing ribbons, volumetric ambient cyan aura, and specular rim illumination on Polar Night.
+2. **Aurora Ribbon Drift (Art 2)**: Dynamic sweeping ribbons drifting in an S-curve across an auroral curtain veil with glowing ice filaments.
+3. **Glacial Fold Sanctuary (Art 3)**: Macro intimate perspective on the heart of the folded bloom with deep ambient occlusion and crystalline translucent edge reflections.
+4. **Ascending Frost Crest (Art 4)**: Architectural ascending helical ribbon swirls spiraling towards an arctic crest.
+Matching Scandinavian daylight Snow Storm counterparts (`tools/wallpaper/process_light.py`), inverted high-contrast adaptive pairing, and 24-hour dynamic timed cycle XML (`tools/wallpaper/generate_dynamic.py`).
