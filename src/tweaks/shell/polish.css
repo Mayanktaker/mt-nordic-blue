@@ -254,17 +254,17 @@
 
 /* Notification Action Buttons */
 .message .message-action-bin {
-  padding-top: 6px;
+  padding-top: 8px;
   spacing: 8px;
 }
 
 .message .message-action-bin button,
 .notification-banner button {
-  border-radius: 10px;
-  min-height: 30px;
-  padding: 4px 14px;
+  border-radius: 12px;
+  min-height: 36px;
+  padding: 8px 20px;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   background-color: #1a2536;
   border: 1px solid #25344a;
   color: #eceff4;
@@ -273,7 +273,7 @@
 
 .message .message-action-bin button:hover,
 .notification-banner button:hover {
-  background-color: rgba(136, 192, 208, 0.18);
+  background-color: rgba(136, 192, 208, 0.20);
   border-color: #88c0d0;
   color: #ffffff;
 }
@@ -281,18 +281,19 @@
 .message .message-action-bin button:active,
 .notification-banner button:active {
   background-color: #88c0d0;
+  border-color: #88c0d0;
   color: #090d14;
 }
 
 /* MPRIS Media Player Card & Playback Controls */
 .media-message .message-icon {
-  border-radius: 12px !important;
+  border-radius: 14px !important;
   border: 1px solid #25344a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
 .media-message .message-icon.message-themed-icon {
-  icon-size: 36px !important;
+  icon-size: 38px !important;
   background-color: rgba(136, 192, 208, 0.12);
   color: #88c0d0;
 }
@@ -310,9 +311,10 @@
 }
 
 .message-media-control {
-  padding: 4px 16px;
-  margin: 0 3px;
-  border-radius: 10px;
+  padding: 6px 18px;
+  margin: 0 4px;
+  min-height: 34px;
+  border-radius: 12px;
   color: #eceff4;
   background-color: #1a2536;
   border: 1px solid #25344a;
@@ -320,7 +322,7 @@
 }
 
 .message-media-control:hover {
-  background-color: rgba(136, 192, 208, 0.20);
+  background-color: rgba(136, 192, 208, 0.22);
   border-color: #88c0d0;
   color: #ffffff;
 }
