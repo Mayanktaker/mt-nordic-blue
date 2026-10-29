@@ -120,6 +120,18 @@ windowcontrols button:hover {
   color: #ffffff;
 }
 
+windowcontrols button.minimize:hover {
+  background-color: #ebcb8b;
+  border-color: #ebcb8b;
+  color: #090d14;
+}
+
+windowcontrols button.maximize:hover {
+  background-color: #a3be8c;
+  border-color: #a3be8c;
+  color: #090d14;
+}
+
 windowcontrols button.close:hover {
   background-color: #bf616a;
   border-color: #bf616a;
@@ -128,6 +140,14 @@ windowcontrols button.close:hover {
 
 windowcontrols button:active {
   background-color: rgba(136, 192, 208, 0.35);
+}
+
+windowcontrols button image,
+windowcontrols button picture,
+headerbar button image,
+headerbar button picture {
+  color: #eceff4;
+  -gtk-icon-palette: default;
 }
 
 /* =========================================================================

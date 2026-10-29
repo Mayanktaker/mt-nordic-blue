@@ -1,9 +1,9 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="32" cy="32" r="24" fill="#151D2A" stroke="#25344A" stroke-width="1.5"/>
-<circle cx="32" cy="32" r="15" fill="#202D40" stroke="{COLOR_ACCENT}" stroke-width="3"/>
-<circle cx="32" cy="32" r="6" fill="{COLOR_ACCENT}"/>
-<rect x="30" y="10" width="4" height="8" rx="2" fill="{COLOR_ACCENT}"/>
-<rect x="30" y="46" width="4" height="8" rx="2" fill="{COLOR_ACCENT}"/>
-<rect x="10" y="30" width="8" height="4" rx="2" fill="{COLOR_ACCENT}"/>
-<rect x="46" y="30" width="8" height="4" rx="2" fill="{COLOR_ACCENT}"/>
+<circle cx="32" cy="32" r="15" fill="#202D40" stroke="#88C0D0" stroke-width="3"/>
+<circle cx="32" cy="32" r="6" fill="#88C0D0"/>
+<rect x="30" y="10" width="4" height="8" rx="2" fill="#88C0D0"/>
+<rect x="30" y="46" width="4" height="8" rx="2" fill="#88C0D0"/>
+<rect x="10" y="30" width="8" height="4" rx="2" fill="#88C0D0"/>
+<rect x="46" y="30" width="8" height="4" rx="2" fill="#88C0D0"/>
 </svg>

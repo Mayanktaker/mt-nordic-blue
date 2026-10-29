@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <circle cx="3.5" cy="3.5" r="1.5" fill="currentColor" class="ColorScheme-Text"/>
+  <rect x="6.5" y="2.5" width="7.5" height="2" rx="0.8" fill="currentColor" class="ColorScheme-Text"/>
+  <circle cx="3.5" cy="8" r="1.5" fill="currentColor" class="ColorScheme-Text"/>
+  <rect x="6.5" y="7" width="7.5" height="2" rx="0.8" fill="currentColor" class="ColorScheme-Text"/>
+  <circle cx="3.5" cy="12.5" r="1.5" fill="currentColor" class="ColorScheme-Text"/>
+  <rect x="6.5" y="11.5" width="7.5" height="2" rx="0.8" fill="currentColor" class="ColorScheme-Text"/>
+</svg>

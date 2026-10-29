@@ -577,6 +577,32 @@ EXTENDED_APP_ICONS = {
 <line x1="40" y1="46" x2="40" y2="52" stroke="#88C0D0" stroke-width="2"/>
 </svg>''',
 
+    # 34. CachyOS Package Installer
+    "cachyos-pi": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="piBg" x1="32" y1="8" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#2E415A"/>
+    <stop offset="100%" stop-color="#182332"/>
+  </linearGradient>
+  <linearGradient id="cubeGrad1" x1="16" y1="20" x2="48" y2="44" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#88C0D0"/>
+    <stop offset="100%" stop-color="#5E81AC"/>
+  </linearGradient>
+  <linearGradient id="cubeGrad2" x1="20" y1="20" x2="44" y2="48" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#00D2FF"/>
+    <stop offset="100%" stop-color="#88C0D0"/>
+  </linearGradient>
+</defs>
+<rect x="8" y="8" width="48" height="48" rx="10" fill="url(#piBg)" stroke="#435C7E" stroke-width="1.5"/>
+<g transform="translate(32, 28) scale(0.65)">
+  <path d="M 0 -22 L 20 -11 L 0 0 L -20 -11 Z" fill="url(#cubeGrad2)" stroke="#182332" stroke-width="1.5"/>
+  <path d="M -20 -11 L 0 0 L 0 22 L -20 11 Z" fill="url(#cubeGrad1)" stroke="#182332" stroke-width="1.5"/>
+  <path d="M 20 -11 L 0 0 L 0 22 L 20 11 Z" fill="#2E415A" stroke="#182332" stroke-width="1.5"/>
+</g>
+<circle cx="43" cy="43" r="8" fill="#141D28" stroke="#00D2FF" stroke-width="1.5"/>
+<path d="M 43 39 L 43 47 M 39 43 L 47 43" stroke="#88C0D0" stroke-width="2" stroke-linecap="round"/>
+</svg>''',
+
     # 34. CoolerControl
     "org.coolercontrol.CoolerControl": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <defs>

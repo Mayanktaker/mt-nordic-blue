@@ -788,6 +788,10 @@ APP_ALIASES = {
     # LibreOffice suite
     "libreoffice-main": "libreoffice-startcenter",
     "libreoffice": "libreoffice-startcenter",
+    # CachyOS & System Installer
+    "cachyos-package-installer": "cachyos-pi",
+    "org.cachyos.PackageInstaller": "cachyos-pi",
+    "org.cachyos.cachyos-pi": "cachyos-pi",
 }
 
 # Merge extended application aliases for full desktop compatibility
@@ -1209,11 +1213,23 @@ def build_places() -> None:
             dst_png.symlink_to(f"{target}.png")
 
 def build_apps() -> None:
-    # Build application icons.
+    # Build application icons with token-substituted colors.
     scalable_dir = OUT_DIR / "scalable" / "apps"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
-    for name, svg_content in APP_ICONS.items():
+    color_ctx = {
+        "COLOR_SURFACE": COLOR_SURFACE,
+        "COLOR_BG_DARKER": COLOR_BG_DARKER,
+        "COLOR_ACCENT": COLOR_ACCENT,
+        "COLOR_ACCENT_STRONG": COLOR_ACCENT_STRONG,
+        "COLOR_SURFACE_HOVER": COLOR_SURFACE_HOVER,
+        "COLOR_BG_BASE": COLOR_BG_BASE,
+        "COLOR_BORDER": COLOR_BORDER,
+    }
+
+    for name, svg_raw in APP_ICONS.items():
+        # Substitute palette tokens into SVG content.
+        svg_content = svg_raw.format(**color_ctx) if "{COLOR_" in svg_raw else svg_raw
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
             png_file = OUT_DIR / f"{size}x{size}" / "apps" / f"{name}.png"
@@ -1248,7 +1264,61 @@ def build_symbolic() -> None:
             if ctx in symbolic_dirs:
                 (symbolic_dirs[ctx] / filename).write_text(svg_content)
 
-    # 1. Write core and extended symbolic SVGs
+    # 1. Extract and bundle GNOME Shell internal symbolic icons
+    gs_res_path = Path("/usr/share/gnome-shell/gnome-shell-icons.gresource")
+    if gs_res_path.exists():
+        try:
+            res = Gio.Resource.load(str(gs_res_path))
+            Gio.resources_register(res)
+            for subpath, ctx_targets in [
+                ("/org/gnome/shell/icons/scalable/actions", ["actions", "status", "ui"]),
+                ("/org/gnome/shell/icons/scalable/status", ["status", "actions", "ui"]),
+            ]:
+                try:
+                    for icon in Gio.resources_enumerate_children(subpath, Gio.ResourceLookupFlags.NONE):
+                        try:
+                            data = Gio.resources_lookup_data(f"{subpath}/{icon}", Gio.ResourceLookupFlags.NONE)
+                            svg_text = data.get_data().decode("utf-8")
+                            svg_text = svg_text.replace("url(#gpa:foreground) rgb(0,0,0)", "currentColor")
+                            svg_text = svg_text.replace('#2e3436', 'currentColor').replace('#222', 'currentColor')
+                            write_icon(ctx_targets, icon, svg_text)
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
+        except Exception as e:
+            print(f"Notice: GNOME Shell icons resource lookup skipped ({e})")
+
+    # 2. Extract and bundle all Libadwaita internal symbolic icons (sanitizing grappa foreground)
+    try:
+        Adw.init()
+        adw_icons = Gio.resources_enumerate_children("/org/gnome/Adwaita/icons/scalable/actions", Gio.ResourceLookupFlags.NONE)
+        for icon in adw_icons:
+            try:
+                data = Gio.resources_lookup_data(f"/org/gnome/Adwaita/icons/scalable/actions/{icon}", Gio.ResourceLookupFlags.NONE)
+                svg_text = data.get_data().decode("utf-8")
+                # Sanitize grappa fallback black and adwaita hardcoded dark fills
+                svg_text = svg_text.replace("url(#gpa:foreground) rgb(0,0,0)", "currentColor")
+                svg_text = svg_text.replace('#2e3436', 'currentColor').replace('#222', 'currentColor')
+                write_icon(["actions", "status", "ui"], icon, svg_text)
+            except Exception:
+                pass
+    except Exception as e:
+        print(f"Notice: Adw resource lookup skipped ({e})")
+
+    # 3. Integrate Blur my Shell extension icons if present
+    bms_dir = Path.home() / ".local" / "share" / "gnome-shell" / "extensions" / "blur-my-shell@aunetx" / "icons" / "hicolor" / "scalable" / "actions"
+    if bms_dir.exists():
+        for bms_svg in bms_dir.glob("*.svg"):
+            write_icon(["actions", "status", "ui"], bms_svg.name, bms_svg.read_text())
+
+    # 4. Integrate Tiling Shell extension icons if present
+    ts_dir = Path.home() / ".local" / "share" / "gnome-shell" / "extensions" / "tilingshell@ferrarodomenico.com" / "icons"
+    if ts_dir.exists():
+        for ts_svg in ts_dir.glob("*.svg"):
+            write_icon(["actions", "status", "ui"], ts_svg.name, ts_svg.read_text())
+
+    # 5. Write curated MT-Nordic-Blue symbolic SVGs (takes precedence over extracted icons)
     for name, svg_content in SYMBOLIC_ICONS.items():
         ctx_list = ["status", "actions"]
 
@@ -1261,7 +1331,7 @@ def build_symbolic() -> None:
             ctx_list.append("places")
 
         # UI & Sidebar navigation
-        if any(k in name for k in ["sidebar", "split", "find", "menu", "pan-", "go-", "window-", "screenshot", "camera", "screencast", "record"]):
+        if any(k in name for k in ["sidebar", "split", "find", "menu", "pan-", "go-", "window-", "view-", "screenshot", "camera", "screencast", "record"]):
             ctx_list.append("ui")
 
         # Hardware devices
@@ -1274,7 +1344,7 @@ def build_symbolic() -> None:
 
         write_icon(list(set(ctx_list)), name, svg_content)
 
-    # Storage symbolic aliases
+    # 6. Storage symbolic aliases
     storage_sym_aliases = {
         "drive-symbolic": "drive-harddisk-symbolic",
         "drive-harddisk-system-symbolic": "drive-harddisk-root-symbolic",
@@ -1290,61 +1360,39 @@ def build_symbolic() -> None:
         if target in SYMBOLIC_ICONS:
             write_icon(["status", "actions", "devices"], alias, SYMBOLIC_ICONS[target])
 
-    # 2. Extract and bundle GNOME Shell internal symbolic icons
-    gs_res_path = Path("/usr/share/gnome-shell/gnome-shell-icons.gresource")
-    if gs_res_path.exists():
-        try:
-            res = Gio.Resource.load(str(gs_res_path))
-            Gio.resources_register(res)
-            for subpath, ctx_targets in [
-                ("/org/gnome/shell/icons/scalable/actions", ["actions", "status", "ui"]),
-                ("/org/gnome/shell/icons/scalable/status", ["status", "actions", "ui"]),
-            ]:
-                try:
-                    for icon in Gio.resources_enumerate_children(subpath, Gio.ResourceLookupFlags.NONE):
-                        try:
-                            data = Gio.resources_lookup_data(f"{subpath}/{icon}", Gio.ResourceLookupFlags.NONE)
-                            svg_text = data.get_data().decode("utf-8")
-                            write_icon(ctx_targets, icon, svg_text)
-                        except Exception:
-                            pass
-                except Exception:
-                    pass
-        except Exception as e:
-            print(f"Notice: GNOME Shell icons resource lookup skipped ({e})")
-
-    # 3. Extract and bundle all Libadwaita internal symbolic icons
-    try:
-        Adw.init()
-        adw_icons = Gio.resources_enumerate_children("/org/gnome/Adwaita/icons/scalable/actions", Gio.ResourceLookupFlags.NONE)
-        for icon in adw_icons:
-            try:
-                data = Gio.resources_lookup_data(f"/org/gnome/Adwaita/icons/scalable/actions/{icon}", Gio.ResourceLookupFlags.NONE)
-                svg_text = data.get_data().decode("utf-8")
-                write_icon(["actions", "status", "ui"], icon, svg_text)
-            except Exception:
-                pass
-    except Exception as e:
-        print(f"Notice: Adw resource lookup skipped ({e})")
-
-    # 4. Integrate Blur my Shell extension icons if present
-    bms_dir = Path.home() / ".local" / "share" / "gnome-shell" / "extensions" / "blur-my-shell@aunetx" / "icons" / "hicolor" / "scalable" / "actions"
-    if bms_dir.exists():
-        for bms_svg in bms_dir.glob("*.svg"):
-            write_icon(["actions", "status", "ui"], bms_svg.name, bms_svg.read_text())
-
-    # 5. Integrate Tiling Shell extension icons if present
-    ts_dir = Path.home() / ".local" / "share" / "gnome-shell" / "extensions" / "tilingshell@ferrarodomenico.com" / "icons"
-    if ts_dir.exists():
-        for ts_svg in ts_dir.glob("*.svg"):
-            write_icon(["actions", "status", "ui"], ts_svg.name, ts_svg.read_text())
+    # 7. Navigation & UI symbolic aliases
+    ui_sym_aliases = {
+        "view-sidebar-start-symbolic": "sidebar-show-symbolic",
+        "view-sidebar-start-symbolic-rtl": "sidebar-show-symbolic-rtl",
+        "view-sidebar-end-symbolic": "sidebar-show-right-symbolic",
+        "view-sidebar-end-symbolic-rtl": "sidebar-show-right-symbolic-rtl",
+        "window-minimize": "window-minimize-symbolic",
+        "window-maximize": "window-maximize-symbolic",
+        "window-restore": "window-restore-symbolic",
+        "window-close": "window-close-symbolic",
+    }
+    for alias, target in ui_sym_aliases.items():
+        if target in SYMBOLIC_ICONS:
+            write_icon(["actions", "status", "ui"], alias, SYMBOLIC_ICONS[target])
 
 def build_devices() -> None:
     # Build hardware storage devices icons (HDD, SSD, USB external, Partition).
     scalable_dir = OUT_DIR / "scalable" / "devices"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
-    for name, svg_content in DEVICE_ICONS.items():
+    color_ctx = {
+        "COLOR_SURFACE": COLOR_SURFACE,
+        "COLOR_BG_DARKER": COLOR_BG_DARKER,
+        "COLOR_ACCENT": COLOR_ACCENT,
+        "COLOR_ACCENT_STRONG": COLOR_ACCENT_STRONG,
+        "COLOR_SURFACE_HOVER": COLOR_SURFACE_HOVER,
+        "COLOR_BG_BASE": COLOR_BG_BASE,
+        "COLOR_BORDER": COLOR_BORDER,
+    }
+
+    for name, svg_raw in DEVICE_ICONS.items():
+        # Substitute palette tokens into SVG content.
+        svg_content = svg_raw.format(**color_ctx) if "{COLOR_" in svg_raw else svg_raw
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
             png_file = OUT_DIR / f"{size}x{size}" / "devices" / f"{name}.png"
@@ -1365,11 +1413,23 @@ def build_devices() -> None:
             dst_png.symlink_to(f"{target}.png")
 
 def build_mimetypes() -> None:
-    # Build MIME type document icons.
+    # Build MIME type document icons with token-substituted colors.
     scalable_dir = OUT_DIR / "scalable" / "mimetypes"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
-    for name, svg_content in MIME_ICONS.items():
+    color_ctx = {
+        "COLOR_SURFACE": COLOR_SURFACE,
+        "COLOR_BG_DARKER": COLOR_BG_DARKER,
+        "COLOR_ACCENT": COLOR_ACCENT,
+        "COLOR_ACCENT_STRONG": COLOR_ACCENT_STRONG,
+        "COLOR_SURFACE_HOVER": COLOR_SURFACE_HOVER,
+        "COLOR_BG_BASE": COLOR_BG_BASE,
+        "COLOR_BORDER": COLOR_BORDER,
+    }
+
+    for name, svg_raw in MIME_ICONS.items():
+        # Substitute palette tokens into SVG content.
+        svg_content = svg_raw.format(**color_ctx) if "{COLOR_" in svg_raw else svg_raw
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
             png_file = OUT_DIR / f"{size}x{size}" / "mimetypes" / f"{name}.png"

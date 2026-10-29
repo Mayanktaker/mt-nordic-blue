@@ -1,8 +1,8 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="12" fill="{COLOR_BG_BASE}" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<rect x="18" y="14" width="28" height="36" rx="3" fill="{COLOR_SURFACE}" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<rect x="8" y="8" width="48" height="48" rx="12" fill="#202D40" stroke="#405878" stroke-width="2"/>
+<rect x="18" y="14" width="28" height="36" rx="3" fill="#2A3A52" stroke="#88C0D0" stroke-width="1.5"/>
 <polygon points="38,14 46,22 38,22" fill="#E5B580"/>
-<circle cx="32" cy="33" r="8" fill="{COLOR_BG_BASE}" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<circle cx="32" cy="33" r="8" fill="#202D40" stroke="#88C0D0" stroke-width="1.5"/>
 <path d="M 32 33 L 32 25 A 8 8 0 0 1 39 30 Z" fill="#E5B580"/>
-<path d="M 32 33 L 39 30 A 8 8 0 0 1 32 41 Z" fill="{COLOR_ACCENT_STRONG}"/>
+<path d="M 32 33 L 39 30 A 8 8 0 0 1 32 41 Z" fill="#A3D4E2"/>
 </svg>
