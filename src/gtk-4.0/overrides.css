@@ -246,97 +246,193 @@ headerbar button:checked {
 button {
   background-color: #1a2434;
   color: #eceff4;
-  border: 1px solid #25344a;
-  border-radius: 6px;
-  padding: 4px 10px;
-  min-height: 26px;
+  border: 1px solid rgba(136, 192, 208, 0.18);
+  border-radius: 8px;
+  padding: 4px 12px;
+  min-height: 28px;
   font-weight: 500;
   box-shadow: none;
-  transition: all 150ms ease-in-out;
+  transition: all 140ms ease-in-out;
 }
 
 button:hover {
-  background-color: #202d40;
-  border-color: #88c0d0;
+  background-color: #222f42;
+  border-color: rgba(136, 192, 208, 0.45);
   color: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.20);
 }
 
 button:active,
 button:checked {
-  background-color: #354a68;
+  background-color: #2b3d54;
   border-color: #88c0d0;
-  color: #eceff4;
+  color: #ffffff;
 }
 
-/* Linked / Segmented Buttons: shared borders without oversized overlapping pills */
-.linked:not(.vertical) > button,
-segmented-button > button {
+/* Segmented Buttons & Linked groups: modern recessed capsule track */
+segmented-button,
+.linked:not(.vertical) {
+  background-color: rgba(14, 20, 29, 0.65);
+  border: 1px solid rgba(136, 192, 208, 0.18);
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+segmented-button > button,
+.linked:not(.vertical) > button {
+  background-color: transparent;
+  color: #a0b2c6;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 4px 12px;
   min-height: 24px;
-  padding: 3px 10px;
-  border-radius: 0;
-  border-right: none;
-  box-shadow: none;
+  font-weight: 500;
+  box-shadow: none !important;
+  transition: all 140ms ease-in-out;
 }
 
-.linked:not(.vertical) > button:first-child,
-segmented-button > button:first-child {
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+segmented-button > button:hover,
+.linked:not(.vertical) > button:hover {
+  background-color: rgba(136, 192, 208, 0.12);
+  color: #ffffff;
 }
 
-.linked:not(.vertical) > button:last-child,
-segmented-button > button:last-child {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-right: 1px solid #25344a;
+segmented-button > button:checked,
+segmented-button > button:active,
+.linked:not(.vertical) > button:checked,
+.linked:not(.vertical) > button:active {
+  background-color: #25374e;
+  border: 1px solid rgba(136, 192, 208, 0.38) !important;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.30) !important;
+}
+
+.linked.vertical {
+  background-color: rgba(14, 20, 29, 0.65);
+  border: 1px solid rgba(136, 192, 208, 0.18);
+  border-radius: 8px;
+  padding: 3px;
 }
 
 .linked.vertical > button {
+  background-color: transparent;
+  color: #a0b2c6;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 4px 10px;
   min-height: 24px;
-  padding: 3px 8px;
-  border-radius: 0;
-  border-bottom: none;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
-.linked.vertical > button:first-child {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+.linked.vertical > button:hover {
+  background-color: rgba(136, 192, 208, 0.12);
+  color: #ffffff;
 }
 
-.linked.vertical > button:last-child {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-bottom: 1px solid #25344a;
-}
-
-.linked > button:checked,
-segmented-button > button:checked {
-  background-color: rgba(136, 192, 208, 0.25);
-  border-color: #88c0d0;
-  color: #eceff4;
+.linked.vertical > button:checked,
+.linked.vertical > button:active {
+  background-color: #25374e;
+  border: 1px solid rgba(136, 192, 208, 0.38) !important;
+  color: #ffffff;
   font-weight: 600;
 }
 
-/* Spinbutton compact controls */
+/* Spinbutton: unified rounded capsule control */
 spinbutton {
-  border-radius: 6px;
-  padding: 0;
+  background-color: #1a2434;
+  border: 1px solid rgba(136, 192, 208, 0.20);
+  border-radius: 8px;
+  padding: 2px 4px;
+  color: #eceff4;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.20);
+}
+
+spinbutton:focus-within {
+  border-color: #88c0d0;
+  box-shadow: 0 0 0 1px rgba(136, 192, 208, 0.35);
+}
+
+spinbutton > text {
+  min-width: 28px;
+  padding: 2px 8px;
+  font-weight: 500;
+  color: #eceff4;
+  background: transparent;
 }
 
 spinbutton > button {
-  min-height: 22px;
+  min-height: 24px;
   min-width: 24px;
-  padding: 2px 4px;
+  padding: 2px 5px;
+  border: none !important;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #a0b2c6;
+  box-shadow: none !important;
+  transition: all 120ms ease;
+}
+
+spinbutton > button:hover {
+  background-color: rgba(136, 192, 208, 0.18);
+  color: #ffffff;
+}
+
+spinbutton > button:active {
+  background-color: rgba(136, 192, 208, 0.32);
+  color: #88c0d0;
+}
+
+/* Dropdowns and comboboxes */
+dropdown > button,
+combobox > box > button.combo {
+  background-color: #1a2434;
+  border: 1px solid rgba(136, 192, 208, 0.20);
+  border-radius: 8px;
+  padding: 4px 10px;
+  min-height: 28px;
+  color: #eceff4;
+}
+
+dropdown > button:hover,
+combobox > box > button.combo:hover {
+  background-color: #222f42;
+  border-color: rgba(136, 192, 208, 0.45);
+  color: #ffffff;
+}
+
+/* ViewSwitcher / Tabs in headerbars (Installed | Browse) */
+viewswitcher button,
+headerbar viewswitcher button {
+  background: transparent;
   border: none;
-  box-shadow: none;
+  border-radius: 7px;
+  padding: 4px 14px;
+  min-height: 28px;
+  color: #9aaec4;
+  font-weight: 500;
+  transition: all 140ms ease;
+}
+
+viewswitcher button:hover,
+headerbar viewswitcher button:hover {
+  background-color: rgba(136, 192, 208, 0.10);
+  color: #ffffff;
+}
+
+viewswitcher button:checked,
+headerbar viewswitcher button:checked {
+  background-color: rgba(136, 192, 208, 0.20);
+  border: 1px solid rgba(136, 192, 208, 0.35);
+  color: #ffffff;
+  font-weight: 600;
 }
 
 /* Action and preference rows buttons compact fit */
 row button:not(.suggested-action):not(.destructive-action) {
-  min-height: 24px;
+  min-height: 26px;
   padding: 3px 8px;
+  border-radius: 7px;
 }
 
 /* Flat, image, circular, titlebar, and headerbar buttons retain compact dimensions */
