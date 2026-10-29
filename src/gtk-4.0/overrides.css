@@ -70,8 +70,29 @@ window.csd > headerbar,
   min-height: 44px;
   padding: 0 10px;
   box-shadow: none;
+}
+
+/* Standalone top-level window headerbars receive top rounded corners */
+window.background:not(.solid-csd) > headerbar,
+window.csd:not(.solid-csd) > headerbar {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+}
+
+/* In Libadwaita toolbarviews, headerbars inherit clean background and no conflicting border-radius */
+toolbarview > .top-bar headerbar,
+toolbarview > .bottom-bar headerbar,
+headerbar.flat {
+  background: none;
+  background-color: transparent;
+  border-bottom: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+toolbarview > .top-bar {
+  background-color: @headerbar_bg_color;
+  border-bottom: 1px solid @borders;
 }
 
 headerbar:backdrop,
@@ -444,6 +465,9 @@ ShellyConfirmDialog button#confirm_button:hover {
 /* =========================================================================
    4. Sidebars, Views, Lists & Form Elements
    ========================================================================= */
+overlay-split-view > .sidebar,
+navigation-split-view > .sidebar,
+.sidebar-pane,
 .navigation-sidebar,
 .navigation-sidebar:backdrop,
 placessidebar,
@@ -456,10 +480,47 @@ navigationview:backdrop {
   color: @sidebar_fg_color;
 }
 
+/* Full-height Nordic sidebar divider between sidebar and main window view */
+overlay-split-view > .sidebar,
+navigation-split-view > .sidebar,
+.sidebar-pane {
+  border-right: 1px solid @borders;
+}
+
+overlay-split-view > .sidebar:dir(rtl),
+navigation-split-view > .sidebar:dir(rtl),
+.sidebar-pane:dir(rtl) {
+  border-left: 1px solid @borders;
+  border-right: none;
+}
+
+/* Sidebar top-bar and headerbar: seamless full-height Nordic background */
+overlay-split-view > .sidebar toolbarview > .top-bar,
+navigation-split-view > .sidebar toolbarview > .top-bar,
+.sidebar-pane toolbarview > .top-bar {
+  background-color: @sidebar_bg_color;
+  color: @sidebar_fg_color;
+  border-bottom: 1px solid @borders;
+}
+
+overlay-split-view > .sidebar toolbarview > .top-bar headerbar,
+navigation-split-view > .sidebar toolbarview > .top-bar headerbar {
+  background-color: transparent;
+  border-bottom: none;
+  border-radius: 0;
+}
+
+/* Sidebar navigation item spacing: clean breathing room from the top bar */
+.navigation-sidebar {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
 .navigation-sidebar row,
 placessidebar row {
   color: @sidebar_fg_color;
-  border-radius: 6px;
+  border-radius: 8px;
+  min-height: 34px;
 }
 
 .navigation-sidebar row:hover,

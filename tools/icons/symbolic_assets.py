@@ -162,4 +162,84 @@ EXTENDED_SYMBOLIC_ICONS = {
     "window-close-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
   <path fill="currentColor" class="ColorScheme-Text" d="M 3.7 2.3 C 3.3 1.9 2.7 1.9 2.3 2.3 C 1.9 2.7 1.9 3.3 2.3 3.7 L 6.6 8 L 2.3 12.3 C 1.9 12.7 1.9 13.3 2.3 13.7 C 2.7 14.1 3.3 14.1 3.7 13.7 L 8 9.4 L 12.3 13.7 C 12.7 14.1 13.3 14.1 13.7 13.7 C 14.1 13.3 14.1 12.7 13.7 12.3 L 9.4 8 L 13.7 3.7 C 14.1 3.3 14.1 2.7 13.7 2.3 C 13.3 1.9 12.7 1.9 12.3 2.3 L 8 6.6 Z"/>
 </svg>''',
+
+    # ---------------------------------------------------------------------
+    # Nautilus Search, Progress & Menu Actions (High-Contrast Frost)
+    # ---------------------------------------------------------------------
+    "cancel-operation-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" d="M 3.7 2.3 C 3.3 1.9 2.7 1.9 2.3 2.3 C 1.9 2.7 1.9 3.3 2.3 3.7 L 6.6 8 L 2.3 12.3 C 1.9 12.7 1.9 13.3 2.3 13.7 C 2.7 14.1 3.3 14.1 3.7 13.7 L 8 9.4 L 12.3 13.7 C 12.7 14.1 13.3 14.1 13.7 13.7 C 14.1 13.3 14.1 12.7 13.7 12.3 L 9.4 8 L 13.7 3.7 C 14.1 3.3 14.1 2.7 13.7 2.3 C 13.3 1.9 12.7 1.9 12.3 2.3 L 8 6.6 Z"/>
+</svg>''',
+
+    "process-stop-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" d="M 3.7 2.3 C 3.3 1.9 2.7 1.9 2.3 2.3 C 1.9 2.7 1.9 3.3 2.3 3.7 L 6.6 8 L 2.3 12.3 C 1.9 12.7 1.9 13.3 2.3 13.7 C 2.7 14.1 3.3 14.1 3.7 13.7 L 8 9.4 L 12.3 13.7 C 12.7 14.1 13.3 14.1 13.7 13.7 C 14.1 13.3 14.1 12.7 13.7 12.3 L 9.4 8 L 13.7 3.7 C 14.1 3.3 14.1 2.7 13.7 2.3 C 13.3 1.9 12.7 1.9 12.3 2.3 L 8 6.6 Z"/>
+</svg>''',
+
+    "edit-find-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 6.5 1.5 C 3.74 1.5 1.5 3.74 1.5 6.5 C 1.5 9.26 3.74 11.5 6.5 11.5 C 7.74 11.5 8.87 11.05 9.76 10.3 L 13.23 13.77 C 13.62 14.16 14.25 14.16 14.64 13.77 C 15.03 13.38 15.03 12.75 14.64 12.36 L 11.17 8.89 C 11.38 8.16 11.5 7.35 11.5 6.5 C 11.5 3.74 9.26 1.5 6.5 1.5 Z M 3 6.5 C 3 4.57 4.57 3 6.5 3 C 8.43 3 10 4.57 10 6.5 C 10 8.43 8.43 10 6.5 10 C 4.57 10 3 8.43 3 6.5 Z"/>
+</svg>''',
+
+    "nautilus-folder-search-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 7.5 6.5 C 6.4 6.5 5.5 7.4 5.5 8.5 C 5.5 9.6 6.4 10.5 7.5 10.5 C 7.9 10.5 8.3 10.4 8.6 10.1 L 10.5 12 L 11.5 11 L 9.6 9.1 C 9.8 8.8 10 8.4 10 8.5 C 10 7.4 9.1 6.5 8 6.5 Z M 7.5 7.5 C 8.05 7.5 8.5 7.95 8.5 8.5 C 8.5 9.05 8.05 9.5 7.5 9.5 C 6.95 9.5 6.5 9.05 6.5 8.5 C 6.5 7.95 6.95 7.5 7.5 7.5 Z"/>
+</svg>''',
+
+    "open-menu-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" d="M 2 3 C 1.45 3 1 3.45 1 4 C 1 4.55 1.45 5 2 5 L 14 5 C 14.55 5 15 4.55 15 4 C 15 3.45 14.55 3 14 3 Z M 2 7.5 C 1.45 7.5 1 7.95 1 8.5 C 1 9.05 1.45 9.5 2 9.5 L 14 9.5 C 14.55 9.5 15 9.05 15 8.5 C 15 7.95 14.55 7.5 14 7.5 Z M 2 12 C 1.45 12 1 12.45 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 C 15 12.45 14.55 12 14 12 Z"/>
+</svg>''',
+
+    "org.gnome.Nautilus-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z"/>
+</svg>''',
+
+    "system-file-manager-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z"/>
+</svg>''',
+
+    "bookmark-new-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 3 2 C 2.45 2 2 2.45 2 3 L 2 14 L 7 11.5 L 12 14 L 12 7 L 10.5 7 L 10.5 11.7 L 7 9.9 L 3.5 11.7 L 3.5 3.5 L 8 3.5 L 8 2 Z M 11.5 1 L 11.5 3 L 9.5 3 L 9.5 4.5 L 11.5 4.5 L 11.5 6.5 L 13 6.5 L 13 4.5 L 15 4.5 L 15 3 L 13 3 L 13 1 Z"/>
+</svg>''',
+
+    "folder-documents-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 3 1 C 2.45 1 2 1.45 2 2 L 2 14 C 2 14.55 2.45 15 3 15 L 13 15 C 13.55 15 14 14.55 14 14 L 14 5 L 10 1 Z M 3.5 2.5 L 9 2.5 L 9 5.5 L 12.5 5.5 L 12.5 13.5 L 3.5 13.5 Z M 5 7 L 11 7 L 11 8.2 L 5 8.2 Z M 5 9.5 L 11 9.5 L 11 10.7 L 5 10.7 Z M 5 12 L 9 12 L 9 13.2 L 5 13.2 Z"/>
+</svg>''',
+
+    "folder-download-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 8 6 L 8 9.5 L 6.5 9.5 L 8.5 11.5 L 10.5 9.5 L 9 9.5 L 9 6 Z"/>
+</svg>''',
+
+    "folder-music-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 7 6 L 11 6 L 11 7 L 8.5 7 L 8.5 10.5 C 8.5 11.3 7.8 12 7 12 C 6.2 12 5.5 11.3 5.5 10.5 C 5.5 9.7 6.2 9 7 9 L 7.5 9 L 7.5 7 L 7 7 Z"/>
+</svg>''',
+
+    "folder-pictures-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 5.5 7 C 4.95 7 4.5 7.45 4.5 8 C 4.5 8.55 4.95 9 5.5 9 C 6.05 9 6.5 8.55 6.5 8 C 6.5 7.45 6.05 7 5.5 7 Z M 12 11.5 L 4 11.5 L 6.5 8.5 L 8.5 10.5 L 10 9 Z"/>
+</svg>''',
+
+    "folder-videos-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 6.5 7 L 10.5 9 L 6.5 11 Z"/>
+</svg>''',
+
+    "folder-projects-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 6 7.5 L 4.5 9 L 6 10.5 L 5 11.5 L 2.5 9 L 5 6.5 Z M 10 7.5 L 11.5 9 L 10 10.5 L 11 11.5 L 13.5 9 L 11 6.5 Z"/>
+</svg>''',
+
+    "folder-publicshare-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 8 7 C 7.2 7 6.5 7.7 6.5 8.5 C 6.5 9.3 7.2 10 8 10 C 8.8 10 9.5 9.3 9.5 8.5 C 9.5 7.7 8.8 7 8 7 Z M 5.5 11.5 C 5.5 10.5 7 10 8 10 C 9 10 10.5 10.5 10.5 11.5 L 5.5 11.5 Z"/>
+</svg>''',
+
+    "folder-templates-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 5 C 15 4.45 14.55 4 14 4 L 8 4 L 6.5 2 Z M 2.5 5.5 L 13.5 5.5 L 13.5 12.5 L 2.5 12.5 Z M 5 7 L 11 7 L 11 8 L 5 8 Z M 5 9 L 9 9 L 9 10 L 5 10 Z"/>
+</svg>''',
+
+    "user-desktop-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 11 C 1 11.55 1.45 12 2 12 L 6.5 12 L 5.5 14 L 4 14 L 4 15 L 12 15 L 12 14 L 10.5 14 L 9.5 12 L 14 12 C 14.55 12 15 11.55 15 11 L 15 3 C 15 2.45 14.55 2 14 2 Z M 2.5 3.5 L 13.5 3.5 L 13.5 10.5 L 2.5 10.5 Z"/>
+</svg>''',
+
+    "user-trash-full-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" d="M 3 4 L 13 4 L 11.5 14 L 4.5 14 Z M 5 2 L 11 2 L 12 3 L 4 3 Z M 6 6 L 7 6 L 7 12 L 6 12 Z M 9 6 L 10 6 L 10 12 L 9 12 Z"/>
+</svg>''',
+
+    "non-starred-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 2.5 L 9.7 6.2 L 13.7 6.6 L 10.7 9.4 L 11.5 13.3 L 8 11.3 L 4.5 13.3 L 5.3 9.4 L 2.3 6.6 L 6.3 6.2 Z M 8 4.7 L 7 7 L 4.5 7.2 L 6.4 8.9 L 5.8 11.4 L 8 10.1 L 10.2 11.4 L 9.6 8.9 L 11.5 7.2 L 9 7 Z"/>
+</svg>''',
+
 }

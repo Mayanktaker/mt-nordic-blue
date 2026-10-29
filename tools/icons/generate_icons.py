@@ -1370,10 +1370,15 @@ def build_symbolic() -> None:
         "window-maximize": "window-maximize-symbolic",
         "window-restore": "window-restore-symbolic",
         "window-close": "window-close-symbolic",
+        "system-search-symbolic": "edit-find-symbolic",
+        "nautilus-search-filters-symbolic": "nautilus-folder-search-symbolic",
+        "file-operation-cancelled-symbolic": "cancel-operation-symbolic",
+        "org.gnome.Nautilus-symbolic": "system-file-manager-symbolic",
+        "list-drag-handle-symbolic": "view-more-symbolic",
     }
     for alias, target in ui_sym_aliases.items():
         if target in SYMBOLIC_ICONS:
-            write_icon(["actions", "status", "ui"], alias, SYMBOLIC_ICONS[target])
+            write_icon(["actions", "status", "ui", "apps", "places"], alias, SYMBOLIC_ICONS[target])
 
 def build_devices() -> None:
     # Build hardware storage devices icons (HDD, SSD, USB external, Partition).
