@@ -445,8 +445,8 @@ APP_ICONS = {
 <defs>
   <linearGradient id="cabGrad" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="{COLOR_SURFACE_HOVER}"/>
-    <stop offset="50%" stop-color="#1A333A"/>
-    <stop offset="100%" stop-color="#122329"/>
+    <stop offset="50%" stop-color="#202D40"/>
+    <stop offset="100%" stop-color="#0e141d"/>
   </linearGradient>
   <linearGradient id="handleGrad" x1="24" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="{COLOR_ACCENT}"/>
@@ -455,19 +455,19 @@ APP_ICONS = {
 </defs>
 <rect x="12" y="6" width="40" height="52" rx="8" fill="url(#cabGrad)" stroke="{COLOR_BORDER}" stroke-width="1.5"/>
 <rect x="13.5" y="7.5" width="37" height="5" rx="3" fill="{COLOR_ACCENT}" fill-opacity="0.25"/>
-<rect x="15" y="11" width="34" height="12" rx="3" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<rect x="15" y="11" width="34" height="12" rx="3" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="1"/>
 <rect x="26" y="15.5" width="12" height="3" rx="1.5" fill="url(#handleGrad)"/>
-<rect x="15" y="25" width="34" height="12" rx="3" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<rect x="15" y="25" width="34" height="12" rx="3" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="1"/>
 <rect x="26" y="29.5" width="12" height="3" rx="1.5" fill="url(#handleGrad)"/>
-<rect x="15" y="39" width="34" height="12" rx="3" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<rect x="15" y="39" width="34" height="12" rx="3" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="1"/>
 <rect x="26" y="43.5" width="12" height="3" rx="1.5" fill="url(#handleGrad)"/>
 <circle cx="45" cy="17" r="1.5" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>''',
 
     # 2. GNOME Terminal
     "utilities-terminal": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="6" y="8" width="52" height="48" rx="8" fill="#0B1317" stroke="#2C3E44" stroke-width="1.5"/>
-<rect x="6" y="8" width="52" height="12" rx="8" fill="#16222A"/>
+<rect x="6" y="8" width="52" height="48" rx="8" fill="#090D14" stroke="#25344A" stroke-width="1.5"/>
+<rect x="6" y="8" width="52" height="12" rx="8" fill="#151D2A"/>
 <circle cx="13" cy="14" r="2.5" fill="#E5737F"/>
 <circle cx="20" cy="14" r="2.5" fill="#E5B580"/>
 <circle cx="27" cy="14" r="2.5" fill="{COLOR_ACCENT_STRONG}"/>
@@ -477,8 +477,8 @@ APP_ICONS = {
 
     # 3. GNOME Settings
     "preferences-system": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="24" fill="#16222A" stroke="#2C3E44" stroke-width="1.5"/>
-<circle cx="32" cy="32" r="15" fill="#1D3238" stroke="{COLOR_ACCENT}" stroke-width="3"/>
+<circle cx="32" cy="32" r="24" fill="#151D2A" stroke="#25344A" stroke-width="1.5"/>
+<circle cx="32" cy="32" r="15" fill="#202D40" stroke="{COLOR_ACCENT}" stroke-width="3"/>
 <circle cx="32" cy="32" r="6" fill="{COLOR_ACCENT}"/>
 <rect x="30" y="10" width="4" height="8" rx="2" fill="{COLOR_ACCENT}"/>
 <rect x="30" y="46" width="4" height="8" rx="2" fill="{COLOR_ACCENT}"/>
@@ -488,7 +488,7 @@ APP_ICONS = {
 
     # 4. Text Editor
     "accessories-text-editor": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="12" y="8" width="38" height="48" rx="6" fill="#16222A" stroke="#2C3E44" stroke-width="1.5"/>
+<rect x="12" y="8" width="38" height="48" rx="6" fill="#151D2A" stroke="#25344A" stroke-width="1.5"/>
 <rect x="12" y="8" width="38" height="10" rx="6" fill="{COLOR_ACCENT}"/>
 <line x1="18" y1="26" x2="42" y2="26" stroke="{COLOR_ACCENT}" stroke-width="2.5" stroke-linecap="round"/>
 <line x1="18" y1="33" x2="42" y2="33" stroke="{COLOR_ACCENT}" stroke-width="2.5" stroke-linecap="round"/>
@@ -498,17 +498,17 @@ APP_ICONS = {
 
     # 5. Calculator
     "org.gnome.Calculator": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="10" y="6" width="44" height="52" rx="8" fill="#16222A" stroke="#2C3E44" stroke-width="1.5"/>
-<rect x="16" y="12" width="32" height="12" rx="3" fill="#1D3238" stroke="{COLOR_ACCENT}" stroke-width="1"/>
+<rect x="10" y="6" width="44" height="52" rx="8" fill="#151D2A" stroke="#25344A" stroke-width="1.5"/>
+<rect x="16" y="12" width="32" height="12" rx="3" fill="#202D40" stroke="{COLOR_ACCENT}" stroke-width="1"/>
 <text x="44" y="21" font-family="sans-serif" font-size="10" fill="{COLOR_ACCENT_STRONG}" text-anchor="end">42</text>
-<circle cx="21" cy="32" r="3.5" fill="#1D3238"/>
-<circle cx="32" cy="32" r="3.5" fill="#1D3238"/>
+<circle cx="21" cy="32" r="3.5" fill="#202D40"/>
+<circle cx="32" cy="32" r="3.5" fill="#202D40"/>
 <circle cx="43" cy="32" r="3.5" fill="{COLOR_ACCENT}"/>
-<circle cx="21" cy="42" r="3.5" fill="#1D3238"/>
-<circle cx="32" cy="42" r="3.5" fill="#1D3238"/>
+<circle cx="21" cy="42" r="3.5" fill="#202D40"/>
+<circle cx="32" cy="42" r="3.5" fill="#202D40"/>
 <circle cx="43" cy="42" r="3.5" fill="{COLOR_ACCENT}"/>
-<circle cx="21" cy="51" r="3.5" fill="#1D3238"/>
-<circle cx="32" cy="51" r="3.5" fill="#1D3238"/>
+<circle cx="21" cy="51" r="3.5" fill="#202D40"/>
+<circle cx="32" cy="51" r="3.5" fill="#202D40"/>
 <circle cx="43" cy="51" r="3.5" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>''',
 
@@ -517,12 +517,12 @@ APP_ICONS = {
 <defs>
   <linearGradient id="agGrad" x1="16" y1="46" x2="48" y2="14" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="{COLOR_ACCENT_STRONG}"/>
-    <stop offset="50%" stop-color="#7FC8A0"/>
+    <stop offset="50%" stop-color="#8FBCBB"/>
     <stop offset="100%" stop-color="{COLOR_ACCENT}"/>
   </linearGradient>
 </defs>
-<rect x="6" y="6" width="52" height="52" rx="15" fill="#122329" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<circle cx="32" cy="32" r="23" fill="#182E36" fill-opacity="0.6"/>
+<rect x="6" y="6" width="52" height="52" rx="15" fill="#0e141d" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="23" fill="#1A2434" fill-opacity="0.6"/>
 <!-- Antigravity iconic smooth Gaussian bell arch -->
 <path d="M 17 45 C 21 45 25 38 28.5 25 C 30 19 32 15 32 15 C 32 15 34 19 35.5 25 C 39 38 43 45 47 45 C 48.5 45 49 43.8 48 42.5 C 43 30 36.5 13 32 13 C 27.5 13 21 30 16 42.5 C 15 43.8 15.5 45 17 45 Z" fill="url(#agGrad)"/>
 <circle cx="32" cy="22" r="3" fill="{COLOR_ACCENT_STRONG}"/>
@@ -530,7 +530,7 @@ APP_ICONS = {
 
     # 7. OpenChamber (AI Workspace)
     "openchamber": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="6" y="6" width="52" height="52" rx="14" fill="#122329" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="#0e141d" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <!-- Isometric 3D Chamber Cube in glowing emerald -->
 <g transform="translate(32, 33) scale(0.38)">
   <path d="M 0 -48 L -41.5 -24 L 0 0 L 41.5 -24 Z" fill="none" stroke="{COLOR_ACCENT_STRONG}" stroke-width="5" stroke-linejoin="round"/>
@@ -541,7 +541,7 @@ APP_ICONS = {
 
     # 8. GNOME Geary Mail Client
     "org.gnome.Geary": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="12" width="48" height="40" rx="6" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="12" width="48" height="40" rx="6" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 10 14 L 32 32 L 54 14" stroke="{COLOR_ACCENT}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polygon points="32,36 36,31 28,31" fill="{COLOR_ACCENT_STRONG}"/>
 <line x1="12" y1="48" x2="26" y2="34" stroke="{COLOR_BORDER}" stroke-width="1.8"/>
@@ -550,8 +550,8 @@ APP_ICONS = {
 
     # 9. GNOME Console (kgx)
     "org.gnome.Console": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="7" y="10" width="50" height="44" rx="8" fill="#0D1A1F" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<rect x="7" y="10" width="50" height="11" rx="8" fill="#172F37"/>
+<rect x="7" y="10" width="50" height="44" rx="8" fill="#090D14" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="7" y="10" width="50" height="11" rx="8" fill="#1A2434"/>
 <circle cx="14" cy="15.5" r="2" fill="#E5737F"/>
 <circle cx="20" cy="15.5" r="2" fill="#E5B580"/>
 <circle cx="26" cy="15.5" r="2" fill="{COLOR_ACCENT_STRONG}"/>
@@ -572,7 +572,7 @@ APP_ICONS = {
     # 11. LibreOffice Main / Start Center
     "libreoffice-startcenter": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="8" y="8" width="48" height="48" rx="12" fill="{COLOR_BG_BASE}" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<rect x="18" y="14" width="28" height="36" rx="3" fill="#1E3B44" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<rect x="18" y="14" width="28" height="36" rx="3" fill="#202D40" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
 <polygon points="38,14 46,22 38,22" fill="{COLOR_ACCENT_STRONG}"/>
 <circle cx="32" cy="35" r="6" fill="{COLOR_ACCENT_STRONG}"/>
 <circle cx="32" cy="35" r="3" fill="{COLOR_BG_BASE}"/>
@@ -582,7 +582,7 @@ APP_ICONS = {
     "libreoffice-writer": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="8" y="8" width="48" height="48" rx="12" fill="{COLOR_BG_BASE}" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <rect x="18" y="14" width="28" height="36" rx="3" fill="{COLOR_SURFACE}" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
-<polygon points="38,14 46,22 38,22" fill="#7FC8A0"/>
+<polygon points="38,14 46,22 38,22" fill="#8FBCBB"/>
 <line x1="23" y1="24" x2="35" y2="24" stroke="{COLOR_ACCENT}" stroke-width="2" stroke-linecap="round"/>
 <line x1="23" y1="30" x2="41" y2="30" stroke="{COLOR_ACCENT}" stroke-width="2" stroke-linecap="round"/>
 <line x1="23" y1="36" x2="41" y2="36" stroke="{COLOR_ACCENT}" stroke-width="2" stroke-linecap="round"/>
@@ -598,7 +598,7 @@ APP_ICONS = {
 <line x1="22" y1="34" x2="42" y2="34" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
 <line x1="32" y1="20" x2="32" y2="44" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
 <rect x="24" y="37" width="5" height="5" fill="{COLOR_ACCENT_STRONG}"/>
-<rect x="34" y="29" width="6" height="3" fill="#7FC8A0"/>
+<rect x="34" y="29" width="6" height="3" fill="#8FBCBB"/>
 </svg>''',
 
     # 14. LibreOffice Impress
@@ -635,37 +635,37 @@ APP_ICONS = {
     "libreoffice-math": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="8" y="8" width="48" height="48" rx="12" fill="{COLOR_BG_BASE}" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <rect x="18" y="14" width="28" height="36" rx="3" fill="{COLOR_SURFACE}" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
-<polygon points="38,14 46,22 38,22" fill="#7FC8A0"/>
+<polygon points="38,14 46,22 38,22" fill="#8FBCBB"/>
 <path d="M 24 27 L 39 27 L 32 34 L 39 41 L 24 41" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>''',
 
     # 18. Google Chrome
     "google-chrome": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="26" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<circle cx="32" cy="32" r="11" fill="#1D3238" stroke="{COLOR_ACCENT}" stroke-width="3"/>
+<circle cx="32" cy="32" r="26" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="11" fill="#202D40" stroke="{COLOR_ACCENT}" stroke-width="3"/>
 <circle cx="32" cy="32" r="5" fill="{COLOR_ACCENT_STRONG}"/>
 <path d="M 32 6 C 39.5 6 46.2 9.2 50.8 14.5 L 37.5 37.5" stroke="#E5737F" stroke-width="3" stroke-linecap="round"/>
-<path d="M 50.8 14.5 C 55.2 19.5 58 26.2 58 33.5 L 26.5 33.5" stroke="#7FC8A0" stroke-width="3" stroke-linecap="round"/>
+<path d="M 50.8 14.5 C 55.2 19.5 58 26.2 58 33.5 L 26.5 33.5" stroke="#8FBCBB" stroke-width="3" stroke-linecap="round"/>
 <path d="M 26.5 33.5 L 13.2 51.5 C 8.6 46.5 6 39.7 6 32" stroke="#E5B580" stroke-width="3" stroke-linecap="round"/>
 </svg>''',
 
     # 19. Microsoft Edge
     "microsoft-edge": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="26" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="26" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 32 10 C 22 10 14 18 14 28 C 14 36 20 42 27 42 C 34 42 40 37 40 32 C 40 28 37 25 33 25 C 29 25 27 28 27 30 C 27 32 29 34 31 34 C 33 34 34 33 34 32" stroke="{COLOR_ACCENT_STRONG}" stroke-width="3.5" stroke-linecap="round" fill="none"/>
 <path d="M 46 22 C 49 26 50 31 49 36 C 47 45 39 52 30 52 C 22 52 16 48 13 42" stroke="{COLOR_ACCENT}" stroke-width="3" stroke-linecap="round" fill="none"/>
 </svg>''',
 
     # 20. Brave Browser
     "brave-browser": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="14" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="14" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <polygon points="32,14 44,22 40,40 32,50 24,40 20,22" fill="{COLOR_SURFACE}" stroke="#E5B580" stroke-width="2.5" stroke-linejoin="round"/>
 <polygon points="32,24 38,30 36,40 32,44 28,40 26,30" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>''',
 
     # 21. Claude Desktop (Anthropic)
     "claude-desktop": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="14" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="14" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <g transform="translate(32, 32)">
   <line x1="0" y1="-18" x2="0" y2="18" stroke="#E5B580" stroke-width="4" stroke-linecap="round"/>
   <line x1="-18" y1="0" x2="18" y2="0" stroke="#E5B580" stroke-width="4" stroke-linecap="round"/>
@@ -677,7 +677,7 @@ APP_ICONS = {
 
     # 22. Telegram
     "org.telegram.desktop": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="26" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="26" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <circle cx="32" cy="32" r="24" fill="{COLOR_SURFACE}"/>
 <path d="M 16 31 L 46 19 L 41 45 L 30 37 L 24 43 L 26 35 Z" fill="{COLOR_ACCENT}"/>
 <path d="M 30 37 L 40 24 L 26 35 Z" fill="{COLOR_ACCENT_STRONG}"/>
@@ -685,21 +685,21 @@ APP_ICONS = {
 
     # 23. qBittorrent
     "org.qbittorrent.qBittorrent": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="26" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="26" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 32 16 L 32 38 M 32 38 L 23 29 M 32 38 L 41 29" stroke="{COLOR_ACCENT_STRONG}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M 20 44 C 24 48 40 48 44 44" stroke="{COLOR_ACCENT}" stroke-width="3" stroke-linecap="round"/>
 </svg>''',
 
     # 24. MPV Media Player
     "mpv": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="26" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<circle cx="32" cy="32" r="22" fill="#122329"/>
+<circle cx="32" cy="32" r="26" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="22" fill="#0e141d"/>
 <polygon points="26,20 44,32 26,44" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>''',
 
     # 25. Pavucontrol / Audio Volume Control
     "org.pulseaudio.pavucontrol": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="12" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="12" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <line x1="20" y1="16" x2="20" y2="48" stroke="{COLOR_BORDER}" stroke-width="3" stroke-linecap="round"/>
 <line x1="32" y1="16" x2="32" y2="48" stroke="{COLOR_BORDER}" stroke-width="3" stroke-linecap="round"/>
 <line x1="44" y1="16" x2="44" y2="48" stroke="{COLOR_BORDER}" stroke-width="3" stroke-linecap="round"/>
@@ -710,21 +710,21 @@ APP_ICONS = {
 
     # 26. Extension Manager
     "com.mattjakeman.ExtensionManager": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="14" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="14" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 28 20 C 28 17.5 30 16 32 16 C 34 16 36 17.5 36 20 L 42 20 C 44 20 46 22 46 24 L 46 30 C 48.5 30 50 32 50 34 C 50 36 48.5 38 46 38 L 46 44 C 46 46 44 48 42 48 L 36 48 C 36 50.5 34 52 32 52 C 30 52 28 50.5 28 48 L 22 48 C 20 48 18 46 18 44 L 18 38 C 15.5 38 14 36 14 34 C 14 32 15.5 30 18 30 L 18 24 C 18 22 20 20 22 20 Z" fill="{COLOR_SURFACE}" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" stroke-linejoin="round"/>
 <circle cx="32" cy="34" r="3.5" fill="{COLOR_ACCENT}"/>
 </svg>''',
 
     # 27. GNOME Software
     "org.gnome.Software": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="10" y="16" width="44" height="40" rx="8" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="10" y="16" width="44" height="40" rx="8" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 22 16 C 22 10 26 8 32 8 C 38 8 42 10 42 16" stroke="{COLOR_ACCENT}" stroke-width="3" stroke-linecap="round" fill="none"/>
 <polygon points="32,24 35,32 43,32 37,37 39,45 32,40 25,45 27,37 21,32 29,32" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>''',
 
     # 28. GNOME System Monitor
     "org.gnome.SystemMonitor": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="10" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="10" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <line x1="8" y1="32" x2="56" y2="32" stroke="{COLOR_BORDER}" stroke-width="1.2" stroke-dasharray="2 2"/>
 <line x1="32" y1="8" x2="32" y2="56" stroke="{COLOR_BORDER}" stroke-width="1.2" stroke-dasharray="2 2"/>
 <polyline points="12,34 22,34 27,20 33,46 39,26 44,34 52,34" fill="none" stroke="{COLOR_ACCENT_STRONG}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -742,28 +742,28 @@ APP_ICONS = {
 
     # 30. btop
     "btop": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="6" y="8" width="52" height="48" rx="8" fill="#0D1A1F" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="6" y="8" width="52" height="48" rx="8" fill="#090D14" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <polyline points="12,42 20,38 28,40 36,22 44,30 52,20" fill="none" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="12,46 20,44 28,45 36,36 44,40 52,32" fill="none" stroke="{COLOR_ACCENT}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>''',
 
     # 31. Alacritty
     "Alacritty": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="10" fill="#0D1A1F" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="10" fill="#090D14" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <polygon points="32,15 48,46 41,46 32,27 23,46 16,46" fill="{COLOR_ACCENT_STRONG}"/>
-<polygon points="26,38 38,38 32,26" fill="#0D1A1F"/>
+<polygon points="26,38 38,38 32,26" fill="#090D14"/>
 </svg>''',
 
     # 32. Discord
     "discord": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="14" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="14" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 44 20 C 41.5 18.8 38.8 18 36 17.5 C 35.6 18.2 35.1 19.2 34.8 20 C 31.8 19.6 28.8 19.6 25.8 20 C 25.5 19.2 25 18.2 24.6 17.5 C 21.8 18 19.1 18.8 16.6 20 C 12 26.8 10.8 33.5 11.4 40 C 14.5 42.3 17.4 43.7 20.3 44.6 C 21 43.6 21.6 42.6 22.2 41.5 C 21.1 41.1 20.1 40.5 19.2 39.8 C 19.5 39.6 19.7 39.4 20 39.2 C 25.5 41.8 31.5 41.8 37 39.2 C 37.3 39.4 37.5 39.6 37.8 39.8 C 36.9 40.5 35.9 41.1 34.8 41.5 C 35.4 42.6 36 43.6 36.7 44.6 C 39.6 43.7 42.5 42.3 45.6 40 C 46.3 32.5 44.5 25.8 44 20 Z M 23.5 35 A 3.5 3.5 0 1 1 23.5 28 A 3.5 3.5 0 0 1 23.5 35 Z M 37.5 35 A 3.5 3.5 0 1 1 37.5 28 A 3.5 3.5 0 0 1 37.5 35 Z" fill="{COLOR_ACCENT}"/>
 </svg>''',
 
     # 33. Spotify
     "spotify": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="26" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
-<circle cx="32" cy="32" r="23" fill="#0D1A1F"/>
+<circle cx="32" cy="32" r="26" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<circle cx="32" cy="32" r="23" fill="#090D14"/>
 <path d="M 19 24.5 C 27.5 22 37.5 23 45 27" stroke="{COLOR_ACCENT_STRONG}" stroke-width="4" stroke-linecap="round"/>
 <path d="M 21 32 C 28 30 36 31 43 35" stroke="{COLOR_ACCENT_STRONG}" stroke-width="3.5" stroke-linecap="round"/>
 <path d="M 23 39.5 C 28.5 38 34.5 39 40.5 42.5" stroke="{COLOR_ACCENT}" stroke-width="3" stroke-linecap="round"/>
@@ -771,7 +771,7 @@ APP_ICONS = {
 
     # 34. VS Code
     "code": '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="8" y="8" width="48" height="48" rx="12" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="2"/>
+<rect x="8" y="8" width="48" height="48" rx="12" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="2"/>
 <path d="M 45 13 L 34 23 L 25 15 L 20 18 L 30 27 L 20 36 L 25 39 L 34 31 L 45 41 Z" fill="{COLOR_ACCENT}"/>
 <path d="M 45 13 L 34 23 L 45 33 Z" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>''',
@@ -838,7 +838,7 @@ MIME_DOC_BASE = '''<svg width="64" height="64" viewBox="0 0 64 64" fill="none" x
 <defs>
   <linearGradient id="docGrad" x1="32" y1="8" x2="32" y2="56" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="{COLOR_SURFACE}"/>
-    <stop offset="100%" stop-color="#122329"/>
+    <stop offset="100%" stop-color="#0e141d"/>
   </linearGradient>
 </defs>
 <rect x="14" y="8" width="36" height="48" rx="6" fill="url(#docGrad)" stroke="{COLOR_BORDER}" stroke-width="1.5"/>
@@ -856,8 +856,8 @@ MIME_ICONS = {
     "text-x-python": MIME_DOC_BASE + '''
 <path d="M 28 26 C 28 24 30 23 32 23 L 36 23 C 38 23 39 24 39 26 L 39 30 L 33 30 C 31 30 30 31 30 33 L 30 36 L 28 36 C 26 36 25 35 25 33 L 25 29 C 25 27 26 26 28 26 Z" fill="{COLOR_ACCENT_STRONG}"/>
 <path d="M 36 42 C 36 44 34 45 32 45 L 28 45 C 26 45 25 44 25 42 L 25 38 L 31 38 C 33 38 34 37 34 35 L 34 32 L 36 32 C 38 32 39 33 39 35 L 39 39 C 39 41 38 42 36 42 Z" fill="{COLOR_ACCENT}"/>
-<circle cx="30" cy="26" r="0.8" fill="#122329"/>
-<circle cx="34" cy="42" r="0.8" fill="#122329"/>
+<circle cx="30" cy="26" r="0.8" fill="#0e141d"/>
+<circle cx="34" cy="42" r="0.8" fill="#0e141d"/>
 ''' + SVG_FOOTER,
 
     "application-x-zerosize": MIME_DOC_BASE + '''
@@ -865,7 +865,7 @@ MIME_ICONS = {
 ''' + SVG_FOOTER,
 
     "image-x-generic": MIME_DOC_BASE + '''
-<rect x="20" y="26" width="24" height="18" rx="2" fill="#16222A" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<rect x="20" y="26" width="24" height="18" rx="2" fill="#151D2A" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
 <circle cx="26" cy="31" r="2" fill="{COLOR_ACCENT_STRONG}"/>
 <polygon points="23,43 28,37 33,41 36,38 41,43" fill="{COLOR_ACCENT}"/>
 ''' + SVG_FOOTER,

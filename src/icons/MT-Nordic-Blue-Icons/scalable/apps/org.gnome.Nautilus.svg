@@ -2,8 +2,8 @@
 <defs>
   <linearGradient id="cabGrad" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="{COLOR_SURFACE_HOVER}"/>
-    <stop offset="50%" stop-color="#1A333A"/>
-    <stop offset="100%" stop-color="#122329"/>
+    <stop offset="50%" stop-color="#202D40"/>
+    <stop offset="100%" stop-color="#0e141d"/>
   </linearGradient>
   <linearGradient id="handleGrad" x1="24" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="{COLOR_ACCENT}"/>
@@ -12,11 +12,11 @@
 </defs>
 <rect x="12" y="6" width="40" height="52" rx="8" fill="url(#cabGrad)" stroke="{COLOR_BORDER}" stroke-width="1.5"/>
 <rect x="13.5" y="7.5" width="37" height="5" rx="3" fill="{COLOR_ACCENT}" fill-opacity="0.25"/>
-<rect x="15" y="11" width="34" height="12" rx="3" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<rect x="15" y="11" width="34" height="12" rx="3" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="1"/>
 <rect x="26" y="15.5" width="12" height="3" rx="1.5" fill="url(#handleGrad)"/>
-<rect x="15" y="25" width="34" height="12" rx="3" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<rect x="15" y="25" width="34" height="12" rx="3" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="1"/>
 <rect x="26" y="29.5" width="12" height="3" rx="1.5" fill="url(#handleGrad)"/>
-<rect x="15" y="39" width="34" height="12" rx="3" fill="#14262C" stroke="{COLOR_BORDER}" stroke-width="1"/>
+<rect x="15" y="39" width="34" height="12" rx="3" fill="#0E141D" stroke="{COLOR_BORDER}" stroke-width="1"/>
 <rect x="26" y="43.5" width="12" height="3" rx="1.5" fill="url(#handleGrad)"/>
 <circle cx="45" cy="17" r="1.5" fill="{COLOR_ACCENT_STRONG}"/>
 </svg>

@@ -5,31 +5,31 @@ window.background,
 window.csd,
 dialog,
 messagedialog {
-  border-radius: 0px !important;
+  border-radius: 0px;
 }
 
 headerbar {
-  border-radius: 0px !important;
-  border-top-left-radius: 0px !important;
-  border-top-right-radius: 0px !important;
+  border-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 button {
-  border-radius: 0px !important;
+  border-radius: 0px;
 }
 
 entry {
-  border-radius: 0px !important;
+  border-radius: 0px;
 }
 
 popover.background,
 popover {
-  border-radius: 0px !important;
+  border-radius: 0px;
 }
 
 notebook > header.top > tabs > tab,
 notebook > header.bottom > tabs > tab,
 notebook > header.left > tabs > tab,
 notebook > header.right > tabs > tab {
-  border-radius: 0px !important;
+  border-radius: 0px;
 }

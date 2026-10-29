@@ -1,5 +1,5 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Generates companion Xcursor suite: sleek aerodynamic modern cursors.
+# Generates companion Xcursor suite: sleek aerodynamic modern cursors in Nordic Blue.
 # High-definition multi-resolution (24, 32, 48) Xcursor suite with smooth curves and palette glow.
 
 import json
@@ -13,8 +13,8 @@ from PIL import Image, ImageDraw, ImageFilter
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 TOKENS = json.loads((REPO_ROOT / "palette" / "tokens.json").read_text())
-TECH_NAME = TOKENS.get("meta", {}).get("tech_name", "MT-Theme-Starter")
-DISPLAY_NAME = TOKENS.get("meta", {}).get("name", "MT Theme Starter")
+TECH_NAME = TOKENS.get("meta", {}).get("tech_name", "MT-Nordic-Blue")
+DISPLAY_NAME = TOKENS.get("meta", {}).get("name", "MT Nordic Blue")
 OUT_DIR = REPO_ROOT / "src" / "cursors" / f"{TECH_NAME}-Cursors"
 
 
@@ -24,12 +24,14 @@ def hex_to_rgba(hex_color: str, alpha: int = 255) -> tuple:
     return (r, g, b, alpha)
 
 
-# Palette tokens from palette/tokens.json
-COLOR_BODY = hex_to_rgba(TOKENS["color"]["bg"]["base"], 255)
-COLOR_ACCENT = hex_to_rgba(TOKENS["color"]["accent"]["base"], 255)
-COLOR_EMERALD = hex_to_rgba(TOKENS["color"]["accent"]["strong"], 255)
-COLOR_CORAL = hex_to_rgba(TOKENS["color"]["status"]["destructive"], 255)
-COLOR_SHADOW = (0, 0, 0, int(round(255 * float(TOKENS["color"].get("shadow_alpha", 0.55)))))
+# Authentic MT Nordic Blue palette definitions (no green/sage tones)
+COLOR_BODY = (14, 20, 29, 255)            # Deep Polar Night #0E141D
+COLOR_CYAN_BORDER = (0, 210, 255, 255)     # Electric Cyber Ice Cyan #00D2FF
+COLOR_ACCENT = (136, 192, 208, 255)       # Nordic Frost Cyan #88C0D0
+COLOR_GLACIER = (129, 161, 193, 255)      # Glacier Ice Blue #81A1C1
+COLOR_WHITE = (236, 239, 244, 255)        # Nordic Snow White #ECEFF4
+COLOR_CORAL = (191, 97, 106, 255)         # Nordic Red #BF616A
+COLOR_SHADOW = (0, 0, 0, 140)
 
 INDEX_THEME = f"""[Icon Theme]
 Name={TECH_NAME}-Cursors
@@ -72,7 +74,7 @@ def make_xcursor(frames_with_hotspots: list) -> bytes:
 
 
 def draw_aerodynamic_pointer(target_size: int, show_accent_dot: bool = False) -> tuple:
-    # Draw a sleek aerodynamic curved cursor (Bibata / macOS inspired) with 4x supersampling
+    # Draw a sleek aerodynamic curved cursor with 4x supersampling
     scale = 4
     canvas_size = target_size * scale
     im = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
@@ -99,18 +101,18 @@ def draw_aerodynamic_pointer(target_size: int, show_accent_dot: bool = False) ->
     im = Image.alpha_composite(im, shadow)
 
     draw = ImageDraw.Draw(im)
-    # 2. Outer glowing border
+    # 2. Outer glowing cyan-blue border
     draw.polygon(pts, fill=COLOR_BODY)
-    draw.line(pts + [pts[0]], fill=COLOR_EMERALD, width=int(round(4 * s)), joint="curve")
+    draw.line(pts + [pts[0]], fill=COLOR_CYAN_BORDER, width=int(round(4 * s)), joint="curve")
 
-    # 3. Inner contour accent
+    # 3. Inner crisp white highlight contour
     inner_contour = [(pts[0][0] + 5*s, pts[0][1] + 8*s), (pts[1][0] + 4*s, pts[1][1] - 10*s), (pts[2][0] + 2*s, pts[2][1] - 8*s)]
-    draw.line(inner_contour, fill=COLOR_ACCENT, width=int(round(2.5 * s)))
+    draw.line(inner_contour, fill=COLOR_WHITE, width=int(round(2.5 * s)))
 
     if show_accent_dot:
         dot_center = (pts[2][0] + 10 * s, pts[2][1] + 12 * s)
         draw.ellipse([(dot_center[0] - 6*s, dot_center[1] - 6*s), (dot_center[0] + 6*s, dot_center[1] + 6*s)], fill=COLOR_ACCENT)
-        draw.ellipse([(dot_center[0] - 3*s, dot_center[1] - 3*s), (dot_center[0] + 3*s, dot_center[1] + 3*s)], fill=COLOR_EMERALD)
+        draw.ellipse([(dot_center[0] - 3*s, dot_center[1] - 3*s), (dot_center[0] + 3*s, dot_center[1] + 3*s)], fill=COLOR_CYAN_BORDER)
 
     # Downsample with Lanczos anti-aliasing
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
@@ -120,7 +122,7 @@ def draw_aerodynamic_pointer(target_size: int, show_accent_dot: bool = False) ->
 
 
 def draw_pointer_hand(target_size: int) -> tuple:
-    # Modern sleek pointer hand (index extended, organic curve)
+    # Modern sleek pointer hand
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -129,17 +131,17 @@ def draw_pointer_hand(target_size: int) -> tuple:
     # Shadow
     shadow = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
     sdraw = ImageDraw.Draw(shadow)
-    sdraw.rounded_rectangle([(32 * s, 18 * s), (96 * s, 114 * s)], radius=18*s, fill=COLOR_SHADOW)
+    sdraw.rounded_rectangle([(38 * s, 18 * s), (96 * s, 114 * s)], radius=18*s, fill=COLOR_SHADOW)
     shadow = shadow.filter(ImageFilter.GaussianBlur(6 * s))
     im = Image.alpha_composite(im, shadow)
 
     draw = ImageDraw.Draw(im)
     # Palm and fingers
-    draw.rounded_rectangle([(38 * s, 48 * s), (90 * s, 108 * s)], radius=14*s, fill=COLOR_BODY, outline=COLOR_EMERALD, width=int(round(3.5 * s)))
+    draw.rounded_rectangle([(38 * s, 48 * s), (90 * s, 108 * s)], radius=14*s, fill=COLOR_BODY, outline=COLOR_CYAN_BORDER, width=int(round(3.5 * s)))
     # Index finger extended
-    draw.rounded_rectangle([(38 * s, 16 * s), (58 * s, 72 * s)], radius=10*s, fill=COLOR_BODY, outline=COLOR_EMERALD, width=int(round(3.5 * s)))
-    # Subtle inner accent line on index finger
-    draw.line([(48 * s, 24 * s), (48 * s, 58 * s)], fill=COLOR_ACCENT, width=int(round(2.5 * s)))
+    draw.rounded_rectangle([(38 * s, 16 * s), (58 * s, 72 * s)], radius=10*s, fill=COLOR_BODY, outline=COLOR_CYAN_BORDER, width=int(round(3.5 * s)))
+    # Inner accent line on index finger
+    draw.line([(48 * s, 24 * s), (48 * s, 58 * s)], fill=COLOR_WHITE, width=int(round(2.5 * s)))
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     xhot = int(round(12 * (target_size / 32.0)))
@@ -148,35 +150,24 @@ def draw_pointer_hand(target_size: int) -> tuple:
 
 
 def draw_ibeam_text(target_size: int) -> tuple:
-    # High-visibility I-Beam with glowing tips
+    # High-visibility I-Beam
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
     im = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
-
-    draw = ImageDraw.Draw(im)
     cx, cy = 64 * s, 64 * s
-
-    # Dropshadow
-    shadow = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
-    sdraw = ImageDraw.Draw(shadow)
-    sdraw.line([(cx, cy - 42*s), (cx, cy + 42*s)], fill=COLOR_SHADOW, width=int(round(12 * s)))
-    shadow = shadow.filter(ImageFilter.GaussianBlur(4 * s))
-    im = Image.alpha_composite(im, shadow)
 
     draw = ImageDraw.Draw(im)
     # Dark stem background
     draw.line([(cx, cy - 40*s), (cx, cy + 40*s)], fill=COLOR_BODY, width=int(round(8 * s)))
-    # Glowing accent core
-    draw.line([(cx, cy - 38*s), (cx, cy + 38*s)], fill=COLOR_EMERALD, width=int(round(4 * s)))
+    # Glowing cyan core
+    draw.line([(cx, cy - 38*s), (cx, cy + 38*s)], fill=COLOR_CYAN_BORDER, width=int(round(4 * s)))
     # Top & bottom caps
-    draw.line([(cx - 18*s, cy - 40*s), (cx + 18*s, cy - 40*s)], fill=COLOR_ACCENT, width=int(round(4 * s)))
-    draw.line([(cx - 18*s, cy + 40*s), (cx + 18*s, cy + 40*s)], fill=COLOR_ACCENT, width=int(round(4 * s)))
+    draw.line([(cx - 18*s, cy - 40*s), (cx + 18*s, cy - 40*s)], fill=COLOR_WHITE, width=int(round(4 * s)))
+    draw.line([(cx - 18*s, cy + 40*s), (cx + 18*s, cy + 40*s)], fill=COLOR_WHITE, width=int(round(4 * s)))
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
-    xhot = target_size // 2
-    yhot = target_size // 2
-    return final_img, xhot, yhot
+    return final_img, target_size // 2, target_size // 2
 
 
 def draw_crosshair(target_size: int) -> tuple:
@@ -188,15 +179,12 @@ def draw_crosshair(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
 
     draw = ImageDraw.Draw(im)
-    # Circle
-    draw.ellipse([(cx - 32*s, cy - 32*s), (cx + 32*s, cy + 32*s)], outline=COLOR_EMERALD, width=int(round(3 * s)))
-    # Reticle lines
+    draw.ellipse([(cx - 32*s, cy - 32*s), (cx + 32*s, cy + 32*s)], outline=COLOR_CYAN_BORDER, width=int(round(3 * s)))
     draw.line([(cx, cy - 44*s), (cx, cy - 12*s)], fill=COLOR_ACCENT, width=int(round(2.5 * s)))
     draw.line([(cx, cy + 12*s), (cx, cy + 44*s)], fill=COLOR_ACCENT, width=int(round(2.5 * s)))
     draw.line([(cx - 44*s, cy), (cx - 12*s, cy)], fill=COLOR_ACCENT, width=int(round(2.5 * s)))
     draw.line([(cx + 12*s, cy), (cx + 44*s, cy)], fill=COLOR_ACCENT, width=int(round(2.5 * s)))
-    # Center dot
-    draw.ellipse([(cx - 3*s, cy - 3*s), (cx + 3*s, cy + 3*s)], fill=COLOR_EMERALD)
+    draw.ellipse([(cx - 3*s, cy - 3*s), (cx + 3*s, cy + 3*s)], fill=COLOR_WHITE)
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
@@ -211,25 +199,24 @@ def draw_move(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
     draw = ImageDraw.Draw(im)
 
-    # 4 arrow heads
     pts_n = [(cx, cy - 46*s), (cx - 14*s, cy - 26*s), (cx + 14*s, cy - 26*s)]
     pts_s = [(cx, cy + 46*s), (cx - 14*s, cy + 26*s), (cx + 14*s, cy + 26*s)]
     pts_w = [(cx - 46*s, cy), (cx - 26*s, cy - 14*s), (cx - 26*s, cy + 14*s)]
     pts_e = [(cx + 46*s, cy), (cx + 26*s, cy - 14*s), (cx + 26*s, cy + 14*s)]
 
     for p in [pts_n, pts_s, pts_w, pts_e]:
-        draw.polygon(p, fill=COLOR_BODY)
-        draw.line(p + [p[0]], fill=COLOR_EMERALD, width=int(round(2.5 * s)))
+        draw.polygon(p, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
 
-    draw.line([(cx, cy - 28*s), (cx, cy + 28*s)], fill=COLOR_ACCENT, width=int(round(3 * s)))
-    draw.line([(cx - 28*s, cy), (cx + 28*s, cy)], fill=COLOR_ACCENT, width=int(round(3 * s)))
+    draw.line([(cx, cy - 30*s), (cx, cy + 30*s)], fill=COLOR_ACCENT, width=int(round(3 * s)))
+    draw.line([(cx - 30*s, cy), (cx + 30*s, cy)], fill=COLOR_ACCENT, width=int(round(3 * s)))
+    draw.ellipse([(cx - 4*s, cy - 4*s), (cx + 4*s, cy + 4*s)], fill=COLOR_WHITE)
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
 
 
 def draw_resize_col(target_size: int) -> tuple:
-    # Horizontal column resize double-arrow
+    # Horizontal resize arrow
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -237,19 +224,18 @@ def draw_resize_col(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
     draw = ImageDraw.Draw(im)
 
-    # Left & Right arrows
-    draw.polygon([(cx - 44*s, cy), (cx - 24*s, cy - 14*s), (cx - 24*s, cy + 14*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.polygon([(cx + 44*s, cy), (cx + 24*s, cy - 14*s), (cx + 24*s, cy + 14*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.line([(cx - 26*s, cy), (cx + 26*s, cy)], fill=COLOR_ACCENT, width=int(round(3.5 * s)))
-    # Vertical divider bar
-    draw.line([(cx, cy - 24*s), (cx, cy + 24*s)], fill=COLOR_EMERALD, width=int(round(3 * s)))
+    pts_w = [(cx - 46*s, cy), (cx - 24*s, cy - 16*s), (cx - 24*s, cy + 16*s)]
+    pts_e = [(cx + 46*s, cy), (cx + 24*s, cy - 16*s), (cx + 24*s, cy + 16*s)]
+    draw.polygon(pts_w, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
+    draw.polygon(pts_e, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
+    draw.line([(cx - 26*s, cy), (cx + 26*s, cy)], fill=COLOR_WHITE, width=int(round(3.5 * s)))
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
 
 
 def draw_resize_row(target_size: int) -> tuple:
-    # Vertical row resize double-arrow
+    # Vertical resize arrow
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -257,19 +243,18 @@ def draw_resize_row(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
     draw = ImageDraw.Draw(im)
 
-    # Top & Bottom arrows
-    draw.polygon([(cx, cy - 44*s), (cx - 14*s, cy - 24*s), (cx + 14*s, cy - 24*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.polygon([(cx, cy + 44*s), (cx - 14*s, cy + 24*s), (cx + 14*s, cy + 24*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.line([(cx, cy - 26*s), (cx, cy + 26*s)], fill=COLOR_ACCENT, width=int(round(3.5 * s)))
-    # Horizontal divider bar
-    draw.line([(cx - 24*s, cy), (cx + 24*s, cy)], fill=COLOR_EMERALD, width=int(round(3 * s)))
+    pts_n = [(cx, cy - 46*s), (cx - 16*s, cy - 24*s), (cx + 16*s, cy - 24*s)]
+    pts_s = [(cx, cy + 46*s), (cx - 16*s, cy + 24*s), (cx + 16*s, cy + 24*s)]
+    draw.polygon(pts_n, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
+    draw.polygon(pts_s, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
+    draw.line([(cx, cy - 26*s), (cx, cy + 26*s)], fill=COLOR_WHITE, width=int(round(3.5 * s)))
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
 
 
 def draw_resize_nesw(target_size: int) -> tuple:
-    # Diagonal resize (top-right to bottom-left)
+    # Diagonal resize NESW
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -277,16 +262,18 @@ def draw_resize_nesw(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
     draw = ImageDraw.Draw(im)
 
-    draw.polygon([(cx + 34*s, cy - 34*s), (cx + 14*s, cy - 34*s), (cx + 34*s, cy - 14*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.polygon([(cx - 34*s, cy + 34*s), (cx - 14*s, cy + 34*s), (cx - 34*s, cy + 14*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.line([(cx - 24*s, cy + 24*s), (cx + 24*s, cy - 24*s)], fill=COLOR_ACCENT, width=int(round(3.5 * s)))
+    draw.line([(cx - 32*s, cy + 32*s), (cx + 32*s, cy - 32*s)], fill=COLOR_WHITE, width=int(round(3.5 * s)))
+    pts_ne = [(cx + 42*s, cy - 42*s), (cx + 16*s, cy - 42*s), (cx + 42*s, cy - 16*s)]
+    pts_sw = [(cx - 42*s, cy + 42*s), (cx - 16*s, cy + 42*s), (cx - 42*s, cy + 16*s)]
+    draw.polygon(pts_ne, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
+    draw.polygon(pts_sw, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
 
 
 def draw_resize_nwse(target_size: int) -> tuple:
-    # Diagonal resize (top-left to bottom-right)
+    # Diagonal resize NWSE
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -294,16 +281,18 @@ def draw_resize_nwse(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
     draw = ImageDraw.Draw(im)
 
-    draw.polygon([(cx - 34*s, cy - 34*s), (cx - 14*s, cy - 34*s), (cx - 34*s, cy - 14*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.polygon([(cx + 34*s, cy + 34*s), (cx + 14*s, cy + 34*s), (cx + 34*s, cy + 14*s)], fill=COLOR_BODY, outline=COLOR_EMERALD)
-    draw.line([(cx - 24*s, cy - 24*s), (cx + 24*s, cy + 24*s)], fill=COLOR_ACCENT, width=int(round(3.5 * s)))
+    draw.line([(cx - 32*s, cy - 32*s), (cx + 32*s, cy + 32*s)], fill=COLOR_WHITE, width=int(round(3.5 * s)))
+    pts_nw = [(cx - 42*s, cy - 42*s), (cx - 16*s, cy - 42*s), (cx - 42*s, cy - 16*s)]
+    pts_se = [(cx + 42*s, cy + 42*s), (cx + 16*s, cy + 42*s), (cx + 42*s, cy + 16*s)]
+    draw.polygon(pts_nw, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
+    draw.polygon(pts_se, fill=COLOR_CYAN_BORDER, outline=COLOR_BODY)
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
 
 
 def draw_not_allowed(target_size: int) -> tuple:
-    # Forbidden / Not-Allowed icon
+    # Forbidden / Not Allowed slashed circle
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -311,16 +300,17 @@ def draw_not_allowed(target_size: int) -> tuple:
     cx, cy = 64 * s, 64 * s
     draw = ImageDraw.Draw(im)
 
-    # Coral red forbidden circle with diagonal slash
-    draw.ellipse([(cx - 36*s, cy - 36*s), (cx + 36*s, cy + 36*s)], outline=COLOR_CORAL, width=int(round(6 * s)))
-    draw.line([(cx - 24*s, cy - 24*s), (cx + 24*s, cy + 24*s)], fill=COLOR_CORAL, width=int(round(6 * s)))
+    r = 36 * s
+    draw.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=COLOR_BODY, outline=COLOR_CORAL, width=int(round(5 * s)))
+    d_offset = r * 0.7071
+    draw.line([(cx - d_offset, cy - d_offset), (cx + d_offset, cy + d_offset)], fill=COLOR_CORAL, width=int(round(5 * s)))
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
     return final_img, target_size // 2, target_size // 2
 
 
 def draw_spinner_frame(target_size: int, frame_idx: int, num_frames: int = 8, with_pointer: bool = False) -> tuple:
-    # Smooth modern circular orbital spinner (for wait and progress)
+    # Animated Nordic progress/wait spinner
     scale = 4
     canvas_size = target_size * scale
     s = canvas_size / 128.0
@@ -344,7 +334,7 @@ def draw_spinner_frame(target_size: int, frame_idx: int, num_frames: int = 8, wi
         ay = scy + math.sin(a) * sr
         dot_r = (2.0 + 3.5 * (i / num_frames)) * s
         alpha = int(60 + 195 * (i / num_frames))
-        col = (COLOR_EMERALD[0], COLOR_EMERALD[1], COLOR_EMERALD[2], alpha)
+        col = (COLOR_CYAN_BORDER[0], COLOR_CYAN_BORDER[1], COLOR_CYAN_BORDER[2], alpha)
         draw.ellipse([(ax - dot_r, ay - dot_r), (ax + dot_r, ay + dot_r)], fill=col)
 
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
@@ -364,7 +354,7 @@ def build_cursor_theme() -> None:
 
     sizes = [24, 32, 48]
 
-    # 1. Base cursor shapes map
+    # Base cursor shapes map
     generators = {
         "default": lambda sz: draw_aerodynamic_pointer(sz, False),
         "pointer": lambda sz: draw_pointer_hand(sz),
