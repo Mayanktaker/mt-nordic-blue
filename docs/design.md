@@ -34,6 +34,25 @@ Single source of truth for colors: `palette/tokens.json` (do not hardcode hex va
 
 All text/accent pairs verified ≥4.5:1 on their backgrounds (most ≥9:1 to 16:1).
 
+## Form Controls & Interactive Components (GTK3 / GTK4 / Libadwaita)
+- **Checkbuttons & Radios**:
+  - Unchecked state: deep Nordic slate background (`#16202E`) encased in a distinct 1.5px border (`#435B7D`) to guarantee visibility on all card, dialog, and panel surfaces.
+  - Checked state: bright Nordic Frost fill (`#88C0D0`) with a dark, high-contrast foreground glyph (`#090D14`, contrast ratio >9:1).
+  - Hover / Focus state: luminous cyan glow (`box-shadow: 0 0 6px rgba(136, 192, 208, 0.35)`) and 2px focus rings (`outline-offset: 2px`).
+  - Standardized symbolic icons: `object-select-symbolic`, `check-plain-symbolic`, `checkbox-checked-symbolic`, and `radio-checked-symbolic`.
+- **Switches & Sliders**:
+  - Switches: Nordic capsule design with distinct active frost fill (`#88C0D0`) and dark knob (`#090D14`) when toggled on; slate trough (`#16202E`) and light knob (`#ECEFF4`) when off.
+  - Scales & Progress: rounded troughs with accent highlights and glowing circular sliders.
+- **Dialogs & Popovers**:
+  - Frosted dark slate surfaces (`#151D2A`) with subtle 1px border (`#25344A`) and deep 36px ambient shadows.
+  - Multi-select card items (e.g. Shelly dependency selectors): structured cards with comfortable padding and margin separation to prevent scrollbar overlap.
+
+## Icon Pack Architecture & Fallback
+- **Index Inheritance Hierarchy**: `Inherits=Tela-circle,Adwaita,breeze-dark,breeze,hicolor`.
+- **Standards Compliance**: Full FreeDesktop & KDE standards metadata (`DisplayDepth=32`, `LinkOverlay`, `LockOverlay`, `ZipOverlay`, size declarations, and `FollowsColorScheme=true`).
+- **Complete Symbolic Suite**: Dedicated SVG glyphs for UI form controls, system actions, tray indicators, package managers (Shelly), and media downloaders (Tartube).
+- **Graceful Fallback**: Native Nordic glyphs are prioritized; missing third-party applications seamlessly fall back to `Tela-circle` and `Adwaita` without missing icon placeholders.
+
 ## Modular Options & Tweaks System
 - **Top bar / Panel styles**: `round-island` (16px curved floating bar), `pill` (999px capsule), `bottom-round` (16px bottom rounded corners), `flat` (edge-to-edge square bar).
 - **Corner Curvature**: `round` (16px modern curves) vs `sharp` (0px sharp / non-rounded industrial aesthetic).

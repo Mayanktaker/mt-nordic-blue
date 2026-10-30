@@ -242,4 +242,75 @@ EXTENDED_SYMBOLIC_ICONS = {
   <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 2.5 L 9.7 6.2 L 13.7 6.6 L 10.7 9.4 L 11.5 13.3 L 8 11.3 L 4.5 13.3 L 5.3 9.4 L 2.3 6.6 L 6.3 6.2 Z M 8 4.7 L 7 7 L 4.5 7.2 L 6.4 8.9 L 5.8 11.4 L 8 10.1 L 10.2 11.4 L 9.6 8.9 L 11.5 7.2 L 9 7 Z"/>
 </svg>''',
 
+    # ---------------------------------------------------------------------
+    # Form Controls: Checkbox, Radio, and Selection Indicators
+    # ---------------------------------------------------------------------
+    "object-select-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" d="M 6.2 12.8 L 1.7 8.3 L 3.1 6.9 L 6.2 10 L 12.9 3.3 L 14.3 4.7 Z"/>
+</svg>''',
+
+    "check-plain-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" d="M 6.2 12.8 L 1.7 8.3 L 3.1 6.9 L 6.2 10 L 12.9 3.3 L 14.3 4.7 Z"/>
+</svg>''',
+
+    "checkbox-checked-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 3 C 15 2.45 14.55 2 14 2 Z M 6.4 11.2 L 3.2 8 L 4.6 6.6 L 6.4 8.4 L 11.4 3.4 L 12.8 4.8 Z"/>
+</svg>''',
+
+    "checkbox-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 3 C 15 2.45 14.55 2 14 2 Z M 2.5 3.5 L 13.5 3.5 L 13.5 12.5 L 2.5 12.5 Z"/>
+</svg>''',
+
+    "checkbox-mixed-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 2 C 1.45 2 1 2.45 1 3 L 1 13 C 1 13.55 1.45 14 2 14 L 14 14 C 14.55 14 15 13.55 15 13 L 15 3 C 15 2.45 14.55 2 14 2 Z M 4 7 L 12 7 L 12 9 L 4 9 Z"/>
+</svg>''',
+
+    "dash-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <rect x="3" y="7" width="10" height="2" rx="0.8" fill="currentColor" class="ColorScheme-Text"/>
+</svg>''',
+
+    "radio-checked-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 1 C 4.13 1 1 4.13 1 8 C 1 11.87 4.13 15 8 15 C 11.87 15 15 11.87 15 8 C 15 4.13 11.87 1 8 1 Z M 8 2.5 C 11.04 2.5 13.5 4.96 13.5 8 C 13.5 11.04 11.04 13.5 8 13.5 C 4.96 13.5 2.5 11.04 2.5 8 C 2.5 4.96 4.96 2.5 8 2.5 Z M 8 5 C 6.34 5 5 6.34 5 8 C 5 9.66 6.34 11 8 11 C 9.66 11 11 9.66 11 8 C 11 6.34 9.66 5 8 5 Z"/>
+</svg>''',
+
+    "radio-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 1 C 4.13 1 1 4.13 1 8 C 1 11.87 4.13 15 8 15 C 11.87 15 15 11.87 15 8 C 15 4.13 11.87 1 8 1 Z M 8 2.5 C 11.04 2.5 13.5 4.96 13.5 8 C 13.5 11.04 11.04 13.5 8 13.5 C 4.96 13.5 2.5 11.04 2.5 8 C 2.5 4.96 4.96 2.5 8 2.5 Z"/>
+</svg>''',
+
+    "bullet-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="3.5" fill="currentColor" class="ColorScheme-Text"/>
+</svg>''',
+
+    # ---------------------------------------------------------------------
+    # Shelly Package Manager & Tartube Symbolic
+    # ---------------------------------------------------------------------
+    "shelly-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 1.5 C 5.5 1.5 3.5 3.5 3.5 6 C 3.5 7.8 4.6 9.3 6.1 10 L 5 14 L 8 12.8 L 11 14 L 9.9 10 C 11.4 9.3 12.5 7.8 12.5 6 C 12.5 3.5 10.5 1.5 8 1.5 Z M 8 3 C 9.65 3 11 4.35 11 6 C 11 7.65 9.65 9 8 9 C 6.35 9 5 7.65 5 6 C 5 4.35 6.35 3 8 3 Z"/>
+</svg>''',
+
+    "shelly-shell-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 1.5 C 5.5 1.5 3.5 3.5 3.5 6 C 3.5 7.8 4.6 9.3 6.1 10 L 5 14 L 8 12.8 L 11 14 L 9.9 10 C 11.4 9.3 12.5 7.8 12.5 6 C 12.5 3.5 10.5 1.5 8 1.5 Z M 8 3 C 9.65 3 11 4.35 11 6 C 11 7.65 9.65 9 8 9 C 6.35 9 5 7.65 5 6 C 5 4.35 6.35 3 8 3 Z"/>
+</svg>''',
+
+    "shelly-updates-symbolic": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 8 1 C 4.13 1 1 4.13 1 8 C 1 11.87 4.13 15 8 15 C 11.87 15 15 11.87 15 8 C 15 4.13 11.87 1 8 1 Z M 8 2.5 C 11.04 2.5 13.5 4.96 13.5 8 C 13.5 11.04 11.04 13.5 8 13.5 C 4.96 13.5 2.5 11.04 2.5 8 C 2.5 4.96 4.96 2.5 8 2.5 Z M 7.2 4.5 L 8.8 4.5 L 8.8 8.5 L 11 8.5 L 8 11.5 L 5 8.5 L 7.2 8.5 Z"/>
+</svg>''',
+
+    "tartube-tray": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 3 C 1.45 3 1 3.45 1 4 L 1 12 C 1 12.55 1.45 13 2 13 L 14 13 C 14.55 13 15 12.55 15 12 L 15 4 C 15 3.45 14.55 3 14 3 Z M 6.5 5.5 L 10.5 8 L 6.5 10.5 Z"/>
+</svg>''',
+
+    "tartube-download-tray": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 3 C 1.45 3 1 3.45 1 4 L 1 12 C 1 12.55 1.45 13 2 13 L 14 13 C 14.55 13 15 12.55 15 12 L 15 4 C 15 3.45 14.55 3 14 3 Z M 7.2 5 L 8.8 5 L 8.8 8 L 10.5 8 L 8 10.5 L 5.5 8 L 7.2 8 Z"/>
+</svg>''',
+
+    "tartube-update-tray": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 3 C 1.45 3 1 3.45 1 4 L 1 12 C 1 12.55 1.45 13 2 13 L 14 13 C 14.55 13 15 12.55 15 12 L 15 4 C 15 3.45 14.55 3 14 3 Z M 7.2 6.5 L 8.8 6.5 L 8.8 10 L 10.5 10 L 8 12.5 L 5.5 10 L 7.2 10 Z"/>
+</svg>''',
+
+    "tartube-check-tray": '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" class="ColorScheme-Text" fill-rule="evenodd" d="M 2 3 C 1.45 3 1 3.45 1 4 L 1 12 C 1 12.55 1.45 13 2 13 L 14 13 C 14.55 13 15 12.55 15 12 L 15 4 C 15 3.45 14.55 3 14 3 Z M 6.8 9.5 L 4.5 7.2 L 5.5 6.2 L 6.8 7.5 L 10.5 3.8 L 11.5 4.8 Z"/>
+</svg>''',
+
+
 }

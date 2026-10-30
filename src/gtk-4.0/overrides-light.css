@@ -288,12 +288,12 @@ segmented-button > button,
 .linked:not(.vertical) > button {
   background-color: transparent;
   color: #4c566a;
-  border: none !important;
-  border-radius: 6px !important;
+  border: none;
+  border-radius: 6px;
   padding: 4px 12px;
   min-height: 24px;
   font-weight: 500;
-  box-shadow: none !important;
+  box-shadow: none;
   transition: all 140ms ease-in-out;
 }
 
@@ -308,10 +308,10 @@ segmented-button > button:active,
 .linked:not(.vertical) > button:checked,
 .linked:not(.vertical) > button:active {
   background-color: #ffffff;
-  border: 1px solid rgba(76, 113, 156, 0.35) !important;
+  border: 1px solid rgba(76, 113, 156, 0.35);
   color: #2e3440;
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(46, 52, 64, 0.12) !important;
+  box-shadow: 0 1px 3px rgba(46, 52, 64, 0.12);
 }
 
 .linked.vertical {
@@ -324,11 +324,11 @@ segmented-button > button:active,
 .linked.vertical > button {
   background-color: transparent;
   color: #4c566a;
-  border: none !important;
-  border-radius: 6px !important;
+  border: none;
+  border-radius: 6px;
   padding: 4px 10px;
   min-height: 24px;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .linked.vertical > button:hover {
@@ -339,7 +339,7 @@ segmented-button > button:active,
 .linked.vertical > button:checked,
 .linked.vertical > button:active {
   background-color: #ffffff;
-  border: 1px solid rgba(76, 113, 156, 0.35) !important;
+  border: 1px solid rgba(76, 113, 156, 0.35);
   color: #2e3440;
   font-weight: 600;
 }
@@ -371,17 +371,210 @@ spinbutton > button {
   min-height: 24px;
   min-width: 24px;
   padding: 2px 5px;
-  border: none !important;
+  border: none;
   border-radius: 6px;
   background-color: transparent;
   color: #4c566a;
-  box-shadow: none !important;
+  box-shadow: none;
   transition: all 120ms ease;
 }
 
 spinbutton > button:hover {
   background-color: rgba(76, 113, 156, 0.14);
   color: #2e3440;
+}
+
+/* =========================================================================
+   Checkbuttons, Radios, Switches & Form Controls
+   ========================================================================= */
+checkbutton {
+  padding: 4px 6px;
+  border-radius: 8px;
+  outline: none;
+  color: #2e3440;
+  transition: all 140ms ease-in-out;
+}
+
+checkbutton:focus-visible {
+  outline: 2px solid #4c719c;
+  outline-offset: 2px;
+}
+
+checkbutton > label {
+  margin-left: 8px;
+  color: #2e3440;
+  font-weight: 500;
+}
+
+/* Checkbox (Square Indicator) */
+check {
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: 5px;
+  margin: 2px;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1.5px solid #c0c8d6;
+  box-shadow: inset 0 1px 2px rgba(46, 52, 64, 0.08);
+  color: transparent;
+  transition: all 140ms ease-in-out;
+  -gtk-icon-size: 14px;
+}
+
+check:hover {
+  background-color: #f4f6f9;
+  border-color: #4c719c;
+  box-shadow: 0 0 6px rgba(76, 113, 156, 0.25);
+}
+
+check:active {
+  background-color: #e5e9f0;
+  border-color: #4c719c;
+}
+
+check:checked {
+  background-color: #4c719c;
+  border-color: #4c719c;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(76, 113, 156, 0.35);
+  -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
+}
+
+check:checked:hover {
+  background-color: #5e81ac;
+  border-color: #5e81ac;
+  box-shadow: 0 3px 10px rgba(76, 113, 156, 0.45);
+}
+
+check:indeterminate {
+  background-color: #4c719c;
+  border-color: #4c719c;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(76, 113, 156, 0.35);
+  -gtk-icon-source: -gtk-icontheme("checkbox-mixed-symbolic");
+}
+
+/* Radio Button (Circular Indicator) */
+radio {
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: 999px;
+  margin: 2px;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1.5px solid #c0c8d6;
+  box-shadow: inset 0 1px 2px rgba(46, 52, 64, 0.08);
+  color: transparent;
+  transition: all 140ms ease-in-out;
+  -gtk-icon-size: 14px;
+}
+
+radio:hover {
+  background-color: #f4f6f9;
+  border-color: #4c719c;
+  box-shadow: 0 0 6px rgba(76, 113, 156, 0.25);
+}
+
+radio:active {
+  background-color: #e5e9f0;
+  border-color: #4c719c;
+}
+
+radio:checked {
+  background-color: #4c719c;
+  border-color: #4c719c;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(76, 113, 156, 0.35);
+  -gtk-icon-source: -gtk-icontheme("radio-checked-symbolic");
+}
+
+radio:checked:hover {
+  background-color: #5e81ac;
+  border-color: #5e81ac;
+  box-shadow: 0 3px 10px rgba(76, 113, 156, 0.45);
+}
+
+/* Switches (Nordic Capsule Toggles) */
+switch {
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid #c0c8d6;
+  background-color: #e5e9f0;
+  color: #2e3440;
+  min-width: 44px;
+  min-height: 24px;
+  padding: 2px;
+  box-shadow: inset 0 1px 2px rgba(46, 52, 64, 0.08);
+  transition: all 150ms ease-in-out;
+}
+
+switch:hover {
+  border-color: #4c719c;
+  box-shadow: 0 0 6px rgba(76, 113, 156, 0.20);
+}
+
+switch:checked {
+  background-color: #4c719c;
+  border-color: #4c719c;
+  box-shadow: 0 2px 6px rgba(76, 113, 156, 0.35);
+}
+
+switch slider {
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 999px;
+  margin: 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(46, 52, 64, 0.25);
+  transition: all 150ms ease-in-out;
+}
+
+switch:checked slider {
+  background-color: #ffffff;
+}
+
+/* Sliders & Scales */
+scale trough {
+  background-color: #e5e9f0;
+  border: 1px solid #d8dee9;
+  border-radius: 999px;
+  min-height: 6px;
+  min-width: 6px;
+}
+
+scale highlight {
+  background-color: #4c719c;
+  border-radius: 999px;
+}
+
+scale slider {
+  min-width: 18px;
+  min-height: 18px;
+  margin: -6px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  border: 1.5px solid #4c719c;
+  box-shadow: 0 2px 6px rgba(46, 52, 64, 0.20);
+  transition: all 140ms ease-in-out;
+}
+
+scale slider:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(76, 113, 156, 0.40);
+}
+
+/* Progressbars & Levelbars */
+progressbar trough {
+  background-color: #e5e9f0;
+  border: 1px solid #d8dee9;
+  border-radius: 999px;
+  min-height: 6px;
+}
+
+progressbar progress {
+  background-color: #4c719c;
+  border-radius: 999px;
+  box-shadow: 0 0 6px rgba(76, 113, 156, 0.35);
 }
 
 spinbutton > button:active {
@@ -610,6 +803,33 @@ ShellyConfirmDialog button#confirm_button:hover {
   box-shadow: 0 4px 18px rgba(76, 113, 156, 0.50);
 }
 
+/* Shelly MultiSelect Dialog card row & checkbox polish */
+.lockout-card frame.card,
+.lockout-card .card,
+ShellyMultiSelectDialog frame.card,
+ShellyMultiSelectDialog .card {
+  background-color: #ffffff;
+  border: 1.5px solid #d8dee9;
+  border-radius: 10px;
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  transition: all 140ms ease-in-out;
+}
+
+.lockout-card frame.card:hover,
+.lockout-card .card:hover,
+ShellyMultiSelectDialog frame.card:hover,
+ShellyMultiSelectDialog .card:hover {
+  background-color: #f4f6f9;
+  border-color: rgba(76, 113, 156, 0.45);
+}
+
+.lockout-card checkbutton,
+ShellyMultiSelectDialog checkbutton,
+frame.card checkbutton {
+  margin: 0 4px;
+}
+
 /* Shelly Package Cards, Status Badges & Terminal */
 .pkg-card,
 .utility-row {
@@ -800,4 +1020,125 @@ scrollbar slider {
 
 scrollbar slider:hover {
   background-color: rgba(76, 113, 156, 0.85);
+}
+
+/* =========================================================================
+   5. Popovers, Tooltips, Tabs & Infobars
+   ========================================================================= */
+popover,
+popover.background {
+  background-color: transparent;
+  padding: 0;
+}
+
+popover contents,
+popover.background > contents {
+  background-color: #ffffff;
+  color: #2e3440;
+  border: 1px solid #d8dee9;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(46, 52, 64, 0.15);
+  padding: 6px;
+}
+
+popover.menu modelbutton {
+  min-height: 30px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #2e3440;
+  transition: all 120ms ease;
+}
+
+popover.menu modelbutton:hover {
+  background-color: rgba(76, 113, 156, 0.12);
+  color: #2e3440;
+}
+
+popover.menu modelbutton:selected {
+  background-color: rgba(76, 113, 156, 0.20);
+  color: #2e3440;
+}
+
+popover > arrow {
+  background-color: #ffffff;
+  border: 1px solid #d8dee9;
+}
+
+/* Tooltips */
+tooltip {
+  background-color: #2e3440;
+  color: #eceff4;
+  border: 1px solid #434c5e;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+tooltip label {
+  color: #eceff4;
+  font-size: 11px;
+}
+
+/* Tabs & Tab Bars */
+tabbar {
+  background-color: #e5e9f0;
+  border-bottom: 1px solid #d8dee9;
+}
+
+tabbox > tab {
+  border-radius: 8px 8px 0 0;
+  padding: 6px 14px;
+  color: #4c566a;
+  border: 1px solid transparent;
+  transition: all 120ms ease;
+}
+
+tabbox > tab:hover {
+  background-color: rgba(76, 113, 156, 0.08);
+  color: #2e3440;
+}
+
+tabbox > tab:selected {
+  background-color: #ffffff;
+  color: #2e3440;
+  border-color: #d8dee9;
+  border-bottom-color: transparent;
+  box-shadow: inset 0 2px 0 0 #4c719c;
+}
+
+/* Infobars & Banners */
+infobar,
+banner {
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin: 6px 10px;
+  border: 1px solid #d8dee9;
+}
+
+infobar.info,
+banner.info {
+  background-color: rgba(76, 113, 156, 0.12);
+  border-color: rgba(76, 113, 156, 0.30);
+  color: #2e3440;
+}
+
+infobar.warning,
+banner.warning {
+  background-color: rgba(235, 203, 139, 0.20);
+  border-color: rgba(235, 203, 139, 0.45);
+  color: #2e3440;
+}
+
+infobar.error,
+banner.error {
+  background-color: rgba(191, 97, 106, 0.15);
+  border-color: rgba(191, 97, 106, 0.35);
+  color: #2e3440;
+}
+
+infobar.success,
+banner.success {
+  background-color: rgba(163, 190, 140, 0.20);
+  border-color: rgba(163, 190, 140, 0.45);
+  color: #2e3440;
 }

@@ -21,7 +21,7 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
   - `nordic-snow-storm.json` (Nordic Snow Storm Light #E5E9F0 / #ECEFF4)
 - Shell theme is derived from upstream GNOME Shell CSS per major version, recolored via `src/shell/` maps into both **MT Nordic Blue** (`~/.themes/MT-Nordic-Blue/gnome-shell/`) and **MT Nordic Light** (`~/.themes/MT-Nordic-Light/gnome-shell/`) (never hand-edit generated CSS).
 - Wallpapers: 4K 3D Glacial Silk Bloom suite generated procedurally via Cairo vectors (`tools/wallpaper/generate.py` for dark and `tools/wallpaper/process_light.py` for light) with inverted high-contrast adaptive pairing in GNOME Settings.
-- Icons & Cursors dynamically draw gradients and geometry fills from `palette/tokens.json`.
+- Icons & Cursors dynamically draw gradients and geometry fills from `palette/tokens.json`. Companion icon pack inherits `Tela-circle,Adwaita,breeze-dark,breeze,hicolor` with full FreeDesktop & KDE standards metadata and standalone form-control symbolic glyphs (`object-select-symbolic`, `check-symbolic`, `checkbox-checked-symbolic`, `radio-checked-symbolic`).
 
 ## Commands
 - Contrast gate: `python3 tools/dev/check_contrast.py` (must pass before commits).

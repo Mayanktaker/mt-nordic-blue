@@ -796,6 +796,13 @@ APP_ALIASES = {
     "com.shellyorg.shelly": "shelly",
     "com.shellyorg.shelly-notifications": "shelly",
     "shelly-tray": "shelly",
+    "shelly-update": "shelly",
+    "shelly-updates": "shelly",
+    # Tartube Media Downloader
+    "tartube-tray": "tartube",
+    "tartube-download-tray": "tartube",
+    "tartube-update-tray": "tartube",
+    "tartube-check-tray": "tartube",
     # Android Studio & Mobile Dev
     "studio": "android-studio",
     "Android_Studio": "android-studio",
@@ -959,7 +966,29 @@ DEVICE_ALIASES = {
 INDEX_THEME = f"""[Icon Theme]
 Name={TECH_NAME}-Icons
 Comment={DISPLAY_NAME} high-definition dark icon suite by Mayanktaker (https://mayanktaker.com)
-Inherits=Adwaita,breeze-dark,hicolor
+Inherits=Tela-circle,Adwaita,breeze-dark,breeze,hicolor
+Example=folder
+
+# KDE/Plasma & FreeDesktop Standards
+DisplayDepth=32
+LinkOverlay=link_overlay
+LockOverlay=lock_overlay
+ZipOverlay=zip_overlay
+DesktopDefault=48
+DesktopSizes=16,22,32,48,64,96,128,256
+ToolbarDefault=22
+ToolbarSizes=16,22,32,48
+MainToolbarDefault=22
+MainToolbarSizes=16,22,32,48
+SmallDefault=16
+SmallSizes=16,22,32,48
+PanelDefault=48
+PanelSizes=16,22,32,48,64,96,128,256
+DialogDefault=32
+DialogSizes=16,22,32,48,64,128,256
+FollowsColorScheme=true
+
+KDE-Extensions=.svg
 Directories=scalable/places,scalable/apps,scalable/status,scalable/devices,scalable/actions,scalable/categories,scalable/ui,scalable/mimetypes,symbolic/actions,symbolic/apps,symbolic/categories,symbolic/devices,symbolic/emblems,symbolic/emotes,symbolic/mimetypes,symbolic/places,symbolic/status,symbolic/ui,symbolic/legacy,32x32/places,32x32/apps,32x32/devices,32x32/mimetypes,48x48/places,48x48/apps,48x48/devices,48x48/mimetypes,64x64/places,64x64/apps,64x64/devices,64x64/mimetypes,128x128/places,128x128/apps,128x128/devices,128x128/mimetypes
 
 [scalable/places]
@@ -1389,6 +1418,15 @@ def build_symbolic() -> None:
         "file-operation-cancelled-symbolic": "cancel-operation-symbolic",
         "org.gnome.Nautilus-symbolic": "system-file-manager-symbolic",
         "list-drag-handle-symbolic": "view-more-symbolic",
+        # Checkbox & selection symbolic aliases
+        "check-symbolic": "object-select-symbolic",
+        "checkbox-active-symbolic": "checkbox-checked-symbolic",
+        "radio-active-symbolic": "radio-checked-symbolic",
+        "bullet": "bullet-symbolic",
+        # Shelly symbolic aliases
+        "shelly-updates": "shelly-updates-symbolic",
+        "shelly-shell": "shelly-shell-symbolic",
+        "shelly-tray": "shelly-symbolic",
     }
     for alias, target in ui_sym_aliases.items():
         if target in SYMBOLIC_ICONS:
