@@ -7,7 +7,7 @@ real session (host or disposable VM). "50+" never implies untested future releas
 
 | Layer | GNOME 50.x | GNOME 51.1 (host) | Notes |
 |---|---|---|---|
-| GNOME Shell CSS | **built** (from vendored 50.6 upstream), live test pending a real 50 session | **verified live** | upstream-extract + token map; sage accent baked; upstream HC sheet kept as a11y fallback |
+| GNOME Shell CSS | **built** (dark + light, from vendored 50.6 upstream), live test pending a real 50 session | **verified live** | upstream-extract + token map; sage accent baked; upstream HC sheet kept as a11y fallback |
 | GTK3 apps | same build as 51 | **verified** (resolved-style probe: window/entry/border/fg = exact tokens; applied live) | vendored gtk-3-24 sass, sassc build |
 | GTK4 / libadwaita | best-effort | shipped, live test pending | @define-color overrides for vanilla GTK4; libadwaita needs opt-in `--gtk4-libadwaita` |
 | Flatpak GTK3 | **built + mount-verified** (extension mounts at the GTK path in 25.08/26.08 sandboxes) | same | in-app visual pass deferred by decision; details in docs/flatpak.md |
