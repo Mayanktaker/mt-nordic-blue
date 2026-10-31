@@ -14,7 +14,7 @@
 - Tag `vX.Y`; run `tools/release.sh <version>`. The script generates:
   - Theme release bundle: `dist/<tech_name>-v<version>.tar.xz`
   - Standalone icons bundle: `dist/<tech_name>-icons-v<version>.tar.xz`
-- Installing a bundle: extract it and run `./install.sh` — the installer detects the bundle layout (`tweaks/`, `gtk-4.0-src/`, `icons/`, `cursors/`, `wallpapers/`, `gnome-shell-<major>/`, `gnome-shell-light/gnome-shell-<major>-light/`) and skips all builds. The accent is baked at release time; `--accent` only prints a notice, and a different accent needs a source build.
+- Installing a bundle: extract it and run `./install.sh` — the installer detects the bundle layout (`tweaks/`, `gtk-4.0-src/`, `icons/`, `cursors/`, `wallpapers/`, `gnome-shell-<major>/`, `gnome-shell-light/gnome-shell-<major>-light/`) and skips all builds. Bundles ship `palette/` and `tools/dev/recolor_accent.py`, so `--accent <flavor>` recolors the prebuilt shell and GTK CSS at install time.
 - GitHub Actions CI/CD: Pushing any `v*` tag triggers `.github/workflows/release.yml`, executing the contrast gate, building release bundles, and publishing them directly to GitHub Releases.
 - Release notes are written for end users: what looks different, what got smoother, what was fixed — no internal identifiers or developer hashes.
 
