@@ -36,8 +36,18 @@ mkdir -p "${DIST}"
 cp "${REPO_ROOT}/src/index.theme" "${DIST}/index.theme"
 cp "${REPO_ROOT}/src/index-light.theme" "${DIST}/index-light.theme" 2>/dev/null || true
 for major_dir in "${REPO_ROOT}"/build/theme/gnome-shell-*; do
-  major="${major_dir##*-}"
-  cp -r "${major_dir}" "${DIST}/gnome-shell-${major}"
+  name="${major_dir##*/}"
+  case "${name}" in
+    gnome-shell-*-light)
+      major="${name#gnome-shell-}"; major="${major%-light}"
+      mkdir -p "${DIST}/gnome-shell-light"
+      cp -r "${major_dir}" "${DIST}/gnome-shell-light/gnome-shell-${major}-light"
+      ;;
+    gnome-shell-*)
+      major="${name#gnome-shell-}"
+      cp -r "${major_dir}" "${DIST}/gnome-shell-${major}"
+      ;;
+  esac
 done
 cp -r "${REPO_ROOT}/build/theme/gtk-3.0" "${DIST}/gtk-3.0"
 cp -r "${REPO_ROOT}/src/gtk-4.0" "${DIST}/gtk-4.0-src"
