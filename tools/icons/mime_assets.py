@@ -173,6 +173,7 @@ MIME_BADGE_MAP = {
     "application/vnd.oasis.opendocument.text-template": "doc",
     "application/rtf": "doc",
     "text/x-markdown": "doc",
+    "text/markdown": "doc",
     "application/vnd.oasis.opendocument.graphics": "vector",
     "application/vnd.ms-excel": "sheet",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "sheet",
