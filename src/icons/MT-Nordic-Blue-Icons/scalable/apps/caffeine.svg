@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg-caffeine" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg-caffeine)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+
+<path d="M 18 24 L 40 24 L 38 44 L 20 44 Z" fill="#151D2A" stroke="#88C0D0" stroke-width="2.2"/>
+<path d="M 40 28 L 46 28 C 48 28 48 34 46 34 L 39 34" fill="none" stroke="#88C0D0" stroke-width="2"/>
+<path d="M 24 18 C 24 15 27 15 27 12 M 31 18 C 31 15 34 15 34 12" stroke="#00D2FF" stroke-width="2" stroke-linecap="round"/>
+</svg>

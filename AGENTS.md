@@ -22,6 +22,7 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 - Shell theme is derived from upstream GNOME Shell CSS per major version, recolored via `src/shell/` maps into both **MT Nordic Blue** (`~/.themes/MT-Nordic-Blue/gnome-shell/`) and **MT Nordic Light** (`~/.themes/MT-Nordic-Light/gnome-shell/`) (never hand-edit generated CSS).
 - Wallpapers: 4K 3D Glacial Silk Bloom suite generated procedurally via Cairo vectors (`tools/wallpaper/generate.py` for dark and `tools/wallpaper/process_light.py` for light) with inverted high-contrast adaptive pairing in GNOME Settings.
 - Icons & Cursors dynamically draw gradients and geometry fills from `palette/tokens.json`. Companion icon pack inherits `Tela-circle,Adwaita,breeze-dark,breeze,hicolor` with full FreeDesktop & KDE standards metadata and standalone form-control symbolic glyphs (`object-select-symbolic`, `check-symbolic`, `checkbox-checked-symbolic`, `radio-checked-symbolic`).
+- Icon coverage: ~480 app names (153 hand-drawn + 7 popular-app batches + aliases), 119 mimetypes via badge engine (`tools/icons/mime_assets.py`), 26 GNOME Settings symbolics, 16 misc FreeDesktop symbolics. Batch modules: `apps_popular_1..7.py`, `settings_symbolics.py`, `misc_symbolics.py`, `apps_extra.py`.
 
 ## Commands
 - Contrast gate: `python3 tools/dev/check_contrast.py` (must pass before commits).

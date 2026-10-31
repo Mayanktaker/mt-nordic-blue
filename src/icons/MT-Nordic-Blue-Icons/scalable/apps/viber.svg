@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg-viber" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg-viber)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+
+<path d="M 20 18 L 32 18 L 32 30 L 26 36 L 26 30 L 20 30 Z" fill="none" stroke="#B48EAD" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M 36 22 C 42 22 46 27 46 33 C 46 40 41 45 34 45 C 28 45 25 41 25 37" fill="none" stroke="#88C0D0" stroke-width="2.2"/>
+<path d="M 36 28 C 39 28 41 30 41 33" stroke="#88C0D0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+</svg>

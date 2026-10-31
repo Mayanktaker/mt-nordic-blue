@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg-whatsapp" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg-whatsapp)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+
+<path d="M 32 14 C 22 14 14 22 14 32 C 14 36 15 39 17 42 L 14 50 L 22 47 C 25 49 28 50 32 50 C 42 50 50 42 50 32 C 50 22 42 14 32 14 Z" fill="none" stroke="#A3BE8C" stroke-width="2.4"/>
+<path d="M 25 26 C 25 22 39 22 39 26 L 39 36 C 39 40 25 40 25 36 Z" fill="none" stroke="#A3BE8C" stroke-width="2.2"/>
+<path d="M 28 33 C 30 36 34 36 36 33" stroke="#A3BE8C" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg-webstorm" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg-webstorm)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+
+<rect x="14" y="14" width="36" height="36" rx="9" fill="#00D2FF" fill-opacity="0.18" stroke="#00D2FF" stroke-width="2"/>
+<text x="32" y="41" font-size="19" font-weight="bold" fill="#00D2FF" text-anchor="middle" font-family="sans-serif">W</text>
+</svg>

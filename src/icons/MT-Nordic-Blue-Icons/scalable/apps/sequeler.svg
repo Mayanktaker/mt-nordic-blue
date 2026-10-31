@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg-sequeler" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg-sequeler)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+
+<ellipse cx="32" cy="22" rx="14" ry="4" fill="#88C0D0"/>
+<path d="M 18 22 L 18 44 C 18 46 24 48 32 48 C 40 48 46 46 46 44 L 46 22" fill="#151D2A" stroke="#00D2FF" stroke-width="2"/>
+<line x1="18" y1="32" x2="46" y2="32" stroke="#88C0D0" stroke-width="1.6"/>
+<line x1="32" y1="26" x2="32" y2="46" stroke="#88C0D0" stroke-width="1.4"/>
+</svg>
