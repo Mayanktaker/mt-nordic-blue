@@ -51,6 +51,7 @@ All text/accent pairs verified ≥4.5:1 on their backgrounds (most ≥9:1 to 16:
 - **Index Inheritance Hierarchy**: `Inherits=Tela-circle,Adwaita,breeze-dark,breeze,hicolor`.
 - **Standards Compliance**: Full FreeDesktop & KDE standards metadata (`DisplayDepth=32`, `LinkOverlay`, `LockOverlay`, `ZipOverlay`, size declarations, and `FollowsColorScheme=true`).
 - **Complete Symbolic Suite**: Dedicated SVG glyphs for UI form controls, system actions, tray indicators, package managers (Shelly), and media downloaders (Tartube).
+- **Coverage**: 409 hand-drawn app glyphs + 395 aliases (804 entries), 119 mimetypes from the badge engine, 26 GNOME Settings panel symbolics, 16 misc FreeDesktop symbolics. Popular-app batches live in `tools/icons/apps_popular_1..7.py` behind the shared tile builder `apps_popular_common.py`.
 - **Graceful Fallback**: Native Nordic glyphs are prioritized; missing third-party applications seamlessly fall back to `Tela-circle` and `Adwaita` without missing icon placeholders.
 
 ## Modular Options & Tweaks System
