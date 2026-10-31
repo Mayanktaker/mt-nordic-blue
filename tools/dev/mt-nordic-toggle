@@ -114,15 +114,17 @@ if [ "${ACTION}" = "light" ] || { [ "${ACTION}" = "toggle" ] && [ "${CURRENT_SCH
   TARGET="light"
   SCHEME="default"
   THEME_NAME="MT-Nordic-Light"
-  WP_NAME="mt-nordic-blue-celestial-rift.png"
   echo "Switching to MT Nordic Light (Snow Storm)..."
 else
   TARGET="dark"
   SCHEME="prefer-dark"
   THEME_NAME="MT-Nordic-Blue"
-  WP_NAME="mt-nordic-blue-canopy-dawn.png"
   echo "Switching to MT Nordic Blue (Polar Night)..."
 fi
+
+# Wallpapers ship only with the dark theme dir; paths mirror install.sh default pairing.
+WP_DARK_SRC="${THEMES_DIR}/MT-Nordic-Blue/wallpapers/mt-nordic-blue-art-1-3840x2160.png"
+WP_LIGHT_SRC="${THEMES_DIR}/MT-Nordic-Blue/wallpapers/light/mt-nordic-blue-canopy-dawn-3840x2160.png"
 
 # Apply system interface settings
 gsettings set org.gnome.desktop.interface color-scheme "${SCHEME}"
@@ -138,11 +140,12 @@ if [ -d "${THEMES_DIR}/${THEME_NAME}/gtk-4.0" ]; then
   ln -sf "${THEMES_DIR}/${THEME_NAME}/gtk-4.0/gtk-dark.css" "${CONFIG_GTK4}/gtk-dark.css"
 fi
 
-# Sync 4K wallpaper if available in theme wallpapers
-WP_PATH="${THEMES_DIR}/${THEME_NAME}/wallpapers/${WP_NAME}"
-if [ -f "${WP_PATH}" ]; then
-  gsettings set org.gnome.desktop.background picture-uri "file://${WP_PATH}" 2>/dev/null || true
-  gsettings set org.gnome.desktop.background picture-uri-dark "file://${WP_PATH}" 2>/dev/null || true
+# Sync 4K wallpaper pairing like install.sh does: dark art for light mode, light art for dark mode.
+if [ -f "${WP_DARK_SRC}" ]; then
+  gsettings set org.gnome.desktop.background picture-uri "file://${WP_DARK_SRC}" 2>/dev/null || true
+fi
+if [ -f "${WP_LIGHT_SRC}" ]; then
+  gsettings set org.gnome.desktop.background picture-uri-dark "file://${WP_LIGHT_SRC}" 2>/dev/null || true
 fi
 
 # Refresh running apps and compositor styles
@@ -150,7 +153,7 @@ nautilus -q 2>/dev/null || true
 
 # Send desktop notification alert if notify-send is available
 if command -v notify-send >/dev/null 2>&1; then
-  notify-send -u low -i preferences-desktop-theme -a "MT Nordic Theme" "Theme Switched" "Active mode: ${THEME_NAME} (${TARGET})" 2>/dev/null || true
+  notify-send -u low -i preferences-desktop-theme -a "MT Nordic Theme" "Theme Switched" "Active mode: ${THEME_NAME} (${TARGET}) — reopen apps to finish applying it." 2>/dev/null || true
 fi
 
 echo "✨ Switched to ${THEME_NAME} (${TARGET} mode)."
