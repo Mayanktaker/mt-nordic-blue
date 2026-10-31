@@ -18,7 +18,7 @@ Inspired by polar night, glacial ice, and Arctic light, **MT Nordic Blue** bring
 | **Top Bar / Tray Style** | `--panel round-island` / `pill` / `bottom-round` / `flat` | **Round Island** | Floating curved island (16px), 999px capsule pill, bottom-curved bar, or edge-to-edge flat bar. |
 | **Window Title Controls** | `--controls standard` / `macos` | **Standard** | Clean Adwaita buttons OR Nordic traffic dots (Aurora Red `#BF616A`, Gold `#EBCB8B`, Green `#A3BE8C`). |
 | **Base Palette Flavor** | `--base polar` / `classic` / `cyber` / `oled` | **Deep Polar** | Deep Polar Night (`#0E141D`), Classic Nord Slate (`#2E3440`), Arctic Cyber (`#0A0E17`), or OLED (`#040609`). |
-| **Accent Color Flavor** | `--accent frost` / `glacier` / `aurora` / `arctic` / `cyber` / `blaze` | **Frost Cyan** | `#88C0D0` (Frost), `#81A1C1` (Glacier), `#8FBCBB` (Aurora), `#5E81AC` (Arctic), `#00D2FF` (Cyber), `#D08770` (Blaze). |
+| **Accent Color Flavor** | `--accent frost` / `glacier` / `aurora` / `arctic` / `cyber` / `blaze` | **Frost Cyan** | `#88C0D0` (Frost), `#81A1C1` (Glacier), `#8FBCBB` (Aurora), `#5E81AC` (Arctic), `#00D2FF` (Cyber), `#D08770` (Blaze). Recolors GNOME Shell (panel, popups, overview) and GTK together. |
 | **Companion Icon Pack** | `--icons` / `--no-icons` | **Enabled** | Custom vector icons (`MT-Nordic-Blue-Icons`) with gradient folder plates, folder emblems, and 50+ app icons. |
 | **Companion Cursor Pack** | Installed with icons | **Enabled** | Aerodynamic cursors (`MT-Nordic-Blue-Cursors`) with icy Nordic tips and smooth animated spinners. |
 | **4K Wallpapers** | `--wallpaper 1` / `2` / `3` / `4` / `all` / `none` | **Fjord Canopy** | Procedural 3840x2160 wallpapers with matching light variants and 24-hour dynamic XML. |

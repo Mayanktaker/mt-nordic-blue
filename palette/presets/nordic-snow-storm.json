@@ -32,6 +32,22 @@
       "cyber": "#0099CC",
       "blaze": "#D08770"
     },
+    "accent_strong_flavors": {
+      "frost": "#5E81AC",
+      "glacier": "#7091BC",
+      "aurora": "#A1CCCB",
+      "arctic": "#9AD0E0",
+      "cyber": "#12A9DC",
+      "blaze": "#E29780"
+    },
+    "accent_fg_flavors": {
+      "frost": "#FFFFFF",
+      "glacier": "#090D14",
+      "aurora": "#090D14",
+      "arctic": "#090D14",
+      "cyber": "#090D14",
+      "blaze": "#090D14"
+    },
     "window_controls": {
       "close": "#BF616A",
       "minimize": "#D08770",

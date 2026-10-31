@@ -30,7 +30,7 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 - Wallpaper suite: `python3 tools/wallpaper/generate.py [--which 1|2|3|4|all]` (dark) and `python3 tools/wallpaper/process_light.py` (light) → generates 4K renders into `wallpaper/dist/` and `wallpaper/dist/light/` + preview JPGs in `wallpaper/preview/`.
 - Icons & Cursors build: `python3 tools/icons/generate_icons.py && python3 tools/icons/generate_cursors.py` → builds `src/icons/MT-Nordic-Blue-Icons` and `src/cursors/MT-Nordic-Blue-Cursors`.
 - Icons packaging: `tools/icons/package.sh [version]` → creates `dist/mt-nordic-blue-icons-v<version>.tar.xz`.
-- Shell theme build: `python3 tools/shell/build.py [--major N | --all]` (host major extracts from gresource; others use vendored `src/shell/upstream-<major>/`).
+- Shell theme build: `python3 tools/shell/build.py [--major N | --all] [--accent frost|glacier|aurora|arctic|cyber|blaze]` (host major extracts from gresource; others use vendored `src/shell/upstream-<major>/`; accent is baked from tokens and recorded in `build/theme/gnome-shell-<major>/.accent`).
 - GTK build: `python3 tools/gtk/build.py` → `build/theme/gtk-{3,4}.0/`.
 - Unified master build: `python3 build_all.py` (runs contrast gate, GTK, Shell 50/51, icons, cursors, wallpapers in sequence).
 - Install: `./install.sh` (interactive CLI wizard) or `tools/install.sh [--panel round-island|pill|bottom-round|flat] [--corners round|sharp] [--controls standard|macos] [--size standard|compact] [--base polar|classic|cyber|oled] [--accent frost|glacier|aurora|arctic|cyber|blaze] [--blur|--no-blur] [--icons] [--gtk4-libadwaita] [--wallpaper [1-4|all|none]] [--install-deps]` → installs theme into `~/.themes/MT-Nordic-Blue` and companion packs into `~/.icons/`.

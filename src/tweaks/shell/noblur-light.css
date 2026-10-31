@@ -1,0 +1,48 @@
+/* MT Nordic Blue — © Mayanktaker Computers & Web Development | https://mayanktaker.com */
+/* GNOME Shell tweak: solid opaque Snow Storm surfaces (no blur / translucency) */
+
+#panel {
+  background-color: #E5E9F0 !important;
+  backdrop-filter: none !important;
+}
+
+#panel:overview {
+  background-color: #D8DEE9 !important;
+  backdrop-filter: none !important;
+}
+
+#dash .dash-background,
+#dashtodockContainer #dash .dash-background {
+  background-color: #E5E9F0 !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.popup-menu-content {
+  background-color: #ECEFF4 !important;
+  backdrop-filter: none !important;
+}
+
+.osd-window, .workspace-switcher {
+  background-color: #E5E9F0 !important;
+  backdrop-filter: none !important;
+}
+
+.modal-dialog {
+  background-color: #E5E9F0 !important;
+  backdrop-filter: none !important;
+}
+
+.notification-banner {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.notification-banner .message,
+.message {
+  background-color: #ECEFF4 !important;
+  backdrop-filter: none !important;
+  border: 1px solid rgba(76, 113, 156, 0.25) !important;
+  box-shadow: none !important;
+}

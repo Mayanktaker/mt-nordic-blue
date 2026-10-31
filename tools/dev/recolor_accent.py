@@ -68,8 +68,11 @@ def recolor(css: str, mapping: dict) -> tuple:
         tr, tg, tb = hex_to_rgb(mapping[key])
         alpha = match.group(4)
         channel = f"{tr}, {tg}, {tb}"
-        return f"rgba({channel},{alpha})" if alpha else f"rgb({channel})"
+        return f"rgba({channel}, {alpha})" if alpha else f"rgb({channel})"
 
+    # Accepted forms: #RRGGBB (any case) and rgb()/rgba() with comma-separated channels.
+    # Not handled: 8-digit #RRGGBBAA, percentage alpha, and space-separated rgb(1 2 3) —
+    # no tweak file uses those today, so add support here before relying on them.
     css = re.sub(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)", rgba_sub, css)
     return css, hits
 
@@ -97,7 +100,7 @@ def main() -> int:
                         help="read the source accent from this variant (defaults to --variant)")
     parser.add_argument("--flavor", required=True)
     parser.add_argument("--base-only", action="store_true",
-                        help="skip accent strong (used when the Shell build already baked it)")
+                        help="skip accent strong; use when the target file was built with the accent already baked")
     parser.add_argument("--define-colors", action="store_true", help="append GTK @define-color overrides")
     parser.add_argument("css", type=Path)
     args = parser.parse_args()

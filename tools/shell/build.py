@@ -3,6 +3,7 @@
 # host major extracts its upstream CSS from the gresource, other majors use
 # vendored upstream CSS in src/shell/upstream-<major>/, then recolor via maps.
 
+import copy
 import json
 import re
 import subprocess
@@ -61,18 +62,14 @@ def normalize_hex(match_text: str) -> str:
 
 
 def recolor(css: str, color_map: dict, color_tree: dict) -> tuple:
-    # Apply pseudo-value, hex, and rgba-base replacements; return (css, usage_counts).
+    # Apply hex and rgba-base replacements first, then accent pseudo values last.
+    # Pseudo values must run last: their resolved hex (e.g. #FFFFFF) would otherwise be
+    # re-mapped by the hex table and the accent foreground would silently change.
     usage = {}
-
-    # 1. accent pseudo values (longest first: fg before plain)
-    for pseudo in sorted(color_map["pseudo"], key=len, reverse=True):
-        token_hex = resolve_token(color_map["pseudo"][pseudo], color_tree)
-        usage[pseudo] = css.count(pseudo)
-        css = css.replace(pseudo, token_hex)
 
     hex_map = {k.lower(): resolve_token(v, color_tree) for k, v in color_map["hex"].items()}
 
-    # 2. plain hex literals
+    # 1. plain hex literals
     def hex_sub(match):
         key = normalize_hex(match.group(0))
         mapped = hex_map.get(key)
@@ -82,7 +79,7 @@ def recolor(css: str, color_map: dict, color_tree: dict) -> tuple:
         return mapped
     css = re.sub(r"#[0-9a-fA-F]{3}\b|#[0-9a-fA-F]{6}\b", hex_sub, css)
 
-    # 3. rgba() bases: map base color through the same table, preserve alpha
+    # 2. rgba() bases: map base color through the same table, preserve alpha
     base_overrides = {k: resolve_token(v, color_tree) for k, v in color_map.get("rgba_base_overrides", {}).items()}
 
     def rgba_sub(match):
@@ -97,10 +94,33 @@ def recolor(css: str, color_map: dict, color_tree: dict) -> tuple:
         return f"rgba({tr}, {tg}, {tb}, {alpha})" if alpha else f"rgb({tr}, {tg}, {tb})"
     css = re.sub(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)", rgba_sub, css)
 
+    # 3. accent pseudo values last (longest first: fg before plain)
+    for pseudo in sorted(color_map["pseudo"], key=len, reverse=True):
+        token_hex = resolve_token(color_map["pseudo"][pseudo], color_tree)
+        usage[pseudo] = css.count(pseudo)
+        css = css.replace(pseudo, token_hex)
+
     return css, usage
 
 
-def build_major_variant(major: int, variant: str = "dark") -> None:
+def apply_accent_flavor(tokens: dict, variant: str, flavor: str) -> dict:
+    # Override accent base/strong/foreground in place with the requested flavor and return the color tree.
+    color_tree = tokens["color"]
+    families = (
+        ("accent_flavors", "base"),
+        ("accent_strong_flavors", "strong"),
+        ("accent_fg_flavors", "text_on_accent"),
+    )
+    for family_key, accent_field in families:
+        family = color_tree.get(family_key, {})
+        if flavor not in family:
+            print(f"unknown accent flavor '{flavor}' for {variant}; expected one of {sorted(family)}", file=sys.stderr)
+            sys.exit(2)
+        color_tree["accent"][accent_field] = family[flavor]
+    return color_tree
+
+
+def build_major_variant(major: int, variant: str = "dark", flavor: str = "frost") -> None:
     # Build one Shell major and variant; fail on map drift.
     suffix = f"-{variant}" if variant == "light" else ""
     map_path = REPO_ROOT / "src" / f"shell/colormap-{major}{suffix}.json"
@@ -108,8 +128,9 @@ def build_major_variant(major: int, variant: str = "dark") -> None:
         print(f"No color map for GNOME Shell {major} {variant} at {map_path}.", file=sys.stderr)
         return
 
-    tokens = TOKENS_LIGHT if variant == "light" else TOKENS_DARK
-    color_tree = tokens["color"]
+    # Deep-copy so repeated builds never mutate the module-level token trees.
+    tokens = copy.deepcopy(TOKENS_LIGHT if variant == "light" else TOKENS_DARK)
+    color_tree = apply_accent_flavor(tokens, variant, flavor)
     header = f"/* {tokens['meta'].get('name', 'MT Theme')} — © Mayanktaker Computers & Web Development | https://mayanktaker.com */\n"
 
     color_map = json.loads(map_path.read_text())
@@ -119,9 +140,11 @@ def build_major_variant(major: int, variant: str = "dark") -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "gnome-shell.css").write_text(header + css)
     (out_dir / "gnome-shell-high-contrast.css").write_text(header + load_high_contrast(major))
+    # Record the accent so install.sh can tell a stale build from a current one.
+    (out_dir / ".accent").write_text(flavor + "\n")
 
     unused = [k for k in usage if usage[k] == 0 and not k.startswith("rgba-base")]
-    print(f"Shell {major} ({variant}): wrote {out_dir / 'gnome-shell.css'} ({len(css)} bytes) | "
+    print(f"Shell {major} ({variant}, {flavor}): wrote {out_dir / 'gnome-shell.css'} ({len(css)} bytes) | "
           f"accent pseudo={usage.get('-st-accent-color', 0)}, hex={sum(v for k, v in usage.items() if k.startswith('#'))}, "
           f"rgba={sum(v for k, v in usage.items() if k.startswith('rgba-base'))}")
     if unused:
@@ -130,8 +153,17 @@ def build_major_variant(major: int, variant: str = "dark") -> None:
 
 
 def main() -> int:
-    # Build requested majors and variants: --all or --major N or host default.
+    # Build requested majors and variants: --all or --major N or host default, plus --accent <flavor>.
     args = sys.argv[1:]
+    flavor = "frost"
+    if "--accent" in args:
+        idx = args.index("--accent")
+        if idx + 1 >= len(args):
+            print("--accent needs a flavor", file=sys.stderr)
+            return 2
+        flavor = args[idx + 1]
+        del args[idx : idx + 2]
+
     if args[:1] == ["--all"]:
         majors = sorted(set(int(p.stem.split("-")[1]) for p in (REPO_ROOT / "src" / "shell").glob("colormap-*.json")))
     elif len(args) >= 2 and args[0] == "--major":
@@ -139,12 +171,12 @@ def main() -> int:
     elif not args:
         majors = [host_shell_major()]
     else:
-        print("usage: build.py [--major N | --all]", file=sys.stderr)
+        print("usage: build.py [--major N | --all] [--accent frost|glacier|aurora|arctic|cyber|blaze]", file=sys.stderr)
         return 2
 
     for major in majors:
-        build_major_variant(major, "dark")
-        build_major_variant(major, "light")
+        build_major_variant(major, "dark", flavor)
+        build_major_variant(major, "light", flavor)
     return 0
 
 

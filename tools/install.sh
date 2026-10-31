@@ -719,7 +719,11 @@ if [ "${WANT_BLUR}" -eq 1 ]; then
     dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme true 2>/dev/null || true
   fi
 else
-  append_shell_tweak "${SRC_TWEAKS}/shell/noblur.css"
+  [ -f "${SRC_TWEAKS}/shell/noblur.css" ] && cat "${SRC_TWEAKS}/shell/noblur.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+  # The light theme needs its own opaque surfaces: noblur.css is written for dark.
+  if [ -f "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" ] && [ -f "${SRC_TWEAKS}/shell/noblur-light.css" ]; then
+    cat "${SRC_TWEAKS}/shell/noblur-light.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+  fi
   if [ -f "${SRC_TWEAKS}/gtk/noblur.css" ]; then
     cat "${SRC_TWEAKS}/gtk/noblur.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
     cat "${SRC_TWEAKS}/gtk/noblur.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
@@ -784,7 +788,8 @@ if [ "${ACCENT}" != "frost" ] && have python3; then
     gtk_variant="${gtk_spec%%:*}"
     gtk_file="${gtk_spec#*:}"
     if [ -f "${gtk_file}" ]; then
-      python3 "${SRC_TOOLS}/dev/recolor_accent.py" --variant "${gtk_variant}" --base-only \
+      # GTK files are static frost-written source (never pre-baked), so base and strong both map safely.
+      python3 "${SRC_TOOLS}/dev/recolor_accent.py" --variant "${gtk_variant}" \
         --flavor "${ACCENT}" --define-colors "${gtk_file}" 2>/dev/null || true
     fi
   done

@@ -978,8 +978,7 @@ listview:backdrop {
   color: @view_fg_color;
 }
 
-entry,
-searchentry {
+entry {
   background-color: #151d2a;
   color: #eceff4;
   border: 1px solid rgba(136, 192, 208, 0.20);
@@ -990,9 +989,7 @@ searchentry {
 }
 
 entry:focus,
-entry:focus-within,
-searchentry:focus,
-searchentry:focus-within {
+entry:focus-within {
   border-color: #88c0d0;
   box-shadow: 0 0 0 2px rgba(136, 192, 208, 0.38);
   outline: none;
