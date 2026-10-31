@@ -2,7 +2,7 @@
 <defs>
   <linearGradient id="bg-tutanota-desktop" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
     <stop offset="0%" stop-color="#25344A"/>
-    <stop offset="100%" stop-color="#0e141d"/>
+    <stop offset="100%" stop-color="#0E141D"/>
   </linearGradient>
 </defs>
 <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg-tutanota-desktop)" stroke="#25344A" stroke-width="1.5"/>

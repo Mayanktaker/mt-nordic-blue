@@ -26,6 +26,7 @@ Display name **MT Nordic Blue**, technical/theme-dir name `MT-Nordic-Blue`.
 
 ## Commands
 - Contrast gate: `python3 tools/dev/check_contrast.py` (must pass before commits).
+- Icon context gate: `python3 tools/dev/check_icon_contexts.py` (catches lookup-order shadowing + dangling aliases; run after icon builds).
 - Wallpaper suite: `python3 tools/wallpaper/generate.py [--which 1|2|3|4|all]` (dark) and `python3 tools/wallpaper/process_light.py` (light) → generates 4K renders into `wallpaper/dist/` and `wallpaper/dist/light/` + preview JPGs in `wallpaper/preview/`.
 - Icons & Cursors build: `python3 tools/icons/generate_icons.py && python3 tools/icons/generate_cursors.py` → builds `src/icons/MT-Nordic-Blue-Icons` and `src/cursors/MT-Nordic-Blue-Cursors`.
 - Icons packaging: `tools/icons/package.sh [version]` → creates `dist/mt-nordic-blue-icons-v<version>.tar.xz`.

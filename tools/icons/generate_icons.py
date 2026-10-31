@@ -773,6 +773,7 @@ APP_ICONS.update(EXTENDED_APP_ICONS)
 # Merge system utility icons (KWallet, QEMU, IBus, Orca, Rygel, Bluetooth, etc.)
 APP_ICONS.update(EXTRA_APP_ICONS)
 # Merge popular application batches (browsers, IDEs, media, office, admin)
+# POPULAR batches win over earlier modules on duplicate names (e.g. vivaldi art).
 APP_ICONS.update(POPULAR_APP_ICONS)
 
 APP_ALIASES = {
@@ -1361,10 +1362,11 @@ def build_symbolic() -> None:
     for d in list(scalable_dirs.values()) + list(symbolic_dirs.values()):
         d.mkdir(parents=True, exist_ok=True)
 
-    def write_icon(target_contexts: list[str], icon_name: str, svg_content: str) -> None:
+    def write_icon(target_contexts: list[str], icon_name: str, svg_content: str, scalable: bool = True) -> None:
+        # Write an icon into the given contexts; scalable=False keeps it in the symbolic tree only.
         filename = f"{icon_name}.svg" if not icon_name.endswith(".svg") else icon_name
         for ctx in target_contexts:
-            if ctx in scalable_dirs:
+            if scalable and ctx in scalable_dirs:
                 (scalable_dirs[ctx] / filename).write_text(svg_content)
             if ctx in symbolic_dirs:
                 (symbolic_dirs[ctx] / filename).write_text(svg_content)
@@ -1449,9 +1451,10 @@ def build_symbolic() -> None:
         if any(k in name for k in ["setting", "puzzle", "system", "preference"]):
             ctx_list.append("categories")
 
-        # Keep full-color art intact in scalable apps/devices/places contexts
+        # Bare names that already own color art must not shadow it from scalable/status|actions.
         if name in color_icon_names:
-            ctx_list = [c for c in ctx_list if c not in ("apps", "devices", "places")]
+            write_icon(list(set(ctx_list)), name, svg_content, scalable=False)
+            continue
 
         write_icon(list(set(ctx_list)), name, svg_content)
 
