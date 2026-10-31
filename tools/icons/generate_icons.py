@@ -22,6 +22,26 @@ try:
 except ImportError:
     from tools.icons.app_assets import EXTENDED_APP_ICONS, EXTENDED_APP_ALIASES
 
+try:
+    from settings_symbolics import SETTINGS_SYMBOLIC_ICONS
+except ImportError:
+    from tools.icons.settings_symbolics import SETTINGS_SYMBOLIC_ICONS
+
+try:
+    from misc_symbolics import MISC_SYMBOLIC_ICONS
+except ImportError:
+    from tools.icons.misc_symbolics import MISC_SYMBOLIC_ICONS
+
+try:
+    from apps_extra import EXTRA_APP_ICONS, EXTRA_APP_ALIASES
+except ImportError:
+    from tools.icons.apps_extra import EXTRA_APP_ICONS, EXTRA_APP_ALIASES
+
+try:
+    from mime_assets import BADGES, MIME_BADGE_MAP
+except ImportError:
+    from tools.icons.mime_assets import BADGES, MIME_BADGE_MAP
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 import json
 TOKENS = json.loads((REPO_ROOT / "palette" / "tokens.json").read_text())
@@ -397,6 +417,9 @@ SYMBOLIC_ICONS = {
 
 # Merge extended symbolic icons (screenshot UI, Settings panels, navigation, globe)
 SYMBOLIC_ICONS.update(EXTENDED_SYMBOLIC_ICONS)
+# Merge GNOME Settings panel glyphs (P0 coverage) and misc FreeDesktop symbolics
+SYMBOLIC_ICONS.update(SETTINGS_SYMBOLIC_ICONS)
+SYMBOLIC_ICONS.update(MISC_SYMBOLIC_ICONS)
 
 # =========================================================================
 # Application Icons (LibreOffice, Antigravity, Geary, Disks, Console, Apps)
@@ -742,6 +765,8 @@ APP_ICONS = {
 
 # Merge extended core GNOME application icons (Calendar, Contacts, Weather, etc.)
 APP_ICONS.update(EXTENDED_APP_ICONS)
+# Merge system utility icons (KWallet, QEMU, IBus, Orca, Rygel, Bluetooth, etc.)
+APP_ICONS.update(EXTRA_APP_ICONS)
 
 APP_ALIASES = {
     # File manager
@@ -813,6 +838,7 @@ APP_ALIASES = {
 
 # Merge extended application aliases for full desktop compatibility
 APP_ALIASES.update(EXTENDED_APP_ALIASES)
+APP_ALIASES.update(EXTRA_APP_ALIASES)
 
 # =========================================================================
 # MIME Type Document Icons (Clean botanical file-type suite for Nautilus)
@@ -859,7 +885,35 @@ MIME_ICONS = {
 <text x="32" y="36.5" font-family="sans-serif" font-weight="bold" font-size="8" fill="#FFFFFF" text-anchor="middle">PDF</text>
 <line x1="22" y1="46" x2="42" y2="46" stroke="{COLOR_ACCENT}" stroke-width="2" stroke-linecap="round"/>
 ''' + SVG_FOOTER,
+
+    "application-x-executable": MIME_DOC_BASE + '''
+<rect x="22" y="26" width="20" height="18" rx="3" fill="#151D2A" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<rect x="26" y="30" width="12" height="3" rx="1.5" fill="{COLOR_ACCENT_STRONG}"/>
+<rect x="26" y="35" width="12" height="3" rx="1.5" fill="{COLOR_ACCENT}"/>
+<rect x="26" y="40" width="7" height="3" rx="1.5" fill="{COLOR_BORDER}"/>
+''' + SVG_FOOTER,
+
+    "application-x-sharedlib": MIME_DOC_BASE + '''
+<rect x="22" y="26" width="20" height="18" rx="3" fill="#151D2A" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<path d="M 26 35 L 29 31 L 33 34 L 38 29" fill="none" stroke="{COLOR_ACCENT_STRONG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="26" cy="35" r="1.6" fill="{COLOR_ACCENT}"/>
+<circle cx="38" cy="29" r="1.6" fill="{COLOR_ACCENT}"/>
+''' + SVG_FOOTER,
+
+    "application-vnd.iccprofile": MIME_DOC_BASE + '''
+<circle cx="32" cy="34" r="8" fill="#151D2A" stroke="{COLOR_ACCENT}" stroke-width="1.5"/>
+<path d="M 32 26 A 8 8 0 0 1 32 42 Z" fill="{COLOR_ACCENT_STRONG}"/>
+<circle cx="32" cy="34" r="2.2" fill="{COLOR_SURFACE}"/>
+''' + SVG_FOOTER,
 }
+
+# Merge FreeDesktop MIME badge suite from mime_assets (hand-drawn entries above win).
+# Icon theme filenames replace the "/" separator with "-" (e.g. application/pdf).
+MIME_ICONS.update({
+    name.replace("/", "-"): MIME_DOC_BASE + BADGES[kind] + SVG_FOOTER
+    for name, kind in MIME_BADGE_MAP.items()
+    if name.replace("/", "-") not in MIME_ICONS
+})
 
 # =========================================================================
 # Hardware Storage Devices Suite (64x64 Color SVGs with botanical styling)
@@ -1362,6 +1416,8 @@ def build_symbolic() -> None:
             write_icon(["actions", "status", "ui"], ts_svg.name, ts_svg.read_text())
 
     # 5. Write curated MT-Nordic-Blue symbolic SVGs (takes precedence over extracted icons)
+    # Guard: never replace an existing full-color icon inside its scalable context.
+    color_icon_names = set(APP_ICONS) | set(DEVICE_ICONS) | set(PLACES_EMBLEMS)
     for name, svg_content in SYMBOLIC_ICONS.items():
         ctx_list = ["status", "actions"]
 
@@ -1370,11 +1426,11 @@ def build_symbolic() -> None:
             ctx_list.extend(["apps", "categories"])
 
         # Places / storage / navigation
-        if any(k in name for k in ["folder", "network", "home", "trash", "recent", "globe", "map"]):
+        if any(k in name for k in ["folder", "network", "home", "trash", "recent", "globe", "map", "location", "remote"]):
             ctx_list.append("places")
 
         # UI & Sidebar navigation
-        if any(k in name for k in ["sidebar", "split", "find", "menu", "pan-", "go-", "window-", "view-", "screenshot", "camera", "screencast", "record"]):
+        if any(k in name for k in ["sidebar", "split", "find", "menu", "pan-", "go-", "window-", "view-", "screenshot", "camera", "screencast", "record", "tab"]):
             ctx_list.append("ui")
 
         # Hardware devices
@@ -1384,6 +1440,10 @@ def build_symbolic() -> None:
         # Categories
         if any(k in name for k in ["setting", "puzzle", "system", "preference"]):
             ctx_list.append("categories")
+
+        # Keep full-color art intact in scalable apps/devices/places contexts
+        if name in color_icon_names:
+            ctx_list = [c for c in ctx_list if c not in ("apps", "devices", "places")]
 
         write_icon(list(set(ctx_list)), name, svg_content)
 

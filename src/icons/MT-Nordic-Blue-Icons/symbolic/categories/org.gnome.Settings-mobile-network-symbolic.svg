@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path fill="currentColor" fill-rule="evenodd" d="M 3.4 1 C 2.63 1 2 1.63 2 2.4 L 2 13.6 C 2 14.37 2.63 15 3.4 15 L 7.6 15 C 8.37 15 9 14.37 9 13.6 L 9 2.4 C 9 1.63 8.37 1 7.6 1 Z M 3.5 2.5 L 7.5 2.5 L 7.5 12.3 L 3.5 12.3 Z"/>
+  <circle cx="5.5" cy="13.5" r="0.7" fill="currentColor"/>
+  <path fill="currentColor" d="M 10.5 8.2 C 11.6 9.3 11.6 11 10.5 12.1 L 11.6 13.2 C 13.2 11.6 13.2 8.8 11.6 7.2 Z"/>
+  <path fill="currentColor" d="M 12.2 6.5 C 14.4 8.7 14.4 11.6 12.2 13.8 L 13.3 14.9 C 15.9 12.3 15.9 8 13.3 5.4 Z"/>
+</svg>

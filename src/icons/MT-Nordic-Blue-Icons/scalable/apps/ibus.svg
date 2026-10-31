@@ -1,0 +1,21 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="ibusBg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#ibusBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+<rect x="12" y="22" width="34" height="20" rx="4" fill="#1A2434" stroke="#405878" stroke-width="1.5"/>
+<g fill="#88C0D0">
+  <rect x="16" y="26" width="4" height="4" rx="1"/><rect x="22" y="26" width="4" height="4" rx="1"/>
+  <rect x="28" y="26" width="4" height="4" rx="1"/><rect x="34" y="26" width="4" height="4" rx="1"/>
+  <rect x="16" y="32" width="4" height="4" rx="1"/><rect x="22" y="32" width="4" height="4" rx="1"/>
+  <rect x="28" y="32" width="4" height="4" rx="1"/><rect x="34" y="32" width="4" height="4" rx="1"/>
+  <rect x="20" y="38" width="18" height="3" rx="1.5"/>
+</g>
+<circle cx="46" cy="40" r="10" fill="#0e141d" stroke="#00D2FF" stroke-width="2"/>
+<ellipse cx="46" cy="40" rx="4" ry="10" fill="none" stroke="#00D2FF" stroke-width="1.2"/>
+<line x1="36" y1="40" x2="56" y2="40" stroke="#00D2FF" stroke-width="1.2"/>
+</svg>

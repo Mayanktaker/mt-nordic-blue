@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="pinBg" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#25344A"/>
+    <stop offset="100%" stop-color="#0e141d"/>
+  </linearGradient>
+</defs>
+<rect x="6" y="6" width="52" height="52" rx="14" fill="url(#pinBg)" stroke="#25344A" stroke-width="1.5"/>
+<rect x="8.5" y="8.5" width="47" height="4" rx="2" fill="#88C0D0" fill-opacity="0.25"/>
+<rect x="16" y="24" width="32" height="26" rx="5" fill="#1A2434" stroke="#405878" stroke-width="1.5"/>
+<path d="M 24 24 L 24 19 C 24 14.6 27.6 11 32 11 C 36.4 11 40 14.6 40 19 L 40 24" fill="none" stroke="#00D2FF" stroke-width="3" stroke-linecap="round"/>
+<g fill="#88C0D0">
+  <circle cx="24" cy="32" r="2.6"/><circle cx="32" cy="32" r="2.6"/><circle cx="40" cy="32" r="2.6"/>
+  <circle cx="24" cy="39" r="2.6"/><circle cx="32" cy="39" r="2.6"/><circle cx="40" cy="39" r="2.6"/>
+  <rect x="24" y="44" width="16" height="3" rx="1.5"/>
+</g>
+</svg>
