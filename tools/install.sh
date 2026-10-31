@@ -486,8 +486,8 @@ if [ "${LAYOUT}" = "bundle" ]; then
   NEED_WALLPAPER_GEN=0
   NEED_ICONS_GEN=0
   BUNDLED_ACCENT="$(cat "${SHELL_SRC}/.accent" 2>/dev/null || echo unknown)"
-  if [ "${BUNDLED_ACCENT}" != "${ACCENT}" ]; then
-    echo "notice: bundle CSS is baked with accent '${BUNDLED_ACCENT}'; rebuild from source for --accent ${ACCENT}." >&2
+  if [ "${BUNDLED_ACCENT}" != "${ACCENT}" ] && [ ! -f "${SRC_TOOLS}/dev/recolor_accent.py" ]; then
+    echo "notice: this bundle ships '${BUNDLED_ACCENT}' CSS without the recolor tool; rebuild from source for --accent ${ACCENT}." >&2
   fi
 fi
 

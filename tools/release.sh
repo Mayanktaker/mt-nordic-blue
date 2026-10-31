@@ -57,6 +57,9 @@ cp -r "${REPO_ROOT}/src/cursors" "${DIST}/cursors"
 cp -r "${REPO_ROOT}/extras" "${DIST}/extras"
 mkdir -p "${DIST}/tools/dev" "${DIST}/flatpak"
 cp "${REPO_ROOT}/tools/dev/mt-nordic-toggle" "${DIST}/tools/dev/mt-nordic-toggle"
+# Accent switching inside a bundle needs the recolor tool and the token source it reads.
+cp "${REPO_ROOT}/tools/dev/recolor_accent.py" "${DIST}/tools/dev/recolor_accent.py"
+cp -r "${REPO_ROOT}/palette" "${DIST}/palette"
 cp "${REPO_ROOT}/flatpak/apply-overrides.sh" "${DIST}/flatpak/apply-overrides.sh"
 cp "${REPO_ROOT}/tools/install.sh" "${DIST}/install.sh"
 
