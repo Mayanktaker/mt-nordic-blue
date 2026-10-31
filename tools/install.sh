@@ -27,6 +27,37 @@ ICONS_NAME="${THEME_NAME}-Icons"
 CURSORS_NAME="${THEME_NAME}-Cursors"
 ICONS_DIR="${HOME}/.icons"
 
+# Source layout: repository checkout (builds on demand) or release bundle (prebuilt artifacts).
+if [ -d "${REPO_ROOT}/build/theme" ]; then
+  LAYOUT="repo"
+  SRC_TWEAKS="${REPO_ROOT}/src/tweaks"
+  SRC_GTK4="${REPO_ROOT}/src/gtk-4.0"
+  SRC_GTK2="${REPO_ROOT}/src/gtk-2.0"
+  SRC_ICONS="${REPO_ROOT}/src/icons"
+  SRC_CURSORS="${REPO_ROOT}/src/cursors"
+  SRC_INDEX="${REPO_ROOT}/src/index.theme"
+  SRC_INDEX_LIGHT="${REPO_ROOT}/src/index-light.theme"
+  BUILD_THEME="${REPO_ROOT}/build/theme"
+  SRC_WALLPAPERS="${REPO_ROOT}/wallpaper/dist"
+  SRC_EXTRAS="${REPO_ROOT}/extras"
+  SRC_PALETTE="${REPO_ROOT}/palette"
+  SRC_TOOLS="${REPO_ROOT}/tools"
+else
+  LAYOUT="bundle"
+  SRC_TWEAKS="${REPO_ROOT}/tweaks"
+  SRC_GTK4="${REPO_ROOT}/gtk-4.0-src"
+  SRC_GTK2="${REPO_ROOT}/gtk-2.0"
+  SRC_ICONS="${REPO_ROOT}/icons"
+  SRC_CURSORS="${REPO_ROOT}/cursors"
+  SRC_INDEX="${REPO_ROOT}/index.theme"
+  SRC_INDEX_LIGHT="${REPO_ROOT}/index-light.theme"
+  BUILD_THEME="${REPO_ROOT}"
+  SRC_WALLPAPERS="${REPO_ROOT}/wallpapers"
+  SRC_EXTRAS="${REPO_ROOT}/extras"
+  SRC_PALETTE="${REPO_ROOT}"
+  SRC_TOOLS="${REPO_ROOT}/tools"
+fi
+
 # Defaults
 PANEL_STYLE="round-island"   # Choices: round-island, pill, bottom-round, flat
 CORNERS="round"              # Choices: round (16px), sharp (0px non-rounded)
@@ -394,6 +425,16 @@ esac
 
 # ---------- helpers ----------
 have() { command -v "$1" >/dev/null 2>&1; }
+
+# Append a Shell tweak to the dark theme, and to the light theme when it is present.
+append_shell_tweak() {
+  [ -f "$1" ] || return 0
+  cat "$1" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+  if [ -f "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" ]; then
+    cat "$1" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+  fi
+  return 0
+}
 py_has() { python3 -c "import $1" >/dev/null 2>&1; }
 miss() { MISSING="${MISSING:-}${MISSING:+; }$1"; }
 
@@ -407,10 +448,20 @@ if [ "${SHELL_MAJOR}" -lt 50 ]; then
   exit 1
 fi
 
-[ -f "${REPO_ROOT}/src/shell/colormap-${SHELL_MAJOR}.json" ] || {
+SHELL_SRC="${BUILD_THEME}/gnome-shell-${SHELL_MAJOR}"
+SHELL_LIGHT_SRC="${BUILD_THEME}/gnome-shell-${SHELL_MAJOR}-light"
+if [ "${LAYOUT}" = "bundle" ]; then
+  SHELL_LIGHT_SRC="${REPO_ROOT}/gnome-shell-light/gnome-shell-${SHELL_MAJOR}-light"
+fi
+
+if [ "${LAYOUT}" = "repo" ] && [ ! -f "${REPO_ROOT}/src/shell/colormap-${SHELL_MAJOR}.json" ]; then
   echo "missing src/shell/colormap-${SHELL_MAJOR}.json — Shell ${SHELL_MAJOR} not yet mapped." >&2
   exit 1
-}
+fi
+if [ "${LAYOUT}" = "bundle" ] && [ ! -f "${SHELL_SRC}/gnome-shell.css" ]; then
+  echo "bundle has no gnome-shell.css for Shell ${SHELL_MAJOR}." >&2
+  exit 1
+fi
 
 echo "detected: ${ID:-unknown} · GNOME Shell ${SHELL_MAJOR}"
 
@@ -420,10 +471,25 @@ NEED_GTK_BUILD=0
 NEED_WALLPAPER_GEN=0
 NEED_ICONS_GEN=0
 
-[ -f "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}/gnome-shell.css" ] || NEED_SHELL_BUILD=1
-[ -f "${REPO_ROOT}/build/theme/gtk-3.0/gtk.css" ] || NEED_GTK_BUILD=1
-[ -f "${REPO_ROOT}/wallpaper/dist/mt-nordic-blue-3840x2160.png" ] || NEED_WALLPAPER_GEN=1
-[ -d "${REPO_ROOT}/src/icons/${ICONS_NAME}" ] || NEED_ICONS_GEN=1
+[ -f "${SHELL_SRC}/gnome-shell.css" ] || NEED_SHELL_BUILD=1
+# Shell CSS is accent-dependent: rebuild when the recorded accent differs from the requested one.
+SHELL_ACCENT_MARKER="${SHELL_SRC}/.accent"
+[ "$(cat "${SHELL_ACCENT_MARKER}" 2>/dev/null)" = "${ACCENT}" ] || NEED_SHELL_BUILD=1
+[ -f "${BUILD_THEME}/gtk-3.0/gtk.css" ] || NEED_GTK_BUILD=1
+[ -f "${SRC_WALLPAPERS}/mt-nordic-blue-3840x2160.png" ] || NEED_WALLPAPER_GEN=1
+[ -d "${SRC_ICONS}/${ICONS_NAME}" ] || NEED_ICONS_GEN=1
+
+# Bundles ship prebuilt artifacts and no build tools: never attempt a rebuild.
+if [ "${LAYOUT}" = "bundle" ]; then
+  NEED_SHELL_BUILD=0
+  NEED_GTK_BUILD=0
+  NEED_WALLPAPER_GEN=0
+  NEED_ICONS_GEN=0
+  BUNDLED_ACCENT="$(cat "${SHELL_SRC}/.accent" 2>/dev/null || echo unknown)"
+  if [ "${BUNDLED_ACCENT}" != "${ACCENT}" ]; then
+    echo "notice: bundle CSS is baked with accent '${BUNDLED_ACCENT}'; rebuild from source for --accent ${ACCENT}." >&2
+  fi
+fi
 
 MISSING=""
 
@@ -453,16 +519,16 @@ if [ -n "${MISSING}" ]; then
   fi
 fi
 
-# ---------- builds (only missing outputs) ----------
-[ "${NEED_SHELL_BUILD}" -eq 0 ] || python3 "${REPO_ROOT}/tools/shell/build.py" --major "${SHELL_MAJOR}"
-[ "${NEED_GTK_BUILD}" -eq 0 ] || python3 "${REPO_ROOT}/tools/gtk/build.py" >/dev/null
+# ---------- builds (only missing or stale outputs) ----------
+[ "${NEED_SHELL_BUILD}" -eq 0 ] || python3 "${SRC_TOOLS}/shell/build.py" --major "${SHELL_MAJOR}" --accent "${ACCENT}"
+[ "${NEED_GTK_BUILD}" -eq 0 ] || python3 "${SRC_TOOLS}/gtk/build.py" >/dev/null
 if [ "${NEED_WALLPAPER_GEN}" -ne 0 ]; then
-  python3 "${REPO_ROOT}/tools/wallpaper/generate.py" >/dev/null
-  python3 "${REPO_ROOT}/tools/wallpaper/process_light.py" >/dev/null
+  python3 "${SRC_TOOLS}/wallpaper/generate.py" >/dev/null
+  python3 "${SRC_TOOLS}/wallpaper/process_light.py" >/dev/null
 fi
 if [ "${NEED_ICONS_GEN}" -eq 1 ]; then
-  python3 "${REPO_ROOT}/tools/icons/generate_icons.py" >/dev/null
-  python3 "${REPO_ROOT}/tools/icons/generate_cursors.py" >/dev/null
+  python3 "${SRC_TOOLS}/icons/generate_icons.py" >/dev/null
+  python3 "${SRC_TOOLS}/icons/generate_cursors.py" >/dev/null
 fi
 
 # ---------- install into ~/.themes (policy: user themes dir only) ----------
@@ -477,21 +543,21 @@ fi
 mkdir -p "${THEME_DIR}/gtk-4.0"
 mkdir -p "${THEME_DIR}/wallpapers"
 mkdir -p "${THEME_DIR}/extras"
-cp "${REPO_ROOT}/src/index.theme" "${THEME_DIR}/index.theme"
+cp "${SRC_INDEX}" "${THEME_DIR}/index.theme"
 rm -rf "${THEME_DIR}/gnome-shell"
-cp -r "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}" "${THEME_DIR}/gnome-shell"
-cp -r "${REPO_ROOT}/build/theme/gtk-3.0" "${THEME_DIR}/"
-cp "${REPO_ROOT}/src/gtk-4.0/overrides.css" "${THEME_DIR}/gtk-4.0/gtk.css"
-cp "${REPO_ROOT}/src/gtk-4.0/overrides.css" "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+cp -r "${SHELL_SRC}" "${THEME_DIR}/gnome-shell"
+cp -r "${BUILD_THEME}/gtk-3.0" "${THEME_DIR}/"
+cp "${SRC_GTK4}/overrides.css" "${THEME_DIR}/gtk-4.0/gtk.css"
+cp "${SRC_GTK4}/overrides.css" "${THEME_DIR}/gtk-4.0/gtk-dark.css"
 
-if [ -f "${REPO_ROOT}/src/gtk-2.0/gtkrc" ]; then
+if [ -f "${SRC_GTK2}/gtkrc" ]; then
   mkdir -p "${THEME_DIR}/gtk-2.0"
-  cp "${REPO_ROOT}/src/gtk-2.0/gtkrc" "${THEME_DIR}/gtk-2.0/gtkrc"
+  cp "${SRC_GTK2}/gtkrc" "${THEME_DIR}/gtk-2.0/gtkrc"
 fi
 
 # Copy wallpapers, instantiate dynamic XMLs, and register with GNOME Settings
-if [ -d "${REPO_ROOT}/wallpaper/dist" ]; then
-  cp -r "${REPO_ROOT}/wallpaper/dist/"* "${THEME_DIR}/wallpapers/" 2>/dev/null || true
+if [ -d "${SRC_WALLPAPERS}" ]; then
+  cp -r "${SRC_WALLPAPERS}/"* "${THEME_DIR}/wallpapers/" 2>/dev/null || true
   if [ -f "${THEME_DIR}/wallpapers/mt-nordic-blue-timed.xml.in" ]; then
     sed "s|@WALLPAPER_DIR@|${THEME_DIR}/wallpapers|g" "${THEME_DIR}/wallpapers/mt-nordic-blue-timed.xml.in" > "${THEME_DIR}/wallpapers/mt-nordic-blue-timed.xml"
   fi
@@ -501,70 +567,70 @@ if [ -d "${REPO_ROOT}/wallpaper/dist" ]; then
   mkdir -p "${HOME}/.local/share/gnome-background-properties"
   cp "${THEME_DIR}/wallpapers/gnome-background-properties.xml" "${HOME}/.local/share/gnome-background-properties/mt-nordic-blue.xml" 2>/dev/null || true
 fi
-if [ -d "${REPO_ROOT}/extras" ]; then
-  cp -r "${REPO_ROOT}/extras/"* "${THEME_DIR}/extras/" 2>/dev/null || true
+if [ -d "${SRC_EXTRAS}" ]; then
+  cp -r "${SRC_EXTRAS}/"* "${THEME_DIR}/extras/" 2>/dev/null || true
 fi
 
 # ---------- install dedicated MT-Nordic-Light into ~/.themes/MT-Nordic-Light ----------
 LIGHT_THEME_DIR="${HOME}/.themes/MT-Nordic-Light"
 mkdir -p "${LIGHT_THEME_DIR}/gnome-shell"
 mkdir -p "${LIGHT_THEME_DIR}/gtk-4.0"
-cp "${REPO_ROOT}/src/index-light.theme" "${LIGHT_THEME_DIR}/index.theme"
-if [ -d "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}-light" ]; then
-  cp -r "${REPO_ROOT}/build/theme/gnome-shell-${SHELL_MAJOR}-light/"* "${LIGHT_THEME_DIR}/gnome-shell/"
-  if [ -f "${REPO_ROOT}/src/tweaks/shell/polish-light.css" ]; then
-    cat "${REPO_ROOT}/src/tweaks/shell/polish-light.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+cp "${SRC_INDEX_LIGHT}" "${LIGHT_THEME_DIR}/index.theme"
+if [ -d "${SHELL_LIGHT_SRC}" ]; then
+  cp -r "${SHELL_LIGHT_SRC}/"* "${LIGHT_THEME_DIR}/gnome-shell/"
+  if [ -f "${SRC_TWEAKS}/shell/polish-light.css" ]; then
+    cat "${SRC_TWEAKS}/shell/polish-light.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
   fi
 fi
-cp -r "${REPO_ROOT}/build/theme/gtk-3.0" "${LIGHT_THEME_DIR}/"
-if [ -f "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" ]; then
-  cp "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
-  cp "${REPO_ROOT}/src/gtk-4.0/overrides-light.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
+cp -r "${BUILD_THEME}/gtk-3.0" "${LIGHT_THEME_DIR}/"
+if [ -f "${SRC_GTK4}/overrides-light.css" ]; then
+  cp "${SRC_GTK4}/overrides-light.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
+  cp "${SRC_GTK4}/overrides-light.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
 else
   cp "${THEME_DIR}/gtk-4.0/gtk.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
   cp "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"
 fi
-if [ -f "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" ]; then
-  cat "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" >> "${LIGHT_THEME_DIR}/gtk-3.0/gtk.css"
-  cat "${REPO_ROOT}/src/tweaks/gtk/polish-light.css" >> "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
+if [ -f "${SRC_TWEAKS}/gtk/polish-light.css" ]; then
+  cat "${SRC_TWEAKS}/gtk/polish-light.css" >> "${LIGHT_THEME_DIR}/gtk-3.0/gtk.css"
+  cat "${SRC_TWEAKS}/gtk/polish-light.css" >> "${LIGHT_THEME_DIR}/gtk-4.0/gtk.css"
 fi
 
 # ---------- apply base polish layer ----------
-cat "${REPO_ROOT}/src/tweaks/shell/polish.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-cat "${REPO_ROOT}/src/tweaks/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+cat "${SRC_TWEAKS}/shell/polish.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+cat "${SRC_TWEAKS}/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+cat "${SRC_TWEAKS}/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+cat "${SRC_TWEAKS}/gtk/polish.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+cat "${SRC_TWEAKS}/gtk/polish.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
 
 # ---------- apply base palette flavor (polar, classic, cyber, oled) ----------
 case "${BASE_PALETTE}" in
   classic)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/base-classic.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/base-classic.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-    if [ -f "${REPO_ROOT}/src/tweaks/gtk/base-classic.css" ]; then
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-classic.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-classic.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-classic.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-classic.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+    [ -f "${SRC_TWEAKS}/shell/base-classic.css" ] && cat "${SRC_TWEAKS}/shell/base-classic.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    if [ -f "${SRC_TWEAKS}/gtk/base-classic.css" ]; then
+      cat "${SRC_TWEAKS}/gtk/base-classic.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+      cat "${SRC_TWEAKS}/gtk/base-classic.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+      cat "${SRC_TWEAKS}/gtk/base-classic.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+      cat "${SRC_TWEAKS}/gtk/base-classic.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
     fi
     echo "  + base palette: Classic Nord Spec (#2E3440 slate)"
     ;;
   cyber)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/base-cyber.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/base-cyber.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-    if [ -f "${REPO_ROOT}/src/tweaks/gtk/base-cyber.css" ]; then
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+    [ -f "${SRC_TWEAKS}/shell/base-cyber.css" ] && cat "${SRC_TWEAKS}/shell/base-cyber.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    if [ -f "${SRC_TWEAKS}/gtk/base-cyber.css" ]; then
+      cat "${SRC_TWEAKS}/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+      cat "${SRC_TWEAKS}/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+      cat "${SRC_TWEAKS}/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+      cat "${SRC_TWEAKS}/gtk/base-cyber.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
     fi
     echo "  + base palette: Arctic Cyber Frost (#0A0E17 midnight navy)"
     ;;
   oled)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/black.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/black.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-    if [ -f "${REPO_ROOT}/src/tweaks/gtk/black.css" ]; then
-      cat "${REPO_ROOT}/src/tweaks/gtk/black.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/black.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/black.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-      cat "${REPO_ROOT}/src/tweaks/gtk/black.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+    [ -f "${SRC_TWEAKS}/shell/black.css" ] && cat "${SRC_TWEAKS}/shell/black.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    if [ -f "${SRC_TWEAKS}/gtk/black.css" ]; then
+      cat "${SRC_TWEAKS}/gtk/black.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+      cat "${SRC_TWEAKS}/gtk/black.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+      cat "${SRC_TWEAKS}/gtk/black.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+      cat "${SRC_TWEAKS}/gtk/black.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
     fi
     echo "  + base palette: True pitch-black OLED"
     ;;
@@ -576,7 +642,7 @@ esac
 # ---------- apply top bar / system tray style ----------
 case "${PANEL_STYLE}" in
   round-island)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/tray-round.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-round.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    append_shell_tweak "${SRC_TWEAKS}/shell/tray-round.css"
     echo "  + top bar: rounded modern island (16px curved floating bar)"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
@@ -585,7 +651,7 @@ case "${PANEL_STYLE}" in
     fi
     ;;
   pill)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/tray-pill.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-pill.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    append_shell_tweak "${SRC_TWEAKS}/shell/tray-pill.css"
     echo "  + top bar: floating pill capsule (999px circular ends)"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
@@ -594,7 +660,7 @@ case "${PANEL_STYLE}" in
     fi
     ;;
   bottom-round)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/tray-bottom-round.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-bottom-round.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    append_shell_tweak "${SRC_TWEAKS}/shell/tray-bottom-round.css"
     echo "  + top bar: bottom-rounded (connected to top edge)"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
@@ -603,7 +669,7 @@ case "${PANEL_STYLE}" in
     fi
     ;;
   flat)
-    [ -f "${REPO_ROOT}/src/tweaks/shell/tray-flat.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/tray-flat.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+    append_shell_tweak "${SRC_TWEAKS}/shell/tray-flat.css"
     echo "  + top bar: classic edge-to-edge square bar"
     if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
       dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur true 2>/dev/null || true
@@ -614,32 +680,34 @@ esac
 
 # ---------- apply corner curvature (round vs sharp) ----------
 if [ "${CORNERS}" = "sharp" ]; then
-  [ -f "${REPO_ROOT}/src/tweaks/shell/sharp.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/sharp.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-  if [ -f "${REPO_ROOT}/src/tweaks/gtk/sharp.css" ]; then
-    cat "${REPO_ROOT}/src/tweaks/gtk/sharp.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/sharp.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/sharp.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/sharp.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+  append_shell_tweak "${SRC_TWEAKS}/shell/sharp.css"
+  if [ -f "${SRC_TWEAKS}/gtk/sharp.css" ]; then
+    cat "${SRC_TWEAKS}/gtk/sharp.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/sharp.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+    cat "${SRC_TWEAKS}/gtk/sharp.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/sharp.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   fi
   echo "  + corner curvature: sharp 0px corners (non-rounded industrial aesthetic)"
 else
-  [ -f "${REPO_ROOT}/src/tweaks/shell/round.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/round.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-  if [ -f "${REPO_ROOT}/src/tweaks/gtk/round.css" ]; then
-    cat "${REPO_ROOT}/src/tweaks/gtk/round.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/round.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/round.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/round.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+  append_shell_tweak "${SRC_TWEAKS}/shell/round.css"
+  if [ -f "${SRC_TWEAKS}/gtk/round.css" ]; then
+    cat "${SRC_TWEAKS}/gtk/round.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/round.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+    cat "${SRC_TWEAKS}/gtk/round.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/round.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   fi
   echo "  + corner curvature: modern 16px rounded curves"
 fi
 
 # ---------- apply surface blur & frosted glassmorphism ----------
 if [ "${WANT_BLUR}" -eq 1 ]; then
-  [ -f "${REPO_ROOT}/src/tweaks/shell/translucent.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/translucent.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-  [ -f "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-  if [ -d "${LIGHT_THEME_DIR}/gnome-shell" ]; then
-    [ -f "${REPO_ROOT}/src/tweaks/shell/translucent.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/translucent.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
-    [ -f "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/blur-my-shell.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+  append_shell_tweak "${SRC_TWEAKS}/shell/blur-my-shell.css"
+  [ -f "${SRC_TWEAKS}/shell/translucent.css" ] && cat "${SRC_TWEAKS}/shell/translucent.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
+  # The light theme needs its own surfaces: translucent.css is written for dark glass.
+  if [ -f "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" ]; then
+    if [ -f "${SRC_TWEAKS}/shell/translucent-light.css" ]; then
+      cat "${SRC_TWEAKS}/shell/translucent-light.css" >> "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css"
+    fi
   fi
   echo "  + surface: frosted glass translucency & blur enabled"
   if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
@@ -651,12 +719,12 @@ if [ "${WANT_BLUR}" -eq 1 ]; then
     dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme true 2>/dev/null || true
   fi
 else
-  [ -f "${REPO_ROOT}/src/tweaks/shell/noblur.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/noblur.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-  if [ -f "${REPO_ROOT}/src/tweaks/gtk/noblur.css" ]; then
-    cat "${REPO_ROOT}/src/tweaks/gtk/noblur.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/noblur.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/noblur.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/noblur.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+  append_shell_tweak "${SRC_TWEAKS}/shell/noblur.css"
+  if [ -f "${SRC_TWEAKS}/gtk/noblur.css" ]; then
+    cat "${SRC_TWEAKS}/gtk/noblur.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/noblur.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+    cat "${SRC_TWEAKS}/gtk/noblur.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/noblur.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   fi
   echo "  + surface: solid opaque surfaces"
   if have dconf && [ -d "${HOME}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx" ]; then
@@ -667,11 +735,11 @@ fi
 
 # ---------- apply window controls (buttons) ----------
 if [ "${CONTROLS}" = "macos" ]; then
-  if [ -f "${REPO_ROOT}/src/tweaks/gtk/macos.css" ]; then
-    cat "${REPO_ROOT}/src/tweaks/gtk/macos.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/macos.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/macos.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/macos.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+  if [ -f "${SRC_TWEAKS}/gtk/macos.css" ]; then
+    cat "${SRC_TWEAKS}/gtk/macos.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/macos.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+    cat "${SRC_TWEAKS}/gtk/macos.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/macos.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   fi
   echo "  + window controls: macOS traffic dots (Aurora Red / Amber / Green)"
 else
@@ -680,12 +748,12 @@ fi
 
 # ---------- apply theme sizing / density ----------
 if [ "${THEME_SIZE}" = "compact" ]; then
-  [ -f "${REPO_ROOT}/src/tweaks/shell/compact.css" ] && cat "${REPO_ROOT}/src/tweaks/shell/compact.css" >> "${THEME_DIR}/gnome-shell/gnome-shell.css"
-  if [ -f "${REPO_ROOT}/src/tweaks/gtk/compact.css" ]; then
-    cat "${REPO_ROOT}/src/tweaks/gtk/compact.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/compact.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/compact.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-    cat "${REPO_ROOT}/src/tweaks/gtk/compact.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+  append_shell_tweak "${SRC_TWEAKS}/shell/compact.css"
+  if [ -f "${SRC_TWEAKS}/gtk/compact.css" ]; then
+    cat "${SRC_TWEAKS}/gtk/compact.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/compact.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+    cat "${SRC_TWEAKS}/gtk/compact.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+    cat "${SRC_TWEAKS}/gtk/compact.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   fi
   echo "  + theme density: compact (slim padding & headerbars)"
 else
@@ -693,11 +761,40 @@ else
 fi
 
 # ---------- apply accent flavor ----------
-if [ -f "${REPO_ROOT}/src/tweaks/gtk/accent-${ACCENT}.css" ]; then
-  cat "${REPO_ROOT}/src/tweaks/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
-  cat "${REPO_ROOT}/src/tweaks/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
-  cat "${REPO_ROOT}/src/tweaks/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
-  cat "${REPO_ROOT}/src/tweaks/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+# Accent base is baked by the Shell build; this only clears literals left in the tweak layers.
+# The light theme also receives dark-written tweaks (tray borders), so its accent is normalised
+# from the dark source even when the flavor is the default frost.
+if have python3 && [ -f "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" ]; then
+  python3 "${SRC_TOOLS}/dev/recolor_accent.py" --variant light --source-variant dark \
+    --base-only --flavor "${ACCENT}" "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" 2>/dev/null || true
+fi
+
+if [ "${ACCENT}" != "frost" ] && have python3; then
+  python3 "${SRC_TOOLS}/dev/recolor_accent.py" --variant dark --flavor "${ACCENT}" \
+    "${THEME_DIR}/gnome-shell/gnome-shell.css" 2>/dev/null || true
+  if [ -f "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" ]; then
+    python3 "${SRC_TOOLS}/dev/recolor_accent.py" --variant light --base-only --flavor "${ACCENT}" \
+      "${LIGHT_THEME_DIR}/gnome-shell/gnome-shell.css" 2>/dev/null || true
+  fi
+  # GTK: dark ships accent-<flavor>.css but still carries hardcoded accent literals, and light
+  # ships no accent tweak at all, so recolor both trees and re-declare the accent colors.
+  for gtk_spec in \
+    "dark:${THEME_DIR}/gtk-4.0/gtk.css" "dark:${THEME_DIR}/gtk-4.0/gtk-dark.css" \
+    "light:${LIGHT_THEME_DIR}/gtk-4.0/gtk.css" "light:${LIGHT_THEME_DIR}/gtk-4.0/gtk-dark.css"; do
+    gtk_variant="${gtk_spec%%:*}"
+    gtk_file="${gtk_spec#*:}"
+    if [ -f "${gtk_file}" ]; then
+      python3 "${SRC_TOOLS}/dev/recolor_accent.py" --variant "${gtk_variant}" --base-only \
+        --flavor "${ACCENT}" --define-colors "${gtk_file}" 2>/dev/null || true
+    fi
+  done
+fi
+
+if [ -f "${SRC_TWEAKS}/gtk/accent-${ACCENT}.css" ]; then
+  cat "${SRC_TWEAKS}/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-3.0/gtk.css"
+  cat "${SRC_TWEAKS}/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+  cat "${SRC_TWEAKS}/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-4.0/gtk.css"
+  cat "${SRC_TWEAKS}/gtk/accent-${ACCENT}.css" >> "${THEME_DIR}/gtk-4.0/gtk-dark.css"
   echo "  + accent color: ${ACCENT}"
 else
   echo "  + accent color: frost (#88C0D0)"
@@ -708,18 +805,18 @@ echo "installed theme files to ${THEME_DIR}"
 # ---------- optional: icons & cursors (user ~/.icons only) ----------
 if [ "${WANT_ICONS}" -eq 1 ]; then
   mkdir -p "${ICONS_DIR}"
-  if [ -d "${REPO_ROOT}/src/icons/${ICONS_NAME}" ]; then
+  if [ -d "${SRC_ICONS}/${ICONS_NAME}" ]; then
     rm -rf "${ICONS_DIR}/${ICONS_NAME}"
-    cp -r "${REPO_ROOT}/src/icons/${ICONS_NAME}" "${ICONS_DIR}/"
+    cp -r "${SRC_ICONS}/${ICONS_NAME}" "${ICONS_DIR}/"
     if command -v gtk-update-icon-cache >/dev/null 2>&1; then
       gtk-update-icon-cache -f -t "${ICONS_DIR}/${ICONS_NAME}" >/dev/null 2>&1 || true
     fi
     gsettings set org.gnome.desktop.interface icon-theme "${ICONS_NAME}" || true
     echo "installed and activated icon pack in ${ICONS_DIR}/${ICONS_NAME}"
   fi
-  if [ -d "${REPO_ROOT}/src/cursors/${CURSORS_NAME}" ]; then
+  if [ -d "${SRC_CURSORS}/${CURSORS_NAME}" ]; then
     rm -rf "${ICONS_DIR}/${CURSORS_NAME}"
-    cp -r "${REPO_ROOT}/src/cursors/${CURSORS_NAME}" "${ICONS_DIR}/"
+    cp -r "${SRC_CURSORS}/${CURSORS_NAME}" "${ICONS_DIR}/"
     gsettings set org.gnome.desktop.interface cursor-theme "${CURSORS_NAME}" || true
     echo "installed and activated cursor pack in ${ICONS_DIR}/${CURSORS_NAME}"
   fi
@@ -750,8 +847,8 @@ if [ "${WANT_WALLPAPER}" -eq 1 ] && [ "${WALLPAPER_CHOICE}" != "none" ]; then
       WP_DARK_SRC="${THEME_DIR}/wallpapers/mt-nordic-blue-art-1-3840x2160.png"
       WP_LIGHT_SRC="${THEME_DIR}/wallpapers/light/mt-nordic-blue-canopy-dawn-3840x2160.png"
       mkdir -p "${HOME}/Pictures/wallpapers-mt-nordic-blue/light"
-      cp "${REPO_ROOT}/wallpaper/dist/"*.png "${HOME}/Pictures/wallpapers-mt-nordic-blue/" 2>/dev/null || true
-      cp "${REPO_ROOT}/wallpaper/dist/light/"*.png "${HOME}/Pictures/wallpapers-mt-nordic-blue/light/" 2>/dev/null || true
+      cp "${SRC_WALLPAPERS}/"*.png "${HOME}/Pictures/wallpapers-mt-nordic-blue/" 2>/dev/null || true
+      cp "${SRC_WALLPAPERS}/light/"*.png "${HOME}/Pictures/wallpapers-mt-nordic-blue/light/" 2>/dev/null || true
       echo "all 4K wallpapers (dark & light) copied to ~/Pictures/wallpapers-mt-nordic-blue/"
       ;;
     *)
@@ -783,6 +880,9 @@ if [ "${WANT_GTK4_OVERRIDE}" -eq 1 ]; then
 gtk-application-prefer-dark-theme=1
 EOF_GTK4_INI
   echo "libadwaita best-effort override linked at ${CONF_DIR}/gtk.css and gtk-dark.css"
+else
+  # libadwaita forces gtk-theme-name to Adwaita-empty, so this link is the only way in.
+  echo "  ! libadwaita apps (Nautilus, Settings, Text Editor) stay stock Adwaita without this link; re-run with --gtk4-libadwaita"
 fi
 
 # ---------- GTK3 config sync & cleanup ----------
@@ -826,13 +926,13 @@ fi
 
 # ---------- install toggle CLI, desktop entry, and Flatpak overrides ----------
 mkdir -p "${HOME}/.local/bin" "${HOME}/.local/share/applications"
-if [ -f "${REPO_ROOT}/tools/dev/mt-nordic-toggle" ]; then
-  cp "${REPO_ROOT}/tools/dev/mt-nordic-toggle" "${HOME}/.local/bin/mt-nordic-toggle"
+if [ -f "${SRC_TOOLS}/dev/mt-nordic-toggle" ]; then
+  cp "${SRC_TOOLS}/dev/mt-nordic-toggle" "${HOME}/.local/bin/mt-nordic-toggle"
   chmod +x "${HOME}/.local/bin/mt-nordic-toggle"
   "${HOME}/.local/bin/mt-nordic-toggle" --bind-shortcut 2>/dev/null || true
 fi
-if [ -f "${REPO_ROOT}/extras/desktop/mt-nordic-toggle.desktop" ]; then
-  cp "${REPO_ROOT}/extras/desktop/mt-nordic-toggle.desktop" "${HOME}/.local/share/applications/mt-nordic-toggle.desktop"
+if [ -f "${SRC_EXTRAS}/desktop/mt-nordic-toggle.desktop" ]; then
+  cp "${SRC_EXTRAS}/desktop/mt-nordic-toggle.desktop" "${HOME}/.local/share/applications/mt-nordic-toggle.desktop"
   if command -v update-desktop-database >/dev/null 2>&1; then
     update-desktop-database "${HOME}/.local/share/applications" 2>/dev/null || true
   fi
