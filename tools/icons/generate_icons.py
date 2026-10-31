@@ -238,8 +238,9 @@ PLACES_ALIASES = {
     "folder-apps": "folder-applications",
     "applications": "folder-applications",
     "folder-calibre": "folder-books",
-    "folder-network": "network-workgroup",
-    "network": "network-workgroup",
+    "folder-network": "folder-remote",
+    "network": "folder-remote",
+    "network-workgroup": "folder-remote",
     "inode-directory": "folder",
     "folder_color": "folder",
     "user-trash-full": "user-trash",
@@ -841,7 +842,6 @@ APP_ALIASES = {
     "Android_Studio": "android-studio",
     # Hardware & System daemons
     "hwloc": "utilities-system-monitor",
-    "org.gnome.goa-daemon-symbolic": "dialog-password-symbolic",
 }
 
 # Merge extended application aliases for full desktop compatibility
@@ -1498,6 +1498,9 @@ def build_symbolic() -> None:
         "shelly-updates": "shelly-updates-symbolic",
         "shelly-shell": "shelly-shell-symbolic",
         "shelly-tray": "shelly-symbolic",
+        # Key/lock daemon symbolics (GOA daemon borrows the password key glyph)
+        "dialog-password-symbolic": "dialog-password",
+        "org.gnome.goa-daemon-symbolic": "dialog-password",
     }
     for alias, target in ui_sym_aliases.items():
         if target in SYMBOLIC_ICONS:
